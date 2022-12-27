@@ -1,2 +1,18 @@
 @import './common';
-@import './example';
+// @import './example';
+@import './base/base';
+@import './base/container-main';
+@import './base/container-library';
+
+
+@import './components/detailes-card';
+@import './components/teams-modal';
+
+
+@import './layout/footer';
+@import './layout/header-library';
+@import './layout/header-main';
+
+
+@import './utils/breakpoints';
+@import './utils/variables';
