@@ -30,5 +30,5 @@ const options = {
 
 const pagination = new Pagination(refs.pagination, options);
 
-const container = document.getElementById('pagination');
+// const container = document.getElementById('pagination');
 
