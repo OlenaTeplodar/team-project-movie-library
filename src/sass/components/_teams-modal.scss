@@ -19,22 +19,26 @@
 
 .team-modal {
   z-index: 2;
-  position: absolute;
+  position: relative;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  //   100%?
-  width: 280px;
-  padding: 20px;
+  width: 80%;
+  height: 80%;
+  overflow-y: auto;
+  padding: 32px;
   background-color: var(--background-color);
   border-radius: 20px;
+  // box-shadow: 2px 2px 3px 3px rgb(255 107 8 / 50%);
 
   @media screen and (min-width: 768px) {
-    padding: 32px;
-    width: 620px;
+    width: 710px;
+    // gap: 20px;
   }
   @media screen and (min-width: 1200px) {
-    width: 855px;
+    width: 910px;
+    // gap: 10px;
+    max-height: 80%;
   }
 }
 
@@ -105,4 +109,93 @@
 
 .team-modal__btn:hover .team-modal__btn-inner:after {
   bottom: 0;
+}
+.icon-heart {
+  margin-left: 10px;
+  margin-right: 10px;
+  animation: pulse 3s infinite;
+}
+.team-modal__title {
+  text-align: center;
+  margin-bottom: 15px;
+  font-weight: 700;
+  font-size: 24px;
+  color: var(--footer-text-color);
+  @media screen and (min-width: 1200px) {
+    font-size: 28px;
+  }
+}
+.team-modal__list {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.team-modal__item {
+  padding-top: 10px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  box-shadow: 11px 8px 26px -9px rgba(0, 0, 0, 0.82);
+}
+.team-modal__foto {
+  overflow: hidden;
+  display: block;
+  width: 90%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.team-modal__info {
+  padding: 10px 10px;
+  text-align: center;
+}
+.team-modal__name {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.14;
+  margin-bottom: 7px;
+  color: var(--footer-text-color);
+}
+
+.team-modal__role {
+  font-size: 14px;
+  line-height: 1.14;
+  font-weight: 500;
+  color: var(--main-accent-color);
+}
+
+.team-modal__soclist {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  column-gap: 15px;
+  padding-top: 10px;
+}
+
+.team-modal__soclink {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  fill: var(--footer-text-color);
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    fill 250ms cubic-bezier(0.4, 0, 0.2, 1), transform 500ms linear;
+}
+
+.team-modal__soclink:hover,
+.team-modal__soclink:focus {
+  background-color: var(--main-accent-color);
+  fill: var(--background-color);
+  transform: scale(1.3);
 }
