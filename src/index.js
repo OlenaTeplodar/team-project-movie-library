@@ -1,2 +1,2 @@
-import { database } from './js/firebase-module';
+// import { database } from './js/firebase-module';
 
