@@ -11,7 +11,12 @@ const firebaseConfig = {
   storageBucket: 'team-project-js-2.appspot.com',
   messagingSenderId: '85270049715',
   appId: '1:85270049715:web:18b08d0b0f680fb47311c6',
+  // databaseURL:
+  //   'https://team-project-js-2-default-rtdb.europe-west1.firebasedatabase.app/',
 };
+
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+let database = firebase.database();
+console.log(database);
