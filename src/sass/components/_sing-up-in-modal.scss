@@ -1,0 +1,215 @@
+.registrationWrapper {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    top: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: 250ms ease-in-out;
+    overflow: hidden;
+}
+
+.registrationWrapper.visible {
+    opacity: 1;
+    visibility: visible;
+    overflow: hidden;
+}
+
+.registr-form {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 320px;
+    margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #212121;
+    padding: 20px;
+    border-radius: 20px;
+    transition: 400ms ease-in-out;
+}
+
+.registr-form.hidden {
+    left: -100%;
+    transition: 400ms ease-in-out;
+}
+
+.form-title {
+    text-align: center;
+    margin-bottom: 40px;
+    font-weight: 600;
+    font-size: 30px;
+    color: var(--text-color-white);
+    letter-spacing: 0.2em;
+}
+// .email {
+// }
+// .emailRegistr {
+// }
+.input:focus ~.pass-email-span,
+.input:valid ~.pass-email-span {
+    color: var(--text-color-white);
+    transform: translateX(10px) translateY(-7px);
+    font-size: 0.65em;
+    padding: 0 10 px;
+    background: #212121;
+    border-left: 1px solid var(--main-accent-color);
+    border-right: 1px solid var(--main-accent-color);
+    letter-spacing: 0.2em;
+}
+
+.input:focus, 
+.input:valid {
+    border: 1px solid var(--main-accent-color);
+}
+
+.pass-email-span {
+    position: absolute;
+    left: 20px;
+    padding: 10px;
+    pointer-events: none;
+    color: var(--text-color-white);
+    font-size: 1em;
+    transition: 250ms;
+    text-transform: uppercase;
+}
+
+
+.first-name, 
+.email {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: inherit;
+    border-radius: 5px;
+    outline: none;
+    margin-bottom: 30px;
+    color: var(--text-color-white);
+    font-size: 1em;
+    transition: 250ms;
+    resize: none;
+}
+
+// .passRegistr {
+// }
+
+.registr-btn, .login-btn {
+    padding: 10px 50px;
+    border: none;
+    outline: none;
+    background: rgba(255, 255, 255, 0.25);
+    margin: 0 auto 40px;
+    color: #fff;
+    display: flex;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: 300ms ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.registr-btn:hover,
+.login-btn:hover {
+    background: rgba(96, 96, 96, 0.25);
+}
+.registr-text {
+    font-size: 16px;
+}
+.changeForm {
+    &__text {
+        text-align: center;
+        color: var(--text-color-white);
+        font-size: 18px;
+    }
+    &__span {
+        font-size: 28px;
+    }
+}
+
+.changeForm__span {
+    cursor: pointer;
+    transition: 250ms ease-in-out;
+    &:hover,
+    &:focus {
+        color: var(--main-accent-color);
+        transition: 250ms ease-in-out;
+    }
+}
+// .animate__animated {
+// }
+// .animate__pulse {
+// }
+
+// .login {
+// }
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 320px;
+    margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #212121;
+    padding: 20px;
+    border-radius: 20px;
+    transition: 250ms ease-in-out;
+}
+
+.registr-form.registr-form.hidden + .login-form.visible {
+    left: 50%;
+    transition: 250ms ease-in-out;
+}
+// .emailLogin {
+// }
+// .passLogin {
+// }
+
+// .registr {
+// }
+
+.loginedModal {
+    position: relative;
+    width: 320px;
+    margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #212121;
+    padding: 20px;
+    border-radius: 20px;
+    transition: 250ms ease-in-out;
+}
+.loginedWrapper {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    top: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: 250ms ease-in-out;
+    overflow: hidden;
+}
+
+.loginedWrapper.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.exitBtnForm {
+    border: none;
+    width: 180px;
+    height: 25px;
+    border-radius: 20px;
+    background-color: var(--main-accent-color);
+    &:hover {background-color: var(--background-color);
+    transition: 250ms ease;}
+}
