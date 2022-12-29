@@ -1,9 +1,12 @@
 import Pagination from 'tui-pagination';
 import 'tui-pagination/dist/tui-pagination.css';
 
-
-
-
+// const container = document.getElementById('pagination');
+// const pagination = new Pagination(container);
+// const container = document.getElementById('pagination');
+refs = {
+  pagination: document.querySelector('.tui-pagination')
+}
 const PER_PAGE = 20;
 
 const options = {
@@ -33,4 +36,3 @@ const options = {
 
 const pagination = new Pagination(refs.pagination, options);
 
-const container = document.getElementById('pagination');
