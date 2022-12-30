@@ -19,12 +19,14 @@
   },
   "dependencies": {
     "@parcel/transformer-css": "^2.8.1",
+    "axios": "^1.2.2",
     "firebase": "^9.15.0",
     "modern-normalize": "^1.1.0",
     "tui-pagination": "^3.4.1"
   },
   "devDependencies": {
     "@parcel/transformer-sass": "^2.8.1",
+    "buffer": "^5.7.1",
     "parcel": "^2.8.1",
     "parcel-reporter-clean-dist": "^1.0.4",
     "posthtml-include": "^1.7.4",
