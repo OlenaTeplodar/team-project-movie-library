@@ -1,10 +1,6 @@
 import Pagination from 'tui-pagination';
 import 'tui-pagination/dist/tui-pagination.css';
 
-// const pagination = new Pagination('pagination');
-
-// const container = document.getElementById('pagination');
-// const pagination = new Pagination(container);
 const PER_PAGE = 20;
 
 const options = {
@@ -34,19 +30,5 @@ const options = {
 
 const pagination = new Pagination(refs.pagination, options);
 
-const page = pagination.getCurrentPage();
-
-
-pagination.on('beforeMove', evt => {
-  const { page } = evt;
-  const result = ajax.call({page});
-
-  if(result) {
-    pagination.movePageTo(page);
-  } else {
-    return false;
-  }
-});
-
-pagination.on('afterMove', ({ page }) => console.log(page));
+const container = document.getElementById('pagination');
 
