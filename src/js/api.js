@@ -19,16 +19,17 @@ export default class FetchApiMovies {
     if (response.status !== 200) {
       throw new Error(response.status);
     }
+    this.incrementPage();
     return results;
   }
 
-  //   incrementPage() {
-  //     this.page += 1;
-  //   }
+  incrementPage() {
+    this.page += 1;
+  }
 
-  //   resetPage() {
-  //     this.page = 1;
-  //   }
+  resetPage() {
+    this.page = 1;
+  }
 
   get query() {
     return this.searchQuery;

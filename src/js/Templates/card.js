@@ -1,8 +1,9 @@
 export function addMoviesCard(cards = []) {
   return cards
     .map(card => {
-      const { id, poster_path, title, original_title, release_date } = card;
-      return `<a class="card__link" href="" title="">
+      const { id, name, poster_path, title, original_title, release_date } =
+        card;
+      return `<a class="card__link" href="" title=${name}>
 			<img class="card__image" id=${id} src=${poster_path} alt=${title} loading="lazy"/>
 		  </a>
 		</div class"card-content">

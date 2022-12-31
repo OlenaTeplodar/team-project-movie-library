@@ -3,17 +3,21 @@
 import FetchApiMovies from './js/api';
 import { addMoviesCard } from './js/Templates/card';
 
-const cardList = document.querySelector('.home-card__list');
+const cardList = document.querySelector('.home-content');
 
-const fetchApiMovies = new FetchApiMovies();
+const fetchApiHomeContent = new FetchApiMovies();
 
-console.log(fetchApiMovies);
+console.log(fetchApiHomeContent);
 
-fetchApiMovies()
-  .fetchPopularMovies()
-  .then(renderCard)
-  .catch(error => console.log(error));
+if (cardList !== '') {
+  return;
+} else {
+  fetchApiHomeContent()
+    .fetchPopularMovies()
+    .then(renderCard({ results }))
+    .catch(error => console.log(error));
+}
 
-function renderCard(films) {
-  cardList.insertAdjacentHTML('beforeend', addMoviesCard(films));
+function renderCard(results) {
+  cardList.insertAdjacentHTML('beforeend', addMoviesCard(results));
 }
