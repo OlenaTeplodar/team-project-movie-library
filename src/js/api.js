@@ -1,4 +1,4 @@
-const axios = require('axios').default;
+const axios = require('axios');
 
 const BASE_URL = 'https://api.themoviedb.org';
 const API_KEY = '9fae0fdf266213c68361ca578a95b948';
@@ -10,17 +10,17 @@ export default class FetchApiMovies {
     this.language = 'en-US';
   }
   async fetchPopularMovies() {
-    console.log(this);
-    const response = await axios.get(
-      `${BASE_URL}/3/movie/popular?api_key=${API_KEY}&language=${this.language}&page=${this.page}`
-    );
-    const results = await response.json();
-    console.log(results);
-    if (response.status !== 200) {
-      throw new Error(response.status);
+    try {
+      const response = await axios.get(
+        `${BASE_URL}/3/movie/popular?api_key=${API_KEY}&language=${this.language}&page=${this.page}`
+      );
+      const results = await response.data.results;
+      console.log(results);
+      return results;
+    } catch (error) {
+      error;
     }
     this.incrementPage();
-    return results;
   }
 
   incrementPage() {
