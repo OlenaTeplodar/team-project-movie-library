@@ -3,12 +3,15 @@ export function addMoviesCard(cards = []) {
     .map(card => {
       const { id, name, poster_path, title, original_title, release_date } =
         card;
-      return `<a class="card__link" href="" title=${name}>
-			<img class="card__image" id=${id} src=${poster_path} alt=${title} loading="lazy"/>
-		  </a>
-		</div class"card-content">
-		  <h2 class='card__name'>${original_title}</h2>
-		  <p class='card__date'>${release_date}</p>
+      return `<li class="card__link" id=${id}>
+	  </div class"card-content">
+			<img class="card__image" src=${poster_path} alt=${name} loading="lazy"/>
+			</div>
+		
+		  <h2 class='card__title'>${title}</h2>
+		  <p class='card__text'><span>${original_title} </span> " | " <span>${release_date}</span></p>
+		  
+		  </li>
 			  `;
     })
     .join('');

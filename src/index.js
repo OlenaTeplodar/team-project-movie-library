@@ -3,7 +3,7 @@
 import FetchApiMovies from './js/api.js';
 import { addMoviesCard } from './js/Templates/card';
 
-const cardList = document.querySelector('.home-content');
+const cardList = document.querySelector('.home-card');
 
 const fetchApiHomeContent = new FetchApiMovies();
 
