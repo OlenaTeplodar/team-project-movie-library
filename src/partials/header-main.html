@@ -1,0 +1,64 @@
+<header class="header">
+    <div class="container header__section">
+      <div class="header__nav-container">
+        <a
+          href="/src/index.html"
+          target="_self"
+          rel="noopener noreferrer"
+          title="Logo"
+          class="logo"
+        >
+          <svg class="logo__icon" width="24" height="24">
+            <use href="/src/images/sprite.svg##icon-film"></use>
+          </svg>
+          <span class="logo__text">Filmoteka</span>
+        </a>
+        <nav class="header__nav">
+          <ul class="header__list">
+            <li class="header__item">
+              <a
+                href="/src/index.html"
+                target="_self"
+                rel="noopener noreferrer"
+                title="Home page"
+                class="header__item-link current"
+                >home</a
+              >
+            </li>
+            <li class="header__item">
+              <a
+                href="/src/my-library.html"
+                target="_self"
+                rel="noopener noreferrer"
+                title="My library"
+                class="header__item-link js-library"
+                >my library</a
+              >
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <form action="submit" class="header__form">
+        <div class="header__form-search">
+          <input
+            type="text"
+            name="searchQuery"
+            autofocus
+            autocomplete="off"
+            placeholder="Movie search"
+            class="header__form-input"
+          />
+          <button
+            type="submit"
+            aria-label="search-button"
+            class="header__search-btn"
+          >
+            <svg class="header__form-icon" width="12" height="12">
+              <use href="/src/images/icons 1.svg#icon-search"></use>
+            </svg>
+          </button>
+        </div>
+      </form>
+      <p class="header__notification"></p>
+    </div>
+  </header>

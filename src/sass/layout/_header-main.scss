@@ -1,0 +1,98 @@
+.header {
+    padding: 40px 0 45px 0;
+    background-image: url(/src/images/header_background_mobile.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-left: auto;
+    margin-right: auto;
+    height: 230px;
+    background-color: #fff;
+}
+
+.header__nav-container {
+  margin-right: auto;
+  margin-left: auto;
+  width: 280;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 65px;
+
+  @media screen and (min-width: 480px) {
+    width: 440;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-bottom: 40px;
+  }
+
+  @media screen and (min-width: 767px) {
+    width: 704;
+  }
+
+  @media screen and (min-width: 1200px) {
+    width: 1136;
+  }
+  }
+  
+  @media screen and (max-width: 767px) {
+    .header-library__section {
+      background-color: var(--footer-background-color);
+      background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+        url(/src/images/header_background_mobile.jpg);
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+  }
+
+  @media screen and (max-width: 767px) and (min-device-pixel-ratio: 2),
+  screen and (max-width: 767px) and (min-resolution: 192dpi),
+  screen and (max-width: 767px) and (min-resolution: 2dppx) {
+  .header-library__section {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+      url(/src/images/header_background_mobile_x2.jpg);
+  }
+}
+
+@media screen and (min-width: 768px) {
+    .header-library__section {
+      background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+        url(/src/images/header_background_tablet.jpg);
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+  }
+
+  @media screen and (min-width: 768px) and (min-device-pixel-ratio: 2),
+  screen and (min-width: 768px) and (min-resolution: 192dpi),
+  screen and (min-width: 768px) and (min-resolution: 2dppx) {
+  .header-library__section {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+      url(/src/images/header_background_tablet_x2.jpg);
+  }
+}
+
+@media screen and (min-width: 1200px) {
+    .header-library__section {
+      background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+        url(/src/images/header_background.jpg);
+    }
+  }
+
+  @media screen and (min-width: 1200px) and (min-device-pixel-ratio: 2),
+  screen and (min-width: 1200px) and (min-resolution: 192dpi),
+  screen and (min-width: 1200px) and (min-resolution: 2dppx) {
+  .header-library__section {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+      url(/src/images/header_background_x2.jpg);
+  }
+}
+
+.logo__text {
+  color: var(--text-color-white);
+  font-family: 'Roboto';
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 100%;
+}
