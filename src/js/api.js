@@ -14,8 +14,7 @@ export default class FetchApiMovies {
       const response = await axios.get(
         `${BASE_URL}/movie/popular?api_key=${API_KEY}&language=${this.language}&page=${this.page}`
       );
-      const results = await response.results;
-      return results;
+      return response.data;
     } catch (error) {
       error;
     }
@@ -26,8 +25,7 @@ export default class FetchApiMovies {
       const response = await axios.get(
         `${BASE_URL}/search/movie?api_key=${API_KEY}&language=${this.language}=${this.page}&query=${this.searchQuery}`
       );
-      const results = await response.data.results;
-      return results;
+      return response.data;
     } catch (error) {
       error;
     }

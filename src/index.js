@@ -9,10 +9,12 @@ const fetchApiHomeContent = new FetchApiMovies();
 
 console.log(fetchApiHomeContent);
 
-fetchApiHomeContent()
-  .fetchPopularMovies()
-  .then(renderCard)
-  .catch(error => console.log(error));
+function renderPopularMovies() {
+  fetchApiHomeContent()
+    .fetchPopularMovies()
+    .then(renderCard)
+    .catch(error => console.log(error));
+}
 
 function renderCard(results) {
   cardList.insertAdjacentHTML('beforeend', addMoviesCard(results));
