@@ -23,15 +23,15 @@ export default class FetchApiMovies {
   }
   // Реалізація пошук та відображення фільмів
   async fetchSearchMovies() {
-    try {
+    // try {
       const response = await axios.get(
         `${BASE_URL}/search/movie?api_key=${API_KEY}&language=${this.language}=${this.page}&query=${this.searchQuery}`
       );
       const results = await response.data.results;
       return results;
-    } catch (error) {
-      error;
-    }
+    // } catch (error) {
+    //   error;
+    // }
   }
 
   async fetchGenresMovies() {
