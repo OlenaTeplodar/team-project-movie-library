@@ -136,7 +136,7 @@
 .team-modal__list {
   display: flex;
   gap: 20px;
-  align-items: center;
+  align-items: stretch;
   flex-wrap: wrap;
   justify-content: space-around;
   @media screen and (min-width: 1199px) {
