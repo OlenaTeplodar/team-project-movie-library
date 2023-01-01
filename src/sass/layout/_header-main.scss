@@ -36,7 +36,7 @@
   }
   
   @media screen and (max-width: 767px) {
-    .header-library__section {
+    .header {
       background-color: var(--footer-background-color);
       background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
         url(/src/images/header_background_mobile.jpg);
@@ -49,14 +49,14 @@
   @media screen and (max-width: 767px) and (min-device-pixel-ratio: 2),
   screen and (max-width: 767px) and (min-resolution: 192dpi),
   screen and (max-width: 767px) and (min-resolution: 2dppx) {
-  .header-library__section {
+  .header {
     background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
       url(/src/images/header_background_mobile_x2.jpg);
   }
 }
 
 @media screen and (min-width: 768px) {
-    .header-library__section {
+    .header {
       background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
         url(/src/images/header_background_tablet.jpg);
       background-repeat: no-repeat;
@@ -67,14 +67,14 @@
   @media screen and (min-width: 768px) and (min-device-pixel-ratio: 2),
   screen and (min-width: 768px) and (min-resolution: 192dpi),
   screen and (min-width: 768px) and (min-resolution: 2dppx) {
-  .header-library__section {
+  .header {
     background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
       url(/src/images/header_background_tablet_x2.jpg);
   }
 }
 
 @media screen and (min-width: 1200px) {
-    .header-library__section {
+    .header {
       background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
         url(/src/images/header_background.jpg);
     }
@@ -83,7 +83,7 @@
   @media screen and (min-width: 1200px) and (min-device-pixel-ratio: 2),
   screen and (min-width: 1200px) and (min-resolution: 192dpi),
   screen and (min-width: 1200px) and (min-resolution: 2dppx) {
-  .header-library__section {
+  .header {
     background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
       url(/src/images/header_background_x2.jpg);
   }
@@ -95,4 +95,19 @@
   font-weight: 500;
   font-size: 30px;
   line-height: 100%;
+}
+
+.header__list {
+  display: flex;
+  gap: 40px;
+}
+
+.header__item-link {
+  color: var(--text-color-white);
+  font-family: 'Roboto';
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 100%;
+  text-transform: uppercase;
+  position: relative;
 }
