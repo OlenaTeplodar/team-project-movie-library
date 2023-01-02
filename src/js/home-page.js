@@ -1,13 +1,13 @@
 import FetchApiMovies from './api';
 import { createMoviesCard } from './Templates/card';
+// import { pagination } from './pagination';
 
 const refs = {
-  body: document.querySelector('body'),
   cardList: document.querySelector('.home-card'),
 };
 
 const fetchApiHomeContent = new FetchApiMovies();
-
+let totalPages;
 showPopularMovies();
 
 async function showPopularMovies() {
@@ -21,5 +21,6 @@ async function showPopularMovies() {
 }
 
 function renderMoviesCard(cards) {
-  refs.cardList.insertAdjacentHTML('beforeend', createMoviesCard(cards));
+  refs.cardList.innerHTML = '';
+  refs.cardList.insertAdjacentHTML('afterbegin', createMoviesCard(cards));
 }
