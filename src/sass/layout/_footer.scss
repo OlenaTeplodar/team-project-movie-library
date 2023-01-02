@@ -9,12 +9,29 @@
 }
 
 .footer-container {
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0px 40px;
   @media screen and (min-width: 768px) {
     padding: 0px;
+  }
+  @media screen and (max-width: 320px) {
+    width: 100%;
+  }
+  @media screen and (min-width: 480px) {
+    width: 480px;
+  }
+  @media screen and (min-width: 768px) {
+    width: 768px;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+  @media screen and (min-width: 1280px) {
+    width: 1280px;
   }
 }
 
