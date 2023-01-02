@@ -11,11 +11,11 @@
   pointer-events: auto;
 }
 
-// .is-hidden {
-//   opacity: 0;
-//   visibility: hidden;
-//   pointer-events: none;
-// }
+.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
 
 .team-modal {
   z-index: 2;
