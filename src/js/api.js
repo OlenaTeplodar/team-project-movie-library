@@ -1,5 +1,5 @@
-import axios from "axios";
-const axios = require('axios');
+import axios from 'axios';
+
 
 const BASE_URL = 'https://api.themoviedb.org/3';
 const API_KEY = '9fae0fdf266213c68361ca578a95b948';
@@ -12,35 +12,36 @@ export default class FetchApiMovies {
   // Реалізація підвантаження популярних фільмів на головну (першу) сторінку
   async fetchPopularMovies() {
     try {
-      const response = await axios.get(
+      return (results = await axios.get(
         `${BASE_URL}/movie/popular?api_key=${API_KEY}&language=${this.language}&page=${this.page}`
-      );
-      const results = await response.results;
-      return results;
+      ));
+      //   const { results } = await response.json();
+      //   return response.results;
     } catch (error) {
       error;
     }
   }
-  // Реалізація пошук та відображення фільмів
+  // Реалізація пошуку та відображення фільмів за ключовими словами
   async fetchSearchMovies() {
-    // try {
-      const response = await axios.get(
-        `${BASE_URL}/search/movie?api_key=${API_KEY}&language=${this.language}=${this.page}&query=${this.searchQuery}`
-      );
-      const results = await response.data.results;
-      return results;
-    // } catch (error) {
-    //   error;
-    // }
+    try {
+      return (data = await axios.get(
+        `${BASE_URL}/search/movie?api_key=${API_KEY}&language=${this.language}&page=${this.page}&query=${this.searchQuery}`
+      ));
+      //   const { data } = await response.json();
+      //   return response.data;
+    } catch (error) {
+      error;
+    }
   }
+  // Реалізація пошуку та відображення фільмів за жанрами
 
   async fetchGenresMovies() {
     try {
-      const response = await axios.get(
-        `${BASE_URL}/genre/movie/list?api_key=${KEY}`
-      );
-      const data = await response.data.genres;
-      return data.genres;
+      return (genres = await axios.get(
+        `${BASE_URL}/genre/movie/list?api_key=${KEY}&language=${this.language}`
+      ));
+      //   const { genres } = await response.json();
+      //   return response.genres;
     } catch (error) {
       error;
     }

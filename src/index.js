@@ -1,4 +1,7 @@
 // import { database } from './js/firebase-module';
+
+import './sass/index.scss';
+import './js/home-page';
 import './js/about-team-modal';
 import FetchApiMovies from './js/api.js';
 import { addMoviesCard } from './js/Templates/card';
