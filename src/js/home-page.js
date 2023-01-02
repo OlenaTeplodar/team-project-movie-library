@@ -1,6 +1,5 @@
 import FetchApiMovies from './api';
 import { createMoviesCard } from './Templates/card';
-// console.log(createMoviesCard);
 
 const refs = {
   body: document.querySelector('body'),
@@ -22,8 +21,5 @@ async function showPopularMovies() {
 }
 
 function renderMoviesCard(cards) {
-  refs.cardList.insertAdjacentHTML(
-    'beforeend',
-    createMoviesCard(results.cards)
-  );
+  refs.cardList.insertAdjacentHTML('beforeend', createMoviesCard(cards));
 }
