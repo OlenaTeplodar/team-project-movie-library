@@ -3,13 +3,19 @@ export function createMoviesCard(cards = []) {
     .map(card => {
       const { id, name, poster_path, title, original_title, release_date } =
         card;
-      return `<a class="card__link" href="" title=${name}>
-			  <img class="card__image" id=${id} src=${poster_path} alt=${title} loading="lazy"/>
-			</a>
-		  </div class"card-content">
-			<h2 class='card__name'>${original_title}</h2>
-			<p class='card__date'>${release_date}</p>
-				`;
+      return `<li class="card__link" id=${id}>
+      </div class = "film__thumb">
+      <picture class="film__img">
+                <source media="(min-width:1024px)"  srcset="https://image.tmdb.org/t/p/w500${poster_path}">
+                <source media="(min-width:768px)"  srcset="https://image.tmdb.org/t/p/w400${poster_path}">
+                <img class="film__img-poster" src="https://image.tmdb.org/t/p/w300${poster_path}" alt="${title}" loading="lazy">
+            </picture>
+          </div>
+        
+        <h2 class='card__title'>${title}</h2>
+        <p class='card__text'><span>${original_title} </span> " | " <span>${release_date}</span></p>
+        
+        </li>`;
     })
     .join('');
 }

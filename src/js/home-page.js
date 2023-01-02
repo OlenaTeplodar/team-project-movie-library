@@ -8,12 +8,17 @@ const refs = {
 };
 
 const fetchApiHomeContent = new FetchApiMovies();
-// console.log(fetchApiHomeContent);
+
 showPopularMovies();
 
 async function showPopularMovies() {
-  const results = await fetchApiHomeContent.fetchPopularMovies();
-  renderMoviesCard(results);
+  try {
+    const data = await fetchApiHomeContent.fetchPopularMovies();
+    const cards = data.results;
+    renderMoviesCard(cards);
+  } catch (error) {
+    error;
+  }
 }
 
 function renderMoviesCard(cards) {
