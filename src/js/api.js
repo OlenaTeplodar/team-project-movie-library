@@ -11,10 +11,10 @@ export default class FetchApiMovies {
   // Реалізація підвантаження популярних фільмів на головну (першу) сторінку
   async fetchPopularMovies() {
     try {
-      const results = await axios.get(
+      const response = await axios.get(
         `${BASE_URL}/movie/popular?api_key=${API_KEY}&language=${this.language}&page=${this.page}`
       );
-      return results;
+      return await response.results;
     } catch (error) {
       error;
     }
@@ -22,10 +22,10 @@ export default class FetchApiMovies {
   // Реалізація пошуку та відображення фільмів за ключовими словами
   async fetchSearchMovies() {
     try {
-      const data = await axios.get(
+      const response = await axios.get(
         `${BASE_URL}/search/movie?api_key=${API_KEY}&language=${this.language}&page=${this.page}&query=${this.searchQuery}`
       );
-      return data;
+      return await response.data;
     } catch (error) {
       error;
     }
@@ -34,10 +34,10 @@ export default class FetchApiMovies {
 
   async fetchGenresMovies() {
     try {
-      const genres = await axios.get(
+      const response = await axios.get(
         `${BASE_URL}/genre/movie/list?api_key=${KEY}&language=${this.language}`
       );
-      return genres;
+      return await response.genres;
     } catch (error) {
       error;
     }
