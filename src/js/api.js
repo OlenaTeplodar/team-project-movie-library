@@ -14,7 +14,7 @@ export default class FetchApiMovies {
       const response = await axios.get(
         `${BASE_URL}/movie/popular?api_key=${API_KEY}&language=${this.language}&page=${this.page}`
       );
-      return await response.results;
+      return await response.data;
     } catch (error) {
       error;
     }
