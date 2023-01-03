@@ -8,36 +8,36 @@ export default class FetchApiMovies {
     this.page = 1;
     this.language = 'en-US';
   }
-  // Реалізація підвантаження популярних фільмів на головну (першу) сторінку
-  async fetchPopularMovies() {
+  // Реалізація для запиту на список найпопулярніших фільмів на сьогодні для створення колекції на головній сторінці:
+  async fetchPopularMovies(page) {
     try {
       const response = await axios.get(
-        `${BASE_URL}/movie/popular?api_key=${API_KEY}&language=${this.language}&page=${this.page}`
+        `${BASE_URL}/trending/all/day?api_key=${API_KEY}&language=${this.language}&page=${this.page}`
       );
       return await response.data;
     } catch (error) {
       error;
     }
   }
-  // Реалізація пошуку та відображення фільмів за ключовими словами
-  async fetchSearchMovies() {
+  // Реалізація для запиту фільму за ключовим словом на головній сторінці:
+  async fetchSearchMovies(query, page) {
     try {
       const response = await axios.get(
-        `${BASE_URL}/search/movie?api_key=${API_KEY}&language=${this.language}&page=${this.page}&query=${this.searchQuery}`
+        `${BASE_URL}/search/movie?api_key=${API_KEY}&language=${this.language}&page=${this.page}&query=${this.searchQuery}&include_adult=false`
       );
       return await response.data;
     } catch (error) {
       error;
     }
   }
-  // Реалізація пошуку та відображення фільмів за жанрами
-
-  async fetchGenresMovies() {
+  // Реалізація для запиту повної інформації про кінофільм для сторінки кінофільму:
+  // Реалізація для запиту повної інформації про можливий трейлер на YouTube:
+  async fetchGenresMovies(query, page) {
     try {
       const response = await axios.get(
-        `${BASE_URL}/genre/movie/list?api_key=${KEY}&language=${this.language}`
+        `${BASE_URL}/movie/{movie_id}?api_key=${KEY}&language=${this.language}`
       );
-      return await response.genres;
+      return await response.data;
     } catch (error) {
       error;
     }
@@ -45,6 +45,10 @@ export default class FetchApiMovies {
 
   incrementPage() {
     this.page += 1;
+  }
+
+  decrementPage() {
+    this.page -= 1;
   }
 
   resetPage() {
