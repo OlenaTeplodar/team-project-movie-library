@@ -3,17 +3,17 @@ import { createMoviesCard } from './Templates/card';
 // import { pagination } from './pagination';
 
 const refs = {
-  cardList: document.querySelector('.home-card'),
+  cardList: document.querySelector('.cards__list'),
 };
 
 const fetchApiHomeContent = new FetchApiMovies();
-let totalPages;
 showPopularMovies();
 
 async function showPopularMovies() {
   try {
     const data = await fetchApiHomeContent.fetchPopularMovies();
     const cards = data.results;
+    console.log(cards);
     renderMoviesCard(cards);
   } catch (error) {
     error;
@@ -21,6 +21,5 @@ async function showPopularMovies() {
 }
 
 function renderMoviesCard(cards) {
-  refs.cardList.innerHTML = '';
-  refs.cardList.insertAdjacentHTML('afterbegin', createMoviesCard(cards));
+  refs.cardList.insertAdjacentHTML('beforeend', createMoviesCard(cards));
 }
