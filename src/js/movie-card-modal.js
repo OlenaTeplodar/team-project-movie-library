@@ -1,13 +1,12 @@
 import axios from 'axios';
-// Бондаренко
-import FetchApiMovies from './js/api';
-import { markupMovieTrailer } from './js/markup-trailer';
+// для трейлера до фільму у модалці
+import FetchApiMovies from './api';
+import { markupMovieTrailer } from './markup-trailer';
 
 const refs = {
   modalFilmBackdrop: document.querySelector('[data-modal-film]'),
   modalFilm: document.querySelector('.modal-film'),
   cardFilm: document.querySelector('.cards__list'),
-  cardList: document.querySelector('.cards__list'),
 };
 
 refs.cardFilm.addEventListener('click', onOpenModalFilm);
