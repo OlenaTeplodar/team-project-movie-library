@@ -22,10 +22,32 @@ function onOpenModalFilm(e) {
   window.addEventListener('keydown', onCloseEscBtn);
 
   const idCard = e.target.closest('.card__link').id;
-
   createMovieCard(idCard);
+  console.log(idCard);
+  fetchMovieById(idCard).then(response => {
+    refs.modalFilm.innerHTML = '';
+    return render(response);
+  });
+  const boxFetchApiMovies = new FetchApiMovies();
+  // ця функція робиться всередині модального вікна
+  boxFetchApiMovies
+    .fetchMoviesTrailers(idCard)
+    .then(
+      // прописується розмітка і закидається в ДОМ
+      data => {
+        console.log(data);
+        // прописати перевірку якщо пустий масив
+        // показувати картинку
+        if (data.results.length === 0) {
+          return;
+        }
+        // прибрати картинку і поставити трейлер
+        const markupTrailer = markupMovieTrailer(data.results[0].key);
+        refs.modalFilm.insertAdjacentHTML('beforeend', markupTrailer);
+      }
+    )
+    .catch(error => console.log(error));
 }
-
 function closeModalFilm() {
   window.removeEventListener('keydown', onCloseEscBtn);
   document.removeEventListener('click', onCloseModalFilmByBtn);

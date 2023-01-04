@@ -58,7 +58,7 @@ export default class FetchApiMovies {
   async fetchMoviesTrailers(id) {
     try {
       const response = await fetch(
-        `${BASE_URL}/3/movie/${id}/videos?api_key=${API_KEY}&language=${this.language}&page=${this.page}`
+        `${BASE_URL}/movie/${id}/videos?api_key=${API_KEY}&language=${this.language}&page=${this.page}`
       );
       const data = response.json();
       console.log(data);
