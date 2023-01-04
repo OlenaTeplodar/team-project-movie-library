@@ -1,4 +1,8 @@
 import axios from 'axios';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import { genres } from './Templates/genres';
+
+console.log('Hello');
 
 const refs = {
   modalFilmBackdrop: document.querySelector('[data-modal-film]'),
@@ -8,8 +12,6 @@ const refs = {
 
 refs.cardFilm.addEventListener('click', onOpenModalFilm);
 
-document.addEventListener('click', onCloseModalFilmByBtn);
-
 refs.modalFilmBackdrop.addEventListener('click', onBackdropClick);
 
 // --------open/close-modal
@@ -17,23 +19,26 @@ refs.modalFilmBackdrop.addEventListener('click', onBackdropClick);
 function onOpenModalFilm(e) {
   refs.modalFilmBackdrop.classList.remove('is-hidden');
 
+  document.addEventListener('click', onCloseModalFilmByBtn);
   window.addEventListener('keydown', onCloseEscBtn);
 
   const idCard = e.target.closest('.card__link').id;
 
-  fetchMovieById(idCard).then(response => {
-    refs.modalFilm.innerHTML = '';
-    return render(response);
-  });
+  createMovieCard(idCard);
 }
 
 function closeModalFilm() {
   window.removeEventListener('keydown', onCloseEscBtn);
+  document.removeEventListener('click', onCloseModalFilmByBtn);
   refs.modalFilmBackdrop.classList.add('is-hidden');
 }
 
 function onCloseModalFilmByBtn(e) {
-  if (e.target.classList.contains('modal-film__close-button')) {
+  console.log('click');
+  if (
+    e.target.classList.contains('modal-film__close-button') ||
+    e.target.classList.contains('modal-film__modal-icon')
+  ) {
     closeModalFilm();
   }
 }
@@ -45,8 +50,7 @@ function onBackdropClick(e) {
 }
 
 function onCloseEscBtn(e) {
-  console.log(e.code);
-
+  // console.log(e.code);
   if (e.code === 'Escape') {
     closeModalFilm();
   }
@@ -60,18 +64,40 @@ async function fetchMovieById(idMovie) {
       `https://api.themoviedb.org/3/movie/${idMovie}?api_key=9fae0fdf266213c68361ca578a95b948&language=en-US`
     );
     // console.log(response.data);
+
     return await response.data;
   } catch (error) {
-    error;
+    console.log(error.message);
+  }
+}
+
+// -------Create-interface----
+
+async function createMovieCard(id) {
+  try {
+    const response = await fetchMovieById(id);
+    refs.modalFilm.innerHTML = '';
+    render(response);
+  } catch (error) {
+    console.log(error.message);
+    closeModalFilm();
+    Notify.failure('Sorry, movie not found. Please try again.');
   }
 }
 
 // ---Render--
-
 function render(response) {
   const detailsCard = getModalMovieCardMarkup(response);
-  // console.log(detailsCard);
   refs.modalFilm.insertAdjacentHTML('beforeend', detailsCard);
+
+  const btnWatchedFilmModalWindowEl = document.querySelector(
+    '.modal-window__watched-btn'
+  );
+  btnWatchedFilmModalWindowEl.addEventListener('click', onClickBtnWatchedFilm);
+  const btnQueuedFilmModalWindowEl = document.querySelector(
+    '.modal-window__queued-btn'
+  );
+  btnQueuedFilmModalWindowEl.addEventListener('click', onClickBtnQueuedFilm);
 }
 
 // ------Markup----
@@ -85,15 +111,16 @@ const getModalMovieCardMarkup = ({
   vote_average,
   vote_count,
   popularity,
-  // genre_ids,
+  genres,
 }) => {
+  const genresList = genres.map(genre => genre.name).join(', ');
+
   return `
   <button
       type="button"
       class="modal-film__close-button"
       data-modal-film-close
     >
-      x
       <svg class="modal-film__modal-icon" width="30" height="30">
         <use href="/src/images/sprite.svg#icon-close"></use>
       </svg>
@@ -104,7 +131,7 @@ const getModalMovieCardMarkup = ({
   <source media="(min-width:1024px)" srcset="https://image.tmdb.org/t/p/w500${poster_path}" width="375"
   height="478">
   <source media="(min-width:768px)"  srcset="https://image.tmdb.org/t/p/w400${poster_path}">
-  <img class="img-film__poster" src="https://image.tmdb.org/t/p/w300${poster_path}" alt="${title}" loading="lazy"  >
+  <img class="img-film__poster" src="https://image.tmdb.org/t/p/w300${poster_path}"  "alt="${title}" loading="lazy"  >
 </picture>
 <div class="movie-info">
   <h2 class="film-title">${title}</h2>
@@ -112,12 +139,57 @@ const getModalMovieCardMarkup = ({
     <li class="film-title__film-title__item-film">Vote / Votes <span>${vote_average}/ ${vote_count}</span></li>
     <li class="film-title__item-film">Popularity<span>${popularity}</span></li>
     <li class="film-title__item-film">Original Title <span>${original_title}</span></li>
+    <li class="film-title__item-film">Genre <span>${genresList}</span></li>
   
 
   </ul>
   <h3 class="about-title">About ${original_title}</h3>
   <p class="text-about-movie">${overview}</p>
 
+  <ul>
+      <li><button class="modal-window__watched-btn" type="button" data-id=${id}>Add to watched</button></li>
+      <li><button class="modal-window__queued-btn" type="button" data-id=${id}>Add to queue</button></li>
+    </ul>
+
   </div>
 `;
 };
+
+//  poster_path = (src = '/src/images/poster.jpg'),
+
+//////////////////////////////////////// Работа с localStorage ///////////////////////////////////
+
+const watchedFilm = localStorage.getItem('WATCHED-FILM');
+const watchedFilmsArray = JSON.parse(watchedFilm) || [];
+const queuedFilm = localStorage.getItem('QUEUED-FILM');
+const queuedFilmsArray = JSON.parse(queuedFilm) || [];
+
+function onClickBtnWatchedFilm(e) {
+  const watchedBtn = e.target;
+  const idWatchedFilm = watchedBtn.dataset.id;
+  console.log(idWatchedFilm);
+
+  const hasWatchedFilm = watchedFilmsArray.includes(idWatchedFilm);
+  if (hasWatchedFilm) {
+    return;
+  } else {
+    watchedFilmsArray.push(idWatchedFilm);
+    localStorage.setItem('WATCHED-FILM', JSON.stringify(watchedFilmsArray));
+    return;
+  }
+}
+
+function onClickBtnQueuedFilm(e) {
+  const queuedBtn = e.target;
+  const idQueuedFilm = queuedBtn.dataset.id;
+  console.log(idQueuedFilm);
+
+  const hasQueuedFilm = queuedFilmsArray.includes(idQueuedFilm);
+  if (hasQueuedFilm) {
+    return;
+  } else {
+    queuedFilmsArray.push(idQueuedFilm);
+    localStorage.setItem('QUEUED-FILM', JSON.stringify(queuedFilmsArray));
+    return;
+  }
+}
