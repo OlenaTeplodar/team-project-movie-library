@@ -54,7 +54,7 @@ export default class FetchApiMovies {
       error;
     }
   }
-  // Бондаренко Реалізація підвантаження трейлера до фільму для модального вікна
+  // Fetch підвантаження трейлера до фільму для модального вікна
   async fetchMoviesTrailers(id) {
     try {
       const response = await fetch(
