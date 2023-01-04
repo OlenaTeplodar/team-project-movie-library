@@ -110,11 +110,11 @@
   }
 }
 
-.modal-film__img {
+.modal-film__img,
+.img-film__poster {
   display: flex;
 
   margin-right: 16px;
-  object-fit: cover;
 
   width: 375px;
   height: 478px;
@@ -132,10 +132,10 @@
 }
 
 .modal-film__img:hover {
-  -o-transform: scale(1.02);
-  -ms-transform: scale(1.02);
-  -moz-transform: scale(1.02);
-  -webkit-transform: scale(1.02);
+  // -o-transform: scale(1.02);
+  // -ms-transform: scale(1.02);
+  // -moz-transform: scale(1.02);
+  // -webkit-transform: scale(1.02);
   transform: scale(1.02);
 }
 
