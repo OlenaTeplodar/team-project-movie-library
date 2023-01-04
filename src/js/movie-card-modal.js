@@ -64,6 +64,7 @@ async function fetchMovieById(idMovie) {
       `https://api.themoviedb.org/3/movie/${idMovie}?api_key=9fae0fdf266213c68361ca578a95b948&language=en-US`
     );
     // console.log(response.data);
+
     return await response.data;
   } catch (error) {
     console.log(error.message);
@@ -88,6 +89,15 @@ async function createMovieCard(id) {
 function render(response) {
   const detailsCard = getModalMovieCardMarkup(response);
   refs.modalFilm.insertAdjacentHTML('beforeend', detailsCard);
+
+  const btnWatchedFilmModalWindowEl = document.querySelector(
+    '.modal-window__watched-btn'
+  );
+  btnWatchedFilmModalWindowEl.addEventListener('click', onClickBtnWatchedFilm);
+  const btnQueuedFilmModalWindowEl = document.querySelector(
+    '.modal-window__queued-btn'
+  );
+  btnQueuedFilmModalWindowEl.addEventListener('click', onClickBtnQueuedFilm);
 }
 
 // ------Markup----
@@ -136,8 +146,50 @@ const getModalMovieCardMarkup = ({
   <h3 class="about-title">About ${original_title}</h3>
   <p class="text-about-movie">${overview}</p>
 
+  <ul>
+      <li><button class="modal-window__watched-btn" type="button" data-id=${id}>Add to watched</button></li>
+      <li><button class="modal-window__queued-btn" type="button" data-id=${id}>Add to queue</button></li>
+    </ul>
+
   </div>
 `;
 };
 
 //  poster_path = (src = '/src/images/poster.jpg'),
+
+//////////////////////////////////////// Работа с localStorage ///////////////////////////////////
+
+const watchedFilm = localStorage.getItem('WATCHED-FILM');
+const watchedFilmsArray = JSON.parse(watchedFilm) || [];
+const queuedFilm = localStorage.getItem('QUEUED-FILM');
+const queuedFilmsArray = JSON.parse(queuedFilm) || [];
+
+function onClickBtnWatchedFilm(e) {
+  const watchedBtn = e.target;
+  const idWatchedFilm = watchedBtn.dataset.id;
+  console.log(idWatchedFilm);
+
+  const hasWatchedFilm = watchedFilmsArray.includes(idWatchedFilm);
+  if (hasWatchedFilm) {
+    return;
+  } else {
+    watchedFilmsArray.push(idWatchedFilm);
+    localStorage.setItem('WATCHED-FILM', JSON.stringify(watchedFilmsArray));
+    return;
+  }
+}
+
+function onClickBtnQueuedFilm(e) {
+  const queuedBtn = e.target;
+  const idQueuedFilm = queuedBtn.dataset.id;
+  console.log(idQueuedFilm);
+
+  const hasQueuedFilm = queuedFilmsArray.includes(idQueuedFilm);
+  if (hasQueuedFilm) {
+    return;
+  } else {
+    queuedFilmsArray.push(idQueuedFilm);
+    localStorage.setItem('QUEUED-FILM', JSON.stringify(queuedFilmsArray));
+    return;
+  }
+}
