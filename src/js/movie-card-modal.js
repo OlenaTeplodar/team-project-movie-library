@@ -1,60 +1,77 @@
-// const { listenerCount } = require('process');
-
 import axios from 'axios';
 
 const refs = {
-  // openModalFilmBtn: document.querySelector('[data-modal-film-open]'),
-  closeModalFilmBtn: document.querySelector('[data-modal-film-close]'),
   modalFilmBackdrop: document.querySelector('[data-modal-film]'),
   modalFilm: document.querySelector('.modal-film'),
   cardFilm: document.querySelector('.cards__list'),
 };
 
 refs.cardFilm.addEventListener('click', onOpenModalFilm);
-refs.closeModalFilmBtn.addEventListener('click', onCloseModalFilm);
+
+document.addEventListener('click', onCloseModalFilmByBtn);
+
 refs.modalFilmBackdrop.addEventListener('click', onBackdropClick);
 
-let response = [];
+// --------open/close-modal
+
 function onOpenModalFilm(e) {
   refs.modalFilmBackdrop.classList.remove('is-hidden');
+
   window.addEventListener('keydown', onCloseEscBtn);
 
   const idCard = e.target.closest('.card__link').id;
-  console.log(idCard);
 
-  response = fetchFilm(idCard);
-  console.log(response);
-
-  // render(response);
+  fetchMovieById(idCard).then(response => {
+    refs.modalFilm.innerHTML = '';
+    return render(response);
+  });
 }
 
-async function fetchFilm(idMovie) {
+function closeModalFilm() {
+  window.removeEventListener('keydown', onCloseEscBtn);
+  refs.modalFilmBackdrop.classList.add('is-hidden');
+}
+
+function onCloseModalFilmByBtn(e) {
+  if (e.target.classList.contains('modal-film__close-button')) {
+    closeModalFilm();
+  }
+}
+
+function onBackdropClick(e) {
+  if (e.currentTarget === e.target) {
+    closeModalFilm();
+  }
+}
+
+function onCloseEscBtn(e) {
+  console.log(e.code);
+
+  if (e.code === 'Escape') {
+    closeModalFilm();
+  }
+}
+
+// -----Fetch-by-id---
+
+async function fetchMovieById(idMovie) {
   try {
     const response = await axios.get(
       `https://api.themoviedb.org/3/movie/${idMovie}?api_key=9fae0fdf266213c68361ca578a95b948&language=en-US`
     );
-    console.log(response.data);
+    // console.log(response.data);
     return await response.data;
   } catch (error) {
     error;
   }
 }
 
-function onCloseModalFilm() {
-  refs.modalFilmBackdrop.classList.add('is-hidden');
-  window.removeEventListener('keydown', onCloseEscBtn);
-}
+// ---Render--
 
-function onBackdropClick(e) {
-  if (e.currentTarget === e.target) {
-    onCloseModalFilm();
-  }
-}
-
-function onCloseEscBtn(e) {
-  if (e.code === 'Escape') {
-    onCloseModalFilm();
-  }
+function render(response) {
+  const detailsCard = getModalMovieCardMarkup(response);
+  // console.log(detailsCard);
+  refs.modalFilm.insertAdjacentHTML('beforeend', detailsCard);
 }
 
 // ------Markup----
@@ -71,9 +88,19 @@ const getModalMovieCardMarkup = ({
   // genre_ids,
 }) => {
   return `
+  <button
+      type="button"
+      class="modal-film__close-button"
+      data-modal-film-close
+    >
+      x
+      <svg class="modal-film__modal-icon" width="30" height="30">
+        <use href="/src/images/sprite.svg#icon-close"></use>
+      </svg>
+    </button>
    
   <div class="modal-film__card"  id="${id}">
-  <picture class="img-film">
+  <picture class="modal-film__img>
   <source media="(min-width:1024px)" srcset="https://image.tmdb.org/t/p/w500${poster_path}" width="375"
   height="478">
   <source media="(min-width:768px)"  srcset="https://image.tmdb.org/t/p/w400${poster_path}">
@@ -94,12 +121,3 @@ const getModalMovieCardMarkup = ({
   </div>
 `;
 };
-
-// ---Render--
-
-// function render() {
-//   const detailsCard = getModalMovieCardMarkup(response.data);
-//   console.log(detailsCard);
-
-//   refs.modalFilm.insertAdjacentHTML('beforeend', detailsCard);
-// }

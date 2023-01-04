@@ -75,7 +75,7 @@
 
   padding: 0;
   border: none;
-  border-radius: 50%;
+  // border-radius: 50%;
 
   margin-left: auto;
 
@@ -110,7 +110,7 @@
   }
 }
 
-.img-film {
+.modal-film__img {
   display: flex;
 
   margin-right: 16px;
@@ -131,7 +131,7 @@
   }
 }
 
-.img-film:hover {
+.modal-film__img:hover {
   -o-transform: scale(1.02);
   -ms-transform: scale(1.02);
   -moz-transform: scale(1.02);
