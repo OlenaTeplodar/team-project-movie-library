@@ -1,13 +1,14 @@
 import axios from 'axios';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { genres } from './Templates/genres';
-
-console.log('Hello');
+import FetchApiMovies from './js/api';
+import { markupMovieTrailer } from './js/markup-trailer';
 
 const refs = {
   modalFilmBackdrop: document.querySelector('[data-modal-film]'),
   modalFilm: document.querySelector('.modal-film'),
   cardFilm: document.querySelector('.cards__list'),
+  cardList: document.querySelector('.cards__list'),
 };
 
 refs.cardFilm.addEventListener('click', onOpenModalFilm);
@@ -154,7 +155,6 @@ const getModalMovieCardMarkup = ({
   </div>
 `;
 };
-
 //  poster_path = (src = '/src/images/poster.jpg'),
 
 //////////////////////////////////////// Работа с localStorage ///////////////////////////////////

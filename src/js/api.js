@@ -54,6 +54,19 @@ export default class FetchApiMovies {
       error;
     }
   }
+  // Бондаренко Реалізація підвантаження трейлера до фільму для модального вікна
+  async fetchMoviesTrailers(id) {
+    try {
+      const response = await fetch(
+        `${BASE_URL}/3/movie/${id}/videos?api_key=${API_KEY}&language=${this.language}&page=${this.page}`
+      );
+      const data = response.json();
+      console.log(data);
+      return data;
+    } catch (error) {
+      error;
+    }
+  }
 
   incrementPage() {
     return (this.page += 1);
