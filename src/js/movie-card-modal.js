@@ -1,6 +1,5 @@
 import axios from 'axios';
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import { genres } from './Templates/genres';
+// Бондаренко
 import FetchApiMovies from './js/api';
 import { markupMovieTrailer } from './js/markup-trailer';
 
