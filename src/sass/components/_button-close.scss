@@ -1,0 +1,76 @@
+// кнопка закриття модального вікна
+.close-modal__btn {
+  border: none;
+  display: flex;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+// анмація кнопкм закриття
+.close-modal__btn-inner {
+  width: inherit;
+  text-align: center;
+}
+
+.close-modal__btn-text {
+  font-size: 0.8em;
+  line-height: 4em;
+  text-transform: uppercase;
+  color: var(--main-accent-color);
+  transition: all 0.3s ease-in;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.close-modal__btn-inner::before,
+.close-modal__btn-inner::after {
+  position: absolute;
+  content: '';
+  height: 1px;
+  width: inherit;
+  background: var(--main-accent-color);
+  left: 0;
+  transition: all 0.3s ease-in;
+}
+
+.close-modal__btn-inner::before {
+  top: 50%;
+  transform: rotate(45deg);
+}
+
+.close-modal__btn-inner::after {
+  bottom: 50%;
+  transform: rotate(-45deg);
+}
+
+.close-modal__btn:hover .close-modal__btn-text {
+  opacity: 1;
+}
+
+.close-modal__btn:hover .close-modal__btn-inner::before,
+.close-modal__btn:hover .close-modal__btn-inner::after {
+  transform: rotate(0);
+}
+
+.close-modal__btn:hover .close-modal__btn-inner:before {
+  top: 0;
+}
+
+.close-modal__btn:hover .close-modal__btn-inner:after {
+  bottom: 0;
+}
+
+//   Щоб вставити кнопку прописати теги
+//   <button class="close-modal__btn">
+//   <div class="close-modal__btn-inner">
+//       <span class="close-modal__btn-text">Back
+//       </span>
+//   </div>
+// </button>
