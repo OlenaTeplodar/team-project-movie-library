@@ -39,10 +39,11 @@ function onOpenModalFilm(e) {
       if (data.results.length === 0) {
         return;
       }
-      // прибрати картинку і поставити трейлер з інфо до фільму
-      refs.modalFilm.innerHTML = '';
+      // refs.modalFilm.innerHTML = '';
+      const picture = document.querySelector('.modal-film-card-wrapper');
+      picture.remove();
       const markupTrailer = markupMovieTrailer(data.results[0].key);
-      refs.modalFilm.insertAdjacentHTML('beforeend', markupTrailer);
+      refs.modalFilm.insertAdjacentHTML('afterbegin', markupTrailer);
     })
     .catch(error => console.log(error));
   // ------------ end treiler movie -------------
@@ -147,12 +148,14 @@ const getModalMovieCardMarkup = ({
     </button>
    
   <div class="modal-film__card"  id="${id}">
+  <div class="modal-film-card-wrapper">
   <picture class="modal-film__img>
   <source media="(min-width:1024px)" srcset="https://image.tmdb.org/t/p/w500${poster_path}" width="375"
   height="478">
   <source media="(min-width:768px)"  srcset="https://image.tmdb.org/t/p/w400${poster_path}">
   <img class="img-film__poster" src="https://image.tmdb.org/t/p/w300${poster_path}"  "alt="${title}" loading="lazy"  >
 </picture>
+</div>
 <div class="movie-info">
   <h2 class="film-title">${title}</h2>
   <ul class="film-title__list-film">
