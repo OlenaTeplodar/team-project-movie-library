@@ -35,7 +35,7 @@ export default class FetchApiMovies {
   async fetchGenresMovies(movieID) {
     try {
       const response = await axios.get(
-        `${BASE_URL}/movie/{movieID}?api_key=${KEY}&language=${this.language}`
+        `${BASE_URL}/movie/${movieID}?api_key=${KEY}&language=${this.language}`
       );
       return await response.data;
     } catch (error) {
