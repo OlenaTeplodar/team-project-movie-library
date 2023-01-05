@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import { genres } from './Templates/genres';
 // для трейлера до фільму у модалці
 import FetchApiMovies from './api';
 import { markupMovieTrailer } from './markup-trailer';
@@ -22,6 +24,7 @@ function onOpenModalFilm(e) {
   window.addEventListener('keydown', onCloseEscBtn);
 
   const idCard = e.target.closest('.card__link').id;
+
   createMovieCard(idCard);
   console.log(idCard);
   fetchMovieById(idCard).then(response => {
@@ -47,6 +50,7 @@ function onOpenModalFilm(e) {
     .catch(error => console.log(error));
   // ------------ end treiler movie -------------
 }
+
 function closeModalFilm() {
   window.removeEventListener('keydown', onCloseEscBtn);
   document.removeEventListener('click', onCloseModalFilmByBtn);
@@ -176,6 +180,7 @@ const getModalMovieCardMarkup = ({
   </div>
 `;
 };
+
 //  poster_path = (src = '/src/images/poster.jpg'),
 
 //////////////////////////////////////// Работа с localStorage ///////////////////////////////////

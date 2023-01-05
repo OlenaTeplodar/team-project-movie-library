@@ -32,16 +32,17 @@ export default class FetchApiMovies {
   }
   // Реалізація для запиту повної інформації про кінофільм для сторінки кінофільму:
   // Реалізація для запиту повної інформації про можливий трейлер на YouTube:
-  async fetchGenresMovies(movieID) {
+  async fetchIdMovies(movieID) {
     try {
       const response = await axios.get(
-        `${BASE_URL}/movie/${movieID}?api_key=${KEY}&language=${this.language}`
+        `${BASE_URL}/movie/${movieID}?api_key=${API_KEY}&language=${this.language}`
       );
       return await response.data;
     } catch (error) {
       error;
     }
   }
+
   // Реалізація для запиту за жанрами:
   async fetchGenresMovies() {
     try {
