@@ -24,7 +24,7 @@ function onOpenModalFilm(e) {
   document.addEventListener('click', onCloseModalFilmByBtn);
   window.addEventListener('keydown', onCloseEscBtn);
 
-  const idCard = e.target.closest('.card__link').id;
+  const idCard = e.target.closest('.home-card__link').id;
   console.log(idCard);
 
   createMovieCard(idCard);
@@ -60,7 +60,6 @@ function closeModalFilm() {
 }
 
 function onCloseModalFilmByBtn(e) {
-  // console.log('click');
   if (
     e.target.classList.contains('modal-film__close-button') ||
     e.target.classList.contains('modal-film__modal-icon')
@@ -199,8 +198,6 @@ const getModalMovieCardMarkup = ({
   </div>
 `;
 };
-
-//  poster_path = (src = '/src/images/poster.jpg'),
 
 //////////////////////////////////////// Работа с localStorage ///////////////////////////////////
 
