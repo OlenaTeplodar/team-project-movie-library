@@ -39,7 +39,6 @@ function onOpenModalFilm(e) {
       if (data.results.length === 0) {
         return;
       }
-      // refs.modalFilm.innerHTML = '';
       const picture = document.querySelector('.modal-film-card-wrapper');
       picture.remove();
       const markupTrailer = markupMovieTrailer(data.results[0].key);
