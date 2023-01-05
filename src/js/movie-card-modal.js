@@ -3,7 +3,6 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { genres } from './Templates/genres';
 
 console.log('Hello');
-
 const refs = {
   modalFilmBackdrop: document.querySelector('[data-modal-film]'),
   modalFilm: document.querySelector('.modal-film'),
@@ -119,10 +118,9 @@ const getModalMovieCardMarkup = ({
   <button
       type="button"
       class="modal-film__close-button"
-      data-modal-film-close
     >
       <svg class="modal-film__modal-icon" width="30" height="30">
-        <use href="/src/images/sprite.svg#icon-close"></use>
+        <use href="./src/images/sprite.svg#icon-close"></use>
       </svg>
     </button>
    
@@ -136,26 +134,20 @@ const getModalMovieCardMarkup = ({
 <div class="movie-info">
   <h2 class="film-title">${title}</h2>
   <ul class="film-title__list-film">
-    <li class="film-title__film-title__item-film">Vote / Votes <span>${vote_average}/ ${vote_count}</span></li>
-    <li class="film-title__item-film">Popularity<span>${popularity}</span></li>
-    <li class="film-title__item-film">Original Title <span>${original_title}</span></li>
-    <li class="film-title__item-film">Genre <span>${genresList}</span></li>
-  
-
+  <li class="film-title__item-film"><p class="film-title__value" >Vote / Votes </p><p class="film-title__desc-film"><span class="film-title__vote_average">${vote_average}</span><span class="film-title__slash">/</span><span class="film-title__vote_count">${vote_count}</span> </p> </li>
+  <li class="film-title__item-film"><p class="film-title__value">Popularity</p><p class="film-title__desc-film">${popularity}</p></li>
+  <li class="film-title__item-film"><p class="film-title__value">Original Title</p><p class="film-title__desc-film">${original_title}</p></li>
+  <li class="film-title__item-film"><p class="film-title__value">Genre</p><p class="film-title__desc-film">${genresList}</p></li>
   </ul>
   <h3 class="about-title">About ${original_title}</h3>
   <p class="text-about-movie">${overview}</p>
-
   <ul>
       <li><button class="modal-window__watched-btn" type="button" data-id=${id}>Add to watched</button></li>
       <li><button class="modal-window__queued-btn" type="button" data-id=${id}>Add to queue</button></li>
     </ul>
-
   </div>
 `;
 };
-
-//  poster_path = (src = '/src/images/poster.jpg'),
 
 //////////////////////////////////////// Работа с localStorage ///////////////////////////////////
 
