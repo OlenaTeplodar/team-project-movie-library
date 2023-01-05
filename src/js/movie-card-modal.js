@@ -28,8 +28,8 @@ function onOpenModalFilm(e) {
     refs.modalFilm.innerHTML = '';
     return render(response);
   });
+  // ------ trailer movie-------
   const boxFetchApiMovies = new FetchApiMovies();
-  // ця функція робиться всередині модального вікна
   boxFetchApiMovies
     .fetchMoviesTrailers(idCard)
     .then(
@@ -47,6 +47,7 @@ function onOpenModalFilm(e) {
       }
     )
     .catch(error => console.log(error));
+  // ------------ end treiler movie -------------
 }
 function closeModalFilm() {
   window.removeEventListener('keydown', onCloseEscBtn);
