@@ -25,6 +25,7 @@ function onOpenModalFilm(e) {
   window.addEventListener('keydown', onCloseEscBtn);
 
   const idCard = e.target.closest('.card__link').id;
+  console.log(idCard);
 
   createMovieCard(idCard);
   console.log(idCard);
@@ -59,7 +60,7 @@ function closeModalFilm() {
 }
 
 function onCloseModalFilmByBtn(e) {
-  console.log('click');
+  // console.log('click');
   if (
     e.target.classList.contains('modal-film__close-button') ||
     e.target.classList.contains('modal-film__modal-icon')
@@ -101,7 +102,9 @@ async function fetchMovieById(idMovie) {
 async function createMovieCard(id) {
   try {
     const response = await fetchMovieById(id);
+    // console.log(response);
     refs.modalFilm.innerHTML = '';
+
     render(response);
   } catch (error) {
     console.log(error.message);
@@ -113,6 +116,9 @@ async function createMovieCard(id) {
 // ---Render--
 function render(response) {
   const detailsCard = getModalMovieCardMarkup(response);
+  getWatchedToLocalStr(response);
+  getQueuedToLocalStr(response);
+
   refs.modalFilm.insertAdjacentHTML('beforeend', detailsCard);
 
   const btnWatchedFilmModalWindowEl = document.querySelector(
@@ -139,6 +145,23 @@ const getModalMovieCardMarkup = ({
   genres,
 }) => {
   const genresList = genres.map(genre => genre.name).join(', ');
+
+  // const watchedFilm = localStorage.getItem('WATCHED-FILM');
+  // const watchedFilmsArray = JSON.parse(watchedFilm) || [];
+  // const queuedFilm = localStorage.getItem('QUEUED-FILM');
+  // const queuedFilmsArray = JSON.parse(queuedFilm) || [];
+
+  // const a = String(id);
+
+  // const hasWatchedFilm = watchedFilmsArray.some(value => value === String(id));
+  // console.log(hasWatchedFilm);
+  // console.log(id);
+
+  // console.log(watchedFilmsArray);
+
+  // const hasWatchedFilm = watchedFilmsArray.includes(id);
+  // console.log(hasWatchedFilm);
+  // console.log(id);
 
   return `
   <button
@@ -170,12 +193,14 @@ const getModalMovieCardMarkup = ({
   <h3 class="about-title">About ${original_title}</h3>
   <p class="text-about-movie">${overview}</p>
   <ul>
-      <li><button class="modal-window__watched-btn" type="button" data-id=${id}>Add to watched</button></li>
+      <li><button class="modal-window__watched-btn" type="button" data-id=${id}>Add</button></li>
       <li><button class="modal-window__queued-btn" type="button" data-id=${id}>Add to queue</button></li>
     </ul>
   </div>
 `;
 };
+
+//  poster_path = (src = '/src/images/poster.jpg'),
 
 //////////////////////////////////////// Работа с localStorage ///////////////////////////////////
 
@@ -183,6 +208,18 @@ const watchedFilm = localStorage.getItem('WATCHED-FILM');
 const watchedFilmsArray = JSON.parse(watchedFilm) || [];
 const queuedFilm = localStorage.getItem('QUEUED-FILM');
 const queuedFilmsArray = JSON.parse(queuedFilm) || [];
+
+// function arrayFilms() {
+//   const watchedFilmsArray = JSON.parse(watchedFilm) || [];
+//   return watchedFilmsArray
+
+// }
+
+//  const hasWatchedFilm = watchedFilmsArray.includes(id);
+// const aboutFilm = {};
+// console.log(aboutFilm);
+
+// console.log(watchedFilm);
 
 function onClickBtnWatchedFilm(e) {
   const watchedBtn = e.target;
@@ -193,7 +230,8 @@ function onClickBtnWatchedFilm(e) {
   if (hasWatchedFilm) {
     return;
   } else {
-    watchedFilmsArray.push(idWatchedFilm);
+    // watchedFilmsArray.push(idWatchedFilm);
+    // getToLocalStr(response);
     localStorage.setItem('WATCHED-FILM', JSON.stringify(watchedFilmsArray));
     return;
   }
@@ -208,8 +246,36 @@ function onClickBtnQueuedFilm(e) {
   if (hasQueuedFilm) {
     return;
   } else {
-    queuedFilmsArray.push(idQueuedFilm);
+    // queuedFilmsArray.push(idQueuedFilm);
     localStorage.setItem('QUEUED-FILM', JSON.stringify(queuedFilmsArray));
     return;
   }
 }
+
+function getWatchedToLocalStr(response) {
+  watchedFilmsArray.push(response);
+  // queuedFilmsArray.push(response);
+}
+
+function getQueuedToLocalStr(response) {
+  // watchedFilmsArray.push(response);
+  queuedFilmsArray.push(response);
+}
+
+// function checkFilmInLocStr(idCard) {
+//   const hasWatchedFilm = watchedFilmsArray.includes(idCard);
+//   // if (hasWatchedFilm) {
+//   //   return console.log('true');
+//   // } else {
+//   //   return console.log('false');
+//   // }
+//   return hasWatchedFilm;
+// }
+
+// const btnWatchedFilmModalWindowEl = document.querySelector(
+//   '.modal-window__watched-btn'
+// );
+
+// const btnQueuedFilmModalWindowEl = document.querySelector(
+//   '.modal-window__queued-btn'
+// );
