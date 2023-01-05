@@ -137,6 +137,12 @@
     margin: 0;
     margin-bottom: 20px;
   }
+
+  @media screen and (max-width: 1199px) {
+    width: 264px;
+    height: 374px;
+    margin-right: 68px;
+  }
 }
 
 .img-film__poster:hover {
