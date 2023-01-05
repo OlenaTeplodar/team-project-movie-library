@@ -57,12 +57,10 @@ export default class FetchApiMovies {
   // Fetch підвантаження трейлера до фільму для модального вікна
   async fetchMoviesTrailers(id) {
     try {
-      const response = await fetch(
+      const response = await axios.get(
         `${BASE_URL}/movie/${id}/videos?api_key=${API_KEY}&language=${this.language}&page=${this.page}`
       );
-      const data = response.json();
-      console.log(data);
-      return data;
+      return await response.data;
     } catch (error) {
       error;
     }
