@@ -3,8 +3,11 @@ const refs = {
 };
 
 export function renderMoviesCard(cards) {
-  refs.cardList.innerHTML = '';
   refs.cardList.insertAdjacentHTML('beforeend', createMoviesCard(cards));
+}
+
+export function clearMoviesContainer() {
+  refs.cardList.innerHTML = '';
 }
 
 const GENRE_KEY = 'genreList';
@@ -25,20 +28,20 @@ function createMoviesCard(cards = []) {
   return cards
     .map(card => {
       const { id, title, poster_path, genre_ids, release_date } = card;
-      return `<li class="card__link" id=${id}>
-      </div class = "film__thumb">
-      <picture class="film__img">
-                <source media="(min-width:1024px)"  srcset="https://image.tmdb.org/t/p/w500${poster_path}">
-                <source media="(min-width:768px)"  srcset="https://image.tmdb.org/t/p/w400${poster_path}">
-                <img class="film__img-poster" src="https://image.tmdb.org/t/p/w300${poster_path}" alt="${title}" loading="lazy">
-            </picture>
-          </div>
-        
-        <h2 class='card__title'>${title}</h2>
-        <p class='card__text'>${addGenreList(genre_ids)} | ${new Date(
+      return `<li class="home-card__link" id=${id}>
+		</div class = "home-card__thumb">
+		<picture class="home-card__poster">
+				  <source media="(min-width:1280px)"  srcset="https://image.tmdb.org/t/p/w500${poster_path}">
+				  <source media="(min-width:768px)"  srcset="https://image.tmdb.org/t/p/w400${poster_path}">
+				  <img class="home-card__img" src="https://image.tmdb.org/t/p/w300${poster_path}" alt="${title}" loading="lazy">
+			  </picture>
+		  
+		  <h2 class='card__title'>${title}</h2>
+		  <p class='card__text'>${addGenreList(genre_ids)} | ${new Date(
         release_date
       ).getFullYear()}</p>
-        </li>`;
+		</div>
+		  </li>`;
     })
     .join('');
 }
