@@ -32,20 +32,18 @@ function onOpenModalFilm(e) {
   const boxFetchApiMovies = new FetchApiMovies();
   boxFetchApiMovies
     .fetchMoviesTrailers(idCard)
-    .then(
-      // прописується розмітка і закидається в ДОМ
-      data => {
-        console.log(data);
-        // прописати перевірку якщо пустий масив
-        // показувати картинку
-        if (data.results.length === 0) {
-          return;
-        }
-        // прибрати картинку і поставити трейлер
-        const markupTrailer = markupMovieTrailer(data.results[0].key);
-        refs.modalFilm.insertAdjacentHTML('beforeend', markupTrailer);
+    .then(data => {
+      console.log(data);
+      // перевірка якщо пустий масив
+      // показувати картинку
+      if (data.results.length === 0) {
+        return;
       }
-    )
+      // прибрати картинку і поставити трейлер з інфо до фільму
+      refs.modalFilm.innerHTML = '';
+      const markupTrailer = markupMovieTrailer(data.results[0].key);
+      refs.modalFilm.insertAdjacentHTML('beforeend', markupTrailer);
+    })
     .catch(error => console.log(error));
   // ------------ end treiler movie -------------
 }
