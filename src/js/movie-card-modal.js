@@ -2,7 +2,10 @@ import axios from 'axios';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { genres } from './Templates/genres';
 
-console.log('Hello');
+// для трейлера до фільму у модалці
+import FetchApiMovies from './api';
+import { markupMovieTrailer } from './markup-trailer';
+
 const refs = {
   modalFilmBackdrop: document.querySelector('[data-modal-film]'),
   modalFilm: document.querySelector('.modal-film'),
@@ -24,6 +27,29 @@ function onOpenModalFilm(e) {
   const idCard = e.target.closest('.card__link').id;
 
   createMovieCard(idCard);
+  console.log(idCard);
+  fetchMovieById(idCard).then(response => {
+    refs.modalFilm.innerHTML = '';
+    return render(response);
+  });
+  // ------ trailer movie-------
+  const boxFetchApiMovies = new FetchApiMovies();
+  boxFetchApiMovies
+    .fetchMoviesTrailers(idCard)
+    .then(data => {
+      console.log(data);
+      // перевірка якщо пустий масив
+      // показувати картинку
+      if (data.results.length === 0) {
+        return;
+      }
+      const picture = document.querySelector('.modal-film-card-wrapper');
+      picture.remove();
+      const markupTrailer = markupMovieTrailer(data.results[0].key);
+      refs.modalFilm.insertAdjacentHTML('afterbegin', markupTrailer);
+    })
+    .catch(error => console.log(error));
+  // ------------ end treiler movie -------------
 }
 
 function closeModalFilm() {
@@ -125,12 +151,14 @@ const getModalMovieCardMarkup = ({
     </button>
    
   <div class="modal-film__card"  id="${id}">
+  <div class="modal-film-card-wrapper">
   <picture class="modal-film__img>
   <source media="(min-width:1024px)" srcset="https://image.tmdb.org/t/p/w500${poster_path}" width="375"
   height="478">
   <source media="(min-width:768px)"  srcset="https://image.tmdb.org/t/p/w400${poster_path}">
   <img class="img-film__poster" src="https://image.tmdb.org/t/p/w300${poster_path}"  "alt="${title}" loading="lazy"  >
 </picture>
+</div>
 <div class="movie-info">
   <h2 class="film-title">${title}</h2>
   <ul class="film-title__list-film">

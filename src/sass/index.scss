@@ -4,18 +4,17 @@
 @import './base/container-main';
 @import './base/container-library';
 
-
+@import './components/button-up';
 @import './components/detailes-card';
 @import './components/teams-modal';
 @import './components/button';
 @import './components/sing-up-in-modal';
 
-
 @import './layout/footer';
 @import './layout/header-library';
 @import './layout/header-main';
 
-
 @import './utils/breakpoints';
 @import './utils/variables';
 @import './utils/visually-hidden';
+@import './components/button-close';
