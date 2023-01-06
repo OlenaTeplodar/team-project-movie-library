@@ -7,15 +7,15 @@ const refs = {
 refs.watchedBtn.addEventListener('click', onWatchedLibrary);
 function onWatchedLibrary() {
   console.log('click');
-  const moviesFromLocalStorage = loadFromLocalStorage('WATCHED-FILM');
-  console.log(moviesFromLocalStorage);
-  if (!moviesFromLocalStorage || !Object.keys(moviesFromLocalStorage).length) {
+  const moviesArray = loadFromLocalStorage('WATCHED-FILM');
+  console.log(moviesArray);
+  if (!moviesArray || !Object.keys(moviesArray).length) {
     refs.galleryLibrary.innerHTML = '';
     const markupNothing = createMarkupWhenLocalStorageEmpty();
     refs.galleryLibrary.insertAdjacentHTML('beforeend', markupNothing);
   } else {
     refs.galleryLibrary.innerHTML = '';
-    const markup = createMoviesCard(moviesFromLocalStorage);
+    const markup = createMoviesCard(moviesArray);
     refs.galleryLibrary.insertAdjacentHTML('beforeend', markup);
   }
 }
@@ -23,7 +23,8 @@ function onWatchedLibrary() {
 function createMoviesCard(cards = []) {
   return cards
     .map(card => {
-      const { id, title, poster_path, genres, release_date } = card;
+      const { id, title, poster_path, genres, release_date, vote_average } =
+        card;
       const genresForRender = concatGenres(genres.map(genre => genre.name));
       return `<li class="home-card__link" id=${id}>
 		</div class = "home-card__thumb">
@@ -36,7 +37,8 @@ function createMoviesCard(cards = []) {
 		  <h2 class='card__title'>${title}</h2>
 		  <p class='card__text' id=${id}>${
         genresForRender ? genresForRender : '---'
-      }</p> | ${new Date(release_date).getFullYear()}</p>
+      } | ${new Date(release_date).getFullYear()}
+        <span class="card__rating">${vote_average.toFixed(1)}</span> </p>
 		</div>
 		  </li>`;
     })
@@ -57,12 +59,6 @@ function concatGenres(arrOfGenresName) {
 function createMarkupWhenLocalStorageEmpty() {
   return `
   <li class="container-nothing">
-      <img
-        class="container-nothing__img"
-        src="/src/images/empty-hall.jpg"
-        alt="empty-hall"
-        loading="lazy"
-      />
       <div class="container-nothing__content">
         <h2 class="container-nothing__title">Your library is empty!</h2>
         <p class="container-nothing__text">
