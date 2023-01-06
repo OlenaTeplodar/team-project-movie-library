@@ -36,10 +36,12 @@ function createMoviesCard(cards = []) {
 					<img class="home-card__img" src="https://image.tmdb.org/t/p/w300${poster_path}" alt="${title}" loading="lazy">
 				</picture>
 			</div>
-			<h2 class='card__title'>${title}</h2>
-			<p class='card__text'>${addGenreList(genre_ids)} | ${new Date(
+			<div class="card__content">
+			<h2 class="card__title">${title}</h2>
+			<p class="card__text">${addGenreList(genre_ids)} | ${new Date(
         release_date
       ).getFullYear()}</p>
+	  </div>
 			</li>`;
     })
     .join('');
