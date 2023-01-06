@@ -1,6 +1,6 @@
 import FetchApiMovies from './api';
-import { clearMoviesContainer } from './Templates/card';
-import { renderMoviesCard } from './Templates/card';
+import { clearMoviesContainer } from './Templates/cards';
+import { renderMoviesCard } from './Templates/cards';
 
 const refs = {
   cardList: document.querySelector('.gallery__list'),
