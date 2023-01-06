@@ -1,12 +1,14 @@
 import FetchApiMovies from './api';
 import { clearMoviesContainer } from './Templates/cards';
 import { renderMoviesCard } from './Templates/cards';
+import { spinner } from './spinner';
 
 const refs = {
   cardList: document.querySelector('.gallery__list'),
   formSearch: document.querySelector('.header__form'),
   notification: document.querySelector('.header__notification'),
 };
+const target = document.getElementById('foo'); //spinner
 
 const fetchSearchApi = new FetchApiMovies();
 refs.formSearch.addEventListener('submit', onFormSubmit);
@@ -31,6 +33,7 @@ function notification() {
 
 async function getSearchMovies() {
   try {
+    spinner.spin(target); //spinner
     const data = await fetchSearchApi.fetchSearchMovies();
     const cards = data.results;
     console.log(cards);
@@ -46,5 +49,8 @@ async function getSearchMovies() {
     }
   } catch (error) {
     notification();
+  } finally {
+    //spinner
+    spinner.stop();
   }
 }
