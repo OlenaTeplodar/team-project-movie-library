@@ -9,7 +9,7 @@ export default class FetchApiMovies {
     this.language = 'en-US';
   }
   // Реалізація для запиту на список найпопулярніших фільмів на сьогодні для створення колекції на головній сторінці:
-  async fetchPopularMovies(page) {
+  async fetchPopularMovies() {
     try {
       const response = await axios.get(
         `${BASE_URL}/trending/all/day?api_key=${API_KEY}&language=${this.language}&page=${this.page}`
@@ -20,7 +20,7 @@ export default class FetchApiMovies {
     }
   }
   // Реалізація для запиту фільму за ключовим словом на головній сторінці:
-  async fetchSearchMovies(query, page) {
+  async fetchSearchMovies() {
     try {
       const response = await axios.get(
         `${BASE_URL}/search/movie?api_key=${API_KEY}&language=${this.language}&page=${this.page}&query=${this.searchQuery}&include_adult=false`
@@ -32,10 +32,33 @@ export default class FetchApiMovies {
   }
   // Реалізація для запиту повної інформації про кінофільм для сторінки кінофільму:
   // Реалізація для запиту повної інформації про можливий трейлер на YouTube:
-  async fetchGenresMovies(query, page) {
+  async fetchIdMovies(movieID) {
     try {
       const response = await axios.get(
-        `${BASE_URL}/movie/{movie_id}?api_key=${KEY}&language=${this.language}`
+        `${BASE_URL}/movie/${movieID}?api_key=${API_KEY}&language=${this.language}`
+      );
+      return await response.data;
+    } catch (error) {
+      error;
+    }
+  }
+
+  // Реалізація для запиту за жанрами:
+  async fetchGenresMovies() {
+    try {
+      const response = await axios.get(
+        `${BASE_URL}/genre/movie/list?api_key=${API_KEY}&language=${this.language}`
+      );
+      return await response.data;
+    } catch (error) {
+      error;
+    }
+  }
+  // Fetch підвантаження трейлера до фільму для модального вікна
+  async fetchMoviesTrailers(id) {
+    try {
+      const response = await axios.get(
+        `${BASE_URL}/movie/${id}/videos?api_key=${API_KEY}&language=${this.language}&page=${this.page}`
       );
       return await response.data;
     } catch (error) {
@@ -44,11 +67,14 @@ export default class FetchApiMovies {
   }
 
   incrementPage() {
-    this.page += 1;
+    return (this.page += 1);
   }
 
   decrementPage() {
-    this.page -= 1;
+    if (this.page === 1) {
+      return;
+    }
+    return (this.page -= 1);
   }
 
   resetPage() {

@@ -1,6 +1,6 @@
 const refs = {
   openModalLink: document.querySelector('.footer__link'),
-  closeModalBtn: document.querySelector('.team-modal__btn'),
+  closeModalBtn: document.querySelector('.close-modal__btn'),
   modalTeam: document.querySelector('[data-team-modal]'),
 };
 

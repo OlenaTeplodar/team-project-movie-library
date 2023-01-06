@@ -1,16 +1,24 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body,
+html {
+  height: 100%;
+}
+
 body {
   background-color: var(--background-color);
   color: var(--primary-text-color);
   font-family: 'Roboto', sans-serif;
   font-size: 12px;
-//   letter-spacing: 0.04em;
+  letter-spacing: 0.04em;
 
   &.no-scroll {
     overflow: hidden;
   }
 }
-
-
 
 h1,
 h2,
@@ -29,9 +37,10 @@ img {
   /* height: auto; */
 }
 
-// button {
-// //   cursor: url('../images/cursor.png'), pointer;
-// }
+button {
+  border: none;
+  background-color: transparent;
+}
 
 .list {
   list-style: none;
@@ -42,17 +51,18 @@ img {
 .link {
   text-decoration: none;
   color: inherit;
-//   cursor: url('../images/cursor.png'), pointer;
+  //   cursor: url('../images/cursor.png'), pointer;
 }
 
 ul,
 ol {
-  padding-left: 0;
-  margin-top: 0;
-  margin-bottom: 0;
+  //   padding-left: 0;
+  //   margin-top: 0;
+  //   margin-bottom: 0;
   list-style: none;
 }
 
 a {
   text-decoration: none;
+  color: inherit;
 }

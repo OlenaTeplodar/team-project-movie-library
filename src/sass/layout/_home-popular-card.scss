@@ -1,0 +1,117 @@
+.cards__list {
+  display: grid;
+  max-width: 280px;
+  justify-content: center;
+  grid-gap: 20px;
+  grid-auto-rows: auto;
+  padding-top: 20px;
+  padding-bottom: 40px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media screen and (min-width: 768px) {
+  .cards__list {
+    display: grid;
+    max-width: 700px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    max-width: calc(100vw - 60px);
+    grid-gap: 32px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .cards__list {
+    max-width: 1200px;
+    grid-row-gap: 32px;
+    grid-column-gap: 16px;
+  }
+}
+
+.home-card__link {
+  transition: transform 400ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 500ms cubic-bezier(0.4, 0, 0.2, 1);
+  &:hover,
+  &:focus {
+    transform: scale(1.05);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  }
+}
+
+.home-card__poster {
+  width: 280px;
+  height: 402px;
+
+  object-fit: cover;
+}
+
+@media screen and (min-width: 768px) {
+  .home-card__poster {
+    width: 336px;
+    height: 455px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .home-card__poster {
+    width: 395px;
+    height: 574px;
+  }
+}
+
+.home-card__img {
+  border-radius: 5px;
+}
+
+.card__content {
+  padding-top: 10px;
+}
+
+@media screen and (min-width: 768px) {
+  .card__content {
+    padding-top: 8px;
+  }
+}
+
+.card__title {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14px;
+  text-transform: uppercase;
+  color: var(--text-color-dark);
+}
+
+@media screen and (min-width: 768px) {
+  .card__title {
+    line-height: 16px;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .card__title {
+    font-size: 20px;
+    line-height: 24px;
+  }
+}
+
+.card__text {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--main-accent-color);
+}
+
+@media screen and (min-width: 768px) {
+  .card__text {
+    line-height: 16px;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .card__text {
+    font-size: 20px;
+    line-height: 24px;
+  }
+}
