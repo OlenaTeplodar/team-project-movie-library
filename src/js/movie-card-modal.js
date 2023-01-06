@@ -20,6 +20,7 @@ refs.modalFilmBackdrop.addEventListener('click', onBackdropClick);
 
 function onOpenModalFilm(e) {
   refs.modalFilmBackdrop.classList.remove('is-hidden');
+  document.body.classList.add('no-scroll');
 
   document.addEventListener('click', onCloseModalFilmByBtn);
   window.addEventListener('keydown', onCloseEscBtn);
@@ -57,13 +58,11 @@ function closeModalFilm() {
   window.removeEventListener('keydown', onCloseEscBtn);
   document.removeEventListener('click', onCloseModalFilmByBtn);
   refs.modalFilmBackdrop.classList.add('is-hidden');
+  document.body.classList.remove('no-scroll');
 }
 
 function onCloseModalFilmByBtn(e) {
-  if (
-    e.target.classList.contains('modal-film__close-button') ||
-    e.target.classList.contains('modal-film__modal-icon')
-  ) {
+  if (e.target.classList.contains('close-modal__btn-text')) {
     closeModalFilm();
   }
 }
@@ -165,18 +164,16 @@ const getModalMovieCardMarkup = ({
   return `
   <button
       type="button"
-      class="modal-film__close-button"
+      class="modal-film__close-button close-modal__btn"
     >
-      <svg class="modal-film__modal-icon" width="30" height="30">
-        <use href="./src/images/sprite.svg#icon-close"></use>
-      </svg>
+    <div class="close-modal__btn-inner">
+    <span class="close-modal__btn-text">Back
+    </span> </div>
     </button>
-   
   <div class="modal-film__card"  id="${id}">
   <div class="modal-film-card-wrapper">
   <picture class="modal-film__img>
-  <source media="(min-width:1024px)" srcset="https://image.tmdb.org/t/p/w500${poster_path}" width="375"
-  height="478">
+  <source media="(min-width:1024px)" srcset="https://image.tmdb.org/t/p/w500${poster_path}">
   <source media="(min-width:768px)"  srcset="https://image.tmdb.org/t/p/w400${poster_path}">
   <img class="img-film__poster" src="https://image.tmdb.org/t/p/w300${poster_path}"  "alt="${title}" loading="lazy"  >
 </picture>
