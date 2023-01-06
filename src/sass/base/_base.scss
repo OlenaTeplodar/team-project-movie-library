@@ -8,17 +8,12 @@ html {
   height: 100%;
 }
 
-main {
-  flex: 1 auto;
-  position: relative;
-}
-
 body {
   background-color: var(--background-color);
   color: var(--primary-text-color);
   font-family: 'Roboto', sans-serif;
   font-size: 12px;
-  //   letter-spacing: 0.04em;
+  letter-spacing: 0.04em;
 
   &.no-scroll {
     overflow: hidden;

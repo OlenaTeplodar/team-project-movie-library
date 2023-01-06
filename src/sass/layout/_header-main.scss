@@ -1,14 +1,13 @@
-
 .header__section {
-    padding: 40px 0 45px 0;
-    background-image: url(/src/images/header_background_mobile.jpg);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    margin-left: auto;
-    margin-right: auto;
-    height: 230px;
-    background-color: #fff;
+  padding: 40px 0 45px 0;
+  background-image: url(/src/images/header_background_mobile.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-left: auto;
+  margin-right: auto;
+  height: 230px;
+  background-color: #fff;
 }
 
 .header__wrap {
@@ -34,20 +33,20 @@
   @media screen and (min-width: 1200px) {
     width: 1136;
   }
-  }
-  
-  @media screen and (max-width: 767px) {
-    .header__section {
-      background-color: var(--footer-background-color);
-      background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
-        url(/src/images/header_background_mobile.jpg);
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-    }
-  }
+}
 
-  @media screen and (max-width: 767px) and (min-device-pixel-ratio: 2),
+@media screen and (max-width: 767px) {
+  .header__section {
+    background-color: var(--footer-background-color);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+      url(/src/images/header_background_mobile.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+}
+
+@media screen and (max-width: 767px) and (min-device-pixel-ratio: 2),
   screen and (max-width: 767px) and (min-resolution: 192dpi),
   screen and (max-width: 767px) and (min-resolution: 2dppx) {
   .header__section {
@@ -57,15 +56,15 @@
 }
 
 @media screen and (min-width: 768px) {
-    .header__section {
-      background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
-        url(/src/images/header_background_tablet.jpg);
-      background-repeat: no-repeat;
-      background-size: cover;
-    }
+  .header__section {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+      url(/src/images/header_background_tablet.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
   }
+}
 
-  @media screen and (min-width: 768px) and (min-device-pixel-ratio: 2),
+@media screen and (min-width: 768px) and (min-device-pixel-ratio: 2),
   screen and (min-width: 768px) and (min-resolution: 192dpi),
   screen and (min-width: 768px) and (min-resolution: 2dppx) {
   .header__section {
@@ -75,13 +74,13 @@
 }
 
 @media screen and (min-width: 1200px) {
-    .header__section {
-      background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
-        url(/src/images/header_background.jpg);
-    }
+  .header__section {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+      url(/src/images/header_background.jpg);
   }
+}
 
-  @media screen and (min-width: 1200px) and (min-device-pixel-ratio: 2),
+@media screen and (min-width: 1200px) and (min-device-pixel-ratio: 2),
   screen and (min-width: 1200px) and (min-resolution: 192dpi),
   screen and (min-width: 1200px) and (min-resolution: 2dppx) {
   .header__section {
@@ -103,25 +102,25 @@
   margin-right: auto;
 }
 
-@media screen and (min-width: 320px) {
-  .container {
-    width: 320px;
-    padding-left: 32px;
-    padding-right: 32px;
-  }
+// @media screen and (min-width: 320px) {
+//   .container {
+//     width: 320px;
+//     padding-left: 32px;
+//     padding-right: 32px;
+//   }
 
-  @media screen and (min-width: 768px) {
-    .container {
-      width: 768px;
-    }
-  }
-}
+//   @media screen and (min-width: 768px) {
+//     .container {
+//       width: 768px;
+//     }
+//   }
+// }
 
-@media screen and (min-width: 1200px) {
-  .container {
-    width: 1200px;
-  }
-}
+// @media screen and (min-width: 1200px) {
+//   .container {
+//     width: 1200px;
+//   }
+// }
 
 .header__navigation__svg {
   margin-right: 10px;
@@ -196,11 +195,11 @@
     border-bottom: 0.5px solid #ff001b;
   }
   //@include tablet {
-   // width: 336px;
- //}
- // @include desktop {
+  // width: 336px;
+  //}
+  // @include desktop {
   //  width: 394px;
- // }
+  // }
 }
 
 .header__search-btn {
@@ -236,6 +235,6 @@
   color: #ff001b;
   margin-top: 16px;
   //@include tablet {
-   // margin-top: 20px;
+  // margin-top: 20px;
   //}
 }

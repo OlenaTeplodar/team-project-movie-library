@@ -1,8 +1,5 @@
 import FetchApiMovies from './api';
-import { renderMoviesCard } from './Templates/card';
-// import { genres } from './Templates/genres';
-// import Notiflix from 'notiflix';
-// import SimpleLightbox from 'simplelightbox';
+import { renderMoviesCard } from './Templates/cards';
 // import { pagination } from './pagination';
 
 const fetchApiHomeContent = new FetchApiMovies();
