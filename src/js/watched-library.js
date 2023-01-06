@@ -5,22 +5,28 @@ const refs = {
 };
 
 refs.watchedBtn.addEventListener('click', onWatchedLibrary);
-function onWatchedLibrary() {
-  console.log('click');
-  const moviesArray = loadFromLocalStorage('WATCHED-FILM');
-  console.log(moviesArray);
-  if (!moviesArray || !Object.keys(moviesArray).length) {
-    refs.galleryLibrary.innerHTML = '';
-    const markupNothing = createMarkupWhenLocalStorageEmpty();
-    refs.galleryLibrary.insertAdjacentHTML('beforeend', markupNothing);
-  } else {
-    refs.galleryLibrary.innerHTML = '';
-    const markup = createMoviesCard(moviesArray);
-    refs.galleryLibrary.insertAdjacentHTML('beforeend', markup);
+
+export async function onWatchedLibrary() {
+  refs.watchedBtn.classList.add('btn-active');
+  refs.queueBtn.classList.remove('btn-active');
+  try {
+    const moviesArray = await loadFromLocalStorage('WATCHED-FILM');
+    console.log(moviesArray);
+    if (!moviesArray || !Object.keys(moviesArray).length) {
+      clear();
+      const markupNothing = createMarkupWhenLocalStorageEmpty();
+      refs.galleryLibrary.insertAdjacentHTML('beforeend', markupNothing);
+    } else {
+      clear();
+      const markup = createMoviesCard(moviesArray);
+      refs.galleryLibrary.insertAdjacentHTML('beforeend', markup);
+    }
+  } catch (error) {
+    console.log(error.message);
   }
 }
 
-function createMoviesCard(cards = []) {
+export function createMoviesCard(cards = []) {
   return cards
     .map(card => {
       const { id, title, poster_path, genres, release_date, vote_average } =
@@ -56,7 +62,7 @@ function concatGenres(arrOfGenresName) {
   }, '');
 }
 
-function createMarkupWhenLocalStorageEmpty() {
+export function createMarkupWhenLocalStorageEmpty() {
   return `
   <li class="container-nothing">
       <div class="container-nothing__content">
@@ -75,7 +81,7 @@ function createMarkupWhenLocalStorageEmpty() {
     `;
 }
 
-function loadFromLocalStorage(key) {
+export function loadFromLocalStorage(key) {
   try {
     const serializedState = localStorage.getItem(key);
     return serializedState === null ? undefined : JSON.parse(serializedState);
@@ -84,13 +90,6 @@ function loadFromLocalStorage(key) {
   }
 }
 
-// function loadWatchedMoviesFromLocalStorage() {
-//   const moviesFromLocalStorage = loadFromLocalStorage('WATCHED-FILM');
-
-//   if (!moviesFromLocalStorage || !Object.keys(moviesFromLocalStorage).length) {
-//     const markupNothing = createMarkupWhenLocalStorageEmpty();
-//     refs.galleryLibrary.innerHTML = markupNothing;
-//   } else {
-//     onWatchedLibrary();
-//   }
-// }
+export function clear() {
+  refs.galleryLibrary.innerHTML = '';
+}
