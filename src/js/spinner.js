@@ -14,7 +14,7 @@ const opts = {
   direction: 1, 
   color: '#FF001B', 
   fadeColor: 'transparent', 
-  top: '50%', 
+  top: '100px', 
   left: '50%', 
   shadow: '0 0 1px transparent',
   zIndex: 2000000000, 
@@ -22,5 +22,4 @@ const opts = {
   position: 'absolute', 
 };
 
-const target = document.getElementById('foo');
-export const spinner = new Spinner(opts).spin(target);
+export const spinner = new Spinner(opts);
