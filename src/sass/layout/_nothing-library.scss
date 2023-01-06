@@ -1,0 +1,29 @@
+.container-nothing {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.container-nothing__img {
+  width: 1200px;
+}
+.container-nothing__title {
+  margin-bottom: 10px;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+.container-nothing__text {
+  font-size: 16px;
+  font-weight: 400;
+}
+.container-nothing__link {
+  font-weight: 600;
+  color: var(--main-accent-color);
+
+  &:hover,
+  &:focus {
+    color: #da5b06;
+    box-shadow: 0px 8px 43px rgba(255, 107, 1, 0.6);
+  }
+}
