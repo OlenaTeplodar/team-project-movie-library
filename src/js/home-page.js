@@ -1,10 +1,10 @@
 import FetchApiMovies from './api';
-import { renderMoviesCard } from './Templates/cards';
+import { renderMoviesCard } from './renderCards';
+import { genres } from './Templates/genres';
 // import { pagination } from './pagination';
 
 const fetchApiHomeContent = new FetchApiMovies();
 showPopularMovies();
-
 async function showPopularMovies() {
   // spinerPlay();
   try {
