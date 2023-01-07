@@ -150,7 +150,7 @@
   &:hover,
   &:focus {
     background-color: var(--main-accent-color);
-    border: none;
+    border-color: var(--main-accent-color);
   }
 
   @media screen and (min-width: 767px) {
@@ -174,7 +174,10 @@
   margin-left: auto;
   margin-right: auto;
 }
-
+.btn-active {
+  background-color: var(--main-accent-color);
+  border-color: var(--main-accent-color);
+}
 // @media screen and (min-width: 320px) {
 //   .container {
 //     width: 320px;
