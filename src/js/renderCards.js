@@ -6,63 +6,33 @@ export function clearMoviesContainer() {
   refs.cardList.innerHTML = '';
 }
 
-import FetchApiMovies from './api';
-import { load } from './Templates/storage';
-// import { genres } from './Templates/genres';
+import { genres } from './Templates/genres';
 const refs = {
   cardList: document.querySelector('.cards__list'),
 };
 
-const fetchApiGenres = new FetchApiMovies();
 const GENRE_KEY = 'genres';
-let genreList = {};
-
-async function addGenresMovies() {
-  // spinerPlay();
-  try {
-    const data = await fetchApiGenres.fetchGenresMovies();
-    data.genres.forEach(genre => (genreList[genre['id']] = genre['name']));
-  } catch (error) {
-    console.log(error);
-    // Notify.failure(error.message);
-    // refs.pagination.classList.add('is-hidden');
-  }
-  //   spinerStop();
-}
+let genreList = genres;
 
 function loadGenres(genres) {
-  if (localStorage.key === GENRE_KEY) {
-    return (genreList = load(GENRE_KEY));
-  }
-  return genres.reduce((acc, genre, index, arr) => {
-    if (arr.length > 2) {
-      acc = `${arr[0]}, ${arr[1]}, Others`;
-    } else {
-      acc = arr.join(', ');
-    }
-
-    return acc;
-  }, '');
+  const list = genreList
+    .filter(obj => genres.includes(obj.id))
+    .map(g => g.name);
+  console.log('list :>> ', list);
+  return list.length > 2 ? `${list[0]}, ${list[1]}, Others` : list.join(', ');
 }
 
 async function saveToLocalStorage() {
   if (localStorage.key === GENRE_KEY) {
     return;
   }
-  // spinerPlay();
-  await addGenresMovies();
-  // spinerStop();
 }
 
 function createMoviesCard(cards = []) {
-  //   spinerPlay();
   saveToLocalStorage();
-  //   spinerStop();
   return cards
     .map(card => {
       const { id, title, poster_path, genre_ids, release_date } = card;
-      //   const genresList = genres.map(genre => genre.name).join(', ');
-      //   const genresRender = loadGenres(genres.map(genre => genre.name));
       return `<li class="home-card__link" id=${id}>
 			  <div class = "home-card__thumb">
 			  <picture class="home-card__poster">
@@ -73,10 +43,9 @@ function createMoviesCard(cards = []) {
 				</div>
 				<div class="card__content">
 				<h2 class="card__title">${title}</h2>
-				<p class="card__text">${
-          loadGenres(genre_ids)
-          //   genresRender ? genresRender : '---'
-        } | ${new Date(release_date).getFullYear()}</p>
+				<p class="card__text">${loadGenres(genre_ids)} | ${new Date(
+        release_date
+      ).getFullYear()}</p>
 		  </div>
 				</li>`;
     })
