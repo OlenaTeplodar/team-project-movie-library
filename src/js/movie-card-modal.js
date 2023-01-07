@@ -25,7 +25,7 @@ refs.modalFilmBackdrop.addEventListener('click', onBackdropClick);
 
 // --------open/close-modal
 
-let idCard;
+let idMovie;
 let currentMovie;
 
 function onOpenModalFilm(e) {
@@ -71,13 +71,15 @@ function onOpenModalFilm(e) {
   // // ------------ end treiler movie -------------
 }
 
-function onModalLibraryBtnsClick(e, response) {
+function onModalLibraryBtnsClick(e, idMovie) {
+  const a = Number(e.target.dataset.id);
+  console.log(a);
   if (e.target.classList.contains('js-add-watched')) {
     // checkLocalStorageWatchedMovies(e.target, currentMovie);
-    saveToLocalStorage(WATCHED_FILM, response);
+    saveToLocalStorage(WATCHED_FILM, a);
   } else if (e.target.classList.contains('js-add-queue')) {
     // checkLocalStorageQueueMovies(e.target, currentMovie);
-    saveToLocalStorage(QUEUED_FILM, response);
+    saveToLocalStorage(QUEUED_FILM, a);
   }
 }
 
@@ -147,6 +149,7 @@ async function createMovieCard(id) {
 function render(response) {
   const detailsCard = getModalMovieCardMarkup(response);
   refs.modalFilm.insertAdjacentHTML('beforeend', detailsCard);
+
   return response;
 }
 
