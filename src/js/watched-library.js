@@ -1,3 +1,7 @@
+import { Spinner } from 'spin.js';
+import { spinner } from './spinner';
+const target = document.getElementById('foo');
+
 const refs = {
   watchedBtn: document.querySelector('.watched-btn'),
   queueBtn: document.querySelector('.queue-btn'),
@@ -10,8 +14,10 @@ export async function onWatchedLibrary() {
   refs.watchedBtn.classList.add('btn-active');
   refs.queueBtn.classList.remove('btn-active');
   try {
+    spinner.spin(target);
     const moviesArray = await loadFromLocalStorage('WATCHED-FILM');
     console.log(moviesArray);
+
     if (!moviesArray || !Object.keys(moviesArray).length) {
       clear();
       const markupNothing = createMarkupWhenLocalStorageEmpty();
