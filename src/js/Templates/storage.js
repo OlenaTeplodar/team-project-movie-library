@@ -1,4 +1,4 @@
-const save = (key, genres) => {
+export const save = (key, genres) => {
   try {
     const serializedState = JSON.stringify(genres);
     localStorage.setItem(key, serializedState);
@@ -7,7 +7,7 @@ const save = (key, genres) => {
   }
 };
 
-function load(genres) {
+export function load(genres) {
   try {
     const serializedState = localStorage.getItem(genres);
     return serializedState === null ? undefined : JSON.parse(serializedState);

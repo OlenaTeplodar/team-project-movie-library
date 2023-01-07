@@ -7,7 +7,7 @@ export function clearMoviesContainer() {
 }
 
 import FetchApiMovies from './api';
-import { save, load } from './Templates/storage';
+import { load } from './Templates/storage';
 // import { genres } from './Templates/genres';
 const refs = {
   cardList: document.querySelector('.cards__list'),
