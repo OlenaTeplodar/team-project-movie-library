@@ -1,6 +1,12 @@
 import axios from 'axios';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { genres } from './Templates/genres';
+import {
+  WATCHED_FILM,
+  QUEUED_FILM,
+  loadFromLocalStorage,
+  saveToLocalStorage,
+} from './local-storage';
 
 // для трейлера до фільму у модалці
 import FetchApiMovies from './api';
@@ -19,6 +25,9 @@ refs.modalFilmBackdrop.addEventListener('click', onBackdropClick);
 
 // --------open/close-modal
 
+let idMovie;
+let currentMovie;
+
 function onOpenModalFilm(e) {
   refs.modalFilmBackdrop.classList.remove('is-hidden');
   refs.div.classList.remove('is-hidden');
@@ -29,13 +38,19 @@ function onOpenModalFilm(e) {
 
   const idCard = e.target.closest('.home-card__link').id;
   console.log(idCard);
-
+  idMovie = Number(idCard);
+  console.log(idMovie);
   createMovieCard(idCard);
 
   fetchMovieById(idCard).then(response => {
     refs.modalFilm.innerHTML = '';
     return render(response);
   });
+
+  if (!refs.modalFilmBackdrop.classList.contains('is-hidden')) {
+    refs.modalFilm.addEventListener('click', onModalLibraryBtnsClick);
+  }
+
   // // ------ trailer movie-------
   const boxFetchApiMovies = new FetchApiMovies();
   boxFetchApiMovies
@@ -54,6 +69,18 @@ function onOpenModalFilm(e) {
     })
     .catch(error => console.log(error));
   // // ------------ end treiler movie -------------
+}
+
+function onModalLibraryBtnsClick(e, idMovie) {
+  const a = Number(e.target.dataset.id);
+  console.log(a);
+  if (e.target.classList.contains('js-add-watched')) {
+    // checkLocalStorageWatchedMovies(e.target, currentMovie);
+    saveToLocalStorage(WATCHED_FILM, a);
+  } else if (e.target.classList.contains('js-add-queue')) {
+    // checkLocalStorageQueueMovies(e.target, currentMovie);
+    saveToLocalStorage(QUEUED_FILM, a);
+  }
 }
 
 function closeModalFilm() {
@@ -121,20 +148,12 @@ async function createMovieCard(id) {
 // ---Render--
 function render(response) {
   const detailsCard = getModalMovieCardMarkup(response);
-  getWatchedToLocalStr(response);
-  getQueuedToLocalStr(response);
-
   refs.modalFilm.insertAdjacentHTML('beforeend', detailsCard);
 
-  const btnWatchedFilmModalWindowEl = document.querySelector(
-    '.modal-window__watched-btn'
-  );
-  btnWatchedFilmModalWindowEl.addEventListener('click', onClickBtnWatchedFilm);
-  const btnQueuedFilmModalWindowEl = document.querySelector(
-    '.modal-window__queued-btn'
-  );
-  btnQueuedFilmModalWindowEl.addEventListener('click', onClickBtnQueuedFilm);
+  return response;
 }
+
+// console.log(response);
 
 // ------Markup----
 
@@ -150,23 +169,6 @@ const getModalMovieCardMarkup = ({
   genres,
 }) => {
   const genresList = genres.map(genre => genre.name).join(', ');
-
-  // const watchedFilm = localStorage.getItem('WATCHED-FILM');
-  // const watchedFilmsArray = JSON.parse(watchedFilm) || [];
-  // const queuedFilm = localStorage.getItem('QUEUED-FILM');
-  // const queuedFilmsArray = JSON.parse(queuedFilm) || [];
-
-  // const a = String(id);
-
-  // const hasWatchedFilm = watchedFilmsArray.some(value => value === String(id));
-  // console.log(hasWatchedFilm);
-  // console.log(id);
-
-  // console.log(watchedFilmsArray);
-
-  // const hasWatchedFilm = watchedFilmsArray.includes(id);
-  // console.log(hasWatchedFilm);
-  // console.log(id);
 
   return `
   <button
@@ -196,87 +198,9 @@ const getModalMovieCardMarkup = ({
   <h3 class="about-title">About ${original_title}</h3>
   <p class="text-about-movie">${overview}</p>
   <ul>
-      <li><button class="modal-window__watched-btn" type="button" data-id=${id}>Add</button></li>
-      <li><button class="modal-window__queued-btn" type="button" data-id=${id}>Add to queue</button></li>
+      <li><button class="modal-window__watched-btn js-add-watched" type="button" data-id=${id}>Add</button></li>
+      <li><button class="modal-window__queued-btn js-add-queue" type="button" data-id=${id}>Add to queue</button></li>
     </ul>
   </div>
 `;
 };
-
-//////////////////////////////////////// Работа с localStorage ///////////////////////////////////
-
-const watchedFilm = localStorage.getItem('WATCHED-FILM');
-const watchedFilmsArray = JSON.parse(watchedFilm) || [];
-const queuedFilm = localStorage.getItem('QUEUED-FILM');
-const queuedFilmsArray = JSON.parse(queuedFilm) || [];
-
-// function arrayFilms() {
-//   const watchedFilmsArray = JSON.parse(watchedFilm) || [];
-//   return watchedFilmsArray
-
-// }
-
-//  const hasWatchedFilm = watchedFilmsArray.includes(id);
-// const aboutFilm = {};
-// console.log(aboutFilm);
-
-// console.log(watchedFilm);
-
-function onClickBtnWatchedFilm(e) {
-  const watchedBtn = e.target;
-  const idWatchedFilm = watchedBtn.dataset.id;
-  console.log(idWatchedFilm);
-
-  const hasWatchedFilm = watchedFilmsArray.includes(idWatchedFilm);
-  if (hasWatchedFilm) {
-    return;
-  } else {
-    // watchedFilmsArray.push(idWatchedFilm);
-    // getToLocalStr(response);
-    localStorage.setItem('WATCHED-FILM', JSON.stringify(watchedFilmsArray));
-    return;
-  }
-}
-
-function onClickBtnQueuedFilm(e) {
-  const queuedBtn = e.target;
-  const idQueuedFilm = queuedBtn.dataset.id;
-  console.log(idQueuedFilm);
-
-  const hasQueuedFilm = queuedFilmsArray.includes(idQueuedFilm);
-  if (hasQueuedFilm) {
-    return;
-  } else {
-    // queuedFilmsArray.push(idQueuedFilm);
-    localStorage.setItem('QUEUED-FILM', JSON.stringify(queuedFilmsArray));
-    return;
-  }
-}
-
-function getWatchedToLocalStr(response) {
-  watchedFilmsArray.push(response);
-  // queuedFilmsArray.push(response);
-}
-
-function getQueuedToLocalStr(response) {
-  // watchedFilmsArray.push(response);
-  queuedFilmsArray.push(response);
-}
-
-// function checkFilmInLocStr(idCard) {
-//   const hasWatchedFilm = watchedFilmsArray.includes(idCard);
-//   // if (hasWatchedFilm) {
-//   //   return console.log('true');
-//   // } else {
-//   //   return console.log('false');
-//   // }
-//   return hasWatchedFilm;
-// }
-
-// const btnWatchedFilmModalWindowEl = document.querySelector(
-//   '.modal-window__watched-btn'
-// );
-
-// const btnQueuedFilmModalWindowEl = document.querySelector(
-//   '.modal-window__queued-btn'
-// );
