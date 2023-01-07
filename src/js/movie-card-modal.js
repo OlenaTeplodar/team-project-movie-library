@@ -1,6 +1,9 @@
 import axios from 'axios';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { genres } from './Templates/genres';
+
+import { spinner } from './spinner';
+
 import {
   WATCHED_FILM,
   QUEUED_FILM,
@@ -8,9 +11,11 @@ import {
   saveToLocalStorage,
 } from './local-storage';
 
+
 // для трейлера до фільму у модалці
 import FetchApiMovies from './api';
 import { markupMovieTrailer } from './markup-trailer';
+const target = document.getElementById('foo');
 
 const refs = {
   modalFilmBackdrop: document.querySelector('[data-modal-film]'),
@@ -118,6 +123,7 @@ function onCloseEscBtn(e) {
 
 async function fetchMovieById(idMovie) {
   try {
+    spinner.spin(target);
     const response = await axios.get(
       `https://api.themoviedb.org/3/movie/${idMovie}?api_key=9fae0fdf266213c68361ca578a95b948&language=en-US`
     );
@@ -126,6 +132,8 @@ async function fetchMovieById(idMovie) {
     return await response.data;
   } catch (error) {
     console.log(error.message);
+  } finally {
+    spinner.stop();
   }
 }
 
@@ -134,12 +142,12 @@ async function fetchMovieById(idMovie) {
 async function createMovieCard(id) {
   try {
     const response = await fetchMovieById(id);
-    // console.log(response);
+
+    // console.log(id);
     refs.modalFilm.innerHTML = '';
 
     render(response);
   } catch (error) {
-    console.log(error.message);
     closeModalFilm();
     Notify.failure('Sorry, movie not found. Please try again.');
   }
@@ -197,9 +205,10 @@ const getModalMovieCardMarkup = ({
   </ul>
   <h3 class="about-title">About ${original_title}</h3>
   <p class="text-about-movie">${overview}</p>
-  <ul>
-      <li><button class="modal-window__watched-btn js-add-watched" type="button" data-id=${id}>Add</button></li>
-      <li><button class="modal-window__queued-btn js-add-queue" type="button" data-id=${id}>Add to queue</button></li>
+
+  <ul class="modal-window_list-btn">
+      <li class="modal-window_list-item-btn"><button class="modal-window__watched-btn js-add-watched" type="button" data-id=${id}>add to Watched</button></li>
+      <li class="modal-window_list-item-btn"><button class="modal-window__queued-btn js-add-queue" type="button" data-id=${id}>Add to queue</button></li>
     </ul>
   </div>
 `;
