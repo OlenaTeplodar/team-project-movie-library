@@ -1,6 +1,6 @@
 import FetchApiMovies from './api';
-import { clearMoviesContainer } from './Templates/cards';
-import { renderMoviesCard } from './Templates/cards';
+import { clearMoviesContainer } from './renderCards';
+import { renderMoviesCard } from './renderCards';
 import { spinner } from './spinner';
 
 const refs = {
