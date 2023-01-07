@@ -14,7 +14,7 @@ const refs = {
 };
 
 const fetchApiGenres = new FetchApiMovies();
-GENRE_KEY = 'genres';
+const GENRE_KEY = 'genres';
 let genreList = {};
 
 async function addGenresMovies() {
