@@ -9,17 +9,19 @@ import { markupMovieTrailer } from './markup-trailer';
 const refs = {
   modalFilmBackdrop: document.querySelector('[data-modal-film]'),
   modalFilm: document.querySelector('.modal-film'),
+  div: document.querySelector('.modal-film '),
   cardFilm: document.querySelector('.cards__list'),
+  cardFilmLibrary: document.querySelector('.container-library'),
 };
 
 refs.cardFilm.addEventListener('click', onOpenModalFilm);
-
 refs.modalFilmBackdrop.addEventListener('click', onBackdropClick);
 
 // --------open/close-modal
 
 function onOpenModalFilm(e) {
   refs.modalFilmBackdrop.classList.remove('is-hidden');
+  refs.div.classList.remove('is-hidden');
   document.body.classList.add('no-scroll');
 
   document.addEventListener('click', onCloseModalFilmByBtn);
@@ -29,12 +31,12 @@ function onOpenModalFilm(e) {
   console.log(idCard);
 
   createMovieCard(idCard);
-  console.log(idCard);
+
   fetchMovieById(idCard).then(response => {
     refs.modalFilm.innerHTML = '';
     return render(response);
   });
-  // ------ trailer movie-------
+  // // ------ trailer movie-------
   const boxFetchApiMovies = new FetchApiMovies();
   boxFetchApiMovies
     .fetchMoviesTrailers(idCard)
@@ -51,18 +53,23 @@ function onOpenModalFilm(e) {
       refs.modalFilm.insertAdjacentHTML('afterbegin', markupTrailer);
     })
     .catch(error => console.log(error));
-  // ------------ end treiler movie -------------
+  // // ------------ end treiler movie -------------
 }
 
 function closeModalFilm() {
   window.removeEventListener('keydown', onCloseEscBtn);
   document.removeEventListener('click', onCloseModalFilmByBtn);
   refs.modalFilmBackdrop.classList.add('is-hidden');
+  refs.div.classList.add('is-hidden');
   document.body.classList.remove('no-scroll');
 }
 
 function onCloseModalFilmByBtn(e) {
-  if (e.target.classList.contains('close-modal__btn-text')) {
+  if (
+    e.target.classList.contains('close-modal__btn-text') ||
+    e.target.classList.contains('close-modal__btn-inner') ||
+    e.target.classList.contains('close-modal__btn-text')
+  ) {
     closeModalFilm();
   }
 }
