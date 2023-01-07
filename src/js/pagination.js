@@ -1,6 +1,8 @@
-import Pagination from 'tui-pagination';
+// import Pagination from 'tui-pagination';
 import 'tui-pagination/dist/tui-pagination.css';
+//import { renderMoviesCard } from './Templates/cards';
 
+/*
 const PER_PAGE = 20;
 
 const options = {
@@ -27,8 +29,9 @@ const options = {
       '</a>'
   }
 };
+*/
 
-const pagination = new Pagination(refs.pagination, options);
+//const pagination = new Pagination(refs.pagination, options);
 
-const container = document.getElementById('pagination');
+//const container = document.getElementById('pagination');
 
