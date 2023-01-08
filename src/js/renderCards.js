@@ -34,20 +34,22 @@ function createMoviesCard(cards = []) {
     .map(card => {
       const { id, title, poster_path, genre_ids, release_date } = card;
       return `<li class="home-card__link" id=${id}>
-			  <div class = "home-card__thumb">
-			  <picture class="home-card__poster">
-						<source media="(min-width:1280px)"  srcset="https://image.tmdb.org/t/p/w500${poster_path}">
-						<source media="(min-width:768px)"  srcset="https://image.tmdb.org/t/p/w400${poster_path}">
-						<img class="home-card__img" src="https://image.tmdb.org/t/p/w300${poster_path}" alt="${title}" loading="lazy">
-					</picture>
-				</div>
-				<div class="card__content">
-				<h2 class="card__title">${title}</h2>
-				<p class="card__text">${loadGenres(genre_ids)} | ${new Date(
+				<div class = "home-card__thumb">
+				<picture class="home-card__poster">
+						  <source media="(min-width:1280px)"  srcset="https://image.tmdb.org/t/p/w500${poster_path}">
+						  <source media="(min-width:768px)"  srcset="https://image.tmdb.org/t/p/w400${poster_path}">
+						  <img class="home-card__img" src="https://image.tmdb.org/t/p/w300${poster_path}" alt="${title}" loading="lazy">
+					  </picture>
+				  </div>
+				  <div class="card__content">
+				  <h2 class="card__title">${title || 'no name'}</h2>
+				  <p class="card__text">${loadGenres(genre_ids)} | ${
         release_date
-      ).getFullYear()}</p>
-		  </div>
-				</li>`;
+          ? release_date.slice(0, 4)
+          : 'no infomation about release date'
+      }</p>
+			</div>
+				  </li>`;
     })
     .join('');
 }
