@@ -18,7 +18,7 @@ function loadGenres(genres) {
   const list = genreList
     .filter(obj => genres.includes(obj.id))
     .map(g => g.name);
-  console.log('list :>> ', list);
+  // console.log('list :>> ', list);
   return list.length > 2 ? `${list[0]}, ${list[1]}, Others` : list.join(', ');
 }
 
