@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { loadFromLocalStorage } from './local-storage';
+import { WATCHED_FILM, loadFromLocalStorage } from './local-storage';
 const refs = {
   watchedBtn: document.querySelector('.watched-btn'),
   queueBtn: document.querySelector('.queue-btn'),
@@ -13,8 +13,9 @@ let movieId;
 export async function onWatchedLibrary() {
   refs.watchedBtn.classList.add('btn-active');
   refs.queueBtn.classList.remove('btn-active');
+  clear();
   try {
-    const moviesIdArray = loadFromLocalStorage('watchedMovies');
+    const moviesIdArray = loadFromLocalStorage(WATCHED_FILM);
     console.log(moviesIdArray);
     for (let i = 0; i < moviesIdArray.length; i++) {
       movieId = moviesIdArray[i];
@@ -38,7 +39,7 @@ export async function onWatchedLibrary() {
   }
 }
 
-async function fetchMovieById(movieId) {
+export async function fetchMovieById(movieId) {
   try {
     const response = await axios.get(
       `https://api.themoviedb.org/3/movie/${movieId}?api_key=9fae0fdf266213c68361ca578a95b948&language=en-US`
@@ -51,7 +52,7 @@ async function fetchMovieById(movieId) {
   }
 }
 
-function createMarkupWhenLocalStorageEmpty() {
+export function createMarkupWhenLocalStorageEmpty() {
   return `
   <li class="container-nothing">
       <div class="container-nothing__content">
@@ -70,7 +71,7 @@ function createMarkupWhenLocalStorageEmpty() {
     `;
 }
 
-function clear() {
+export function clear() {
   refs.galleryLibrary.innerHTML = '';
 }
 
