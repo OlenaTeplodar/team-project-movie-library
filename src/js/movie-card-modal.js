@@ -1,7 +1,5 @@
 import axios from 'axios';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import { genres } from './Templates/genres';
-
 import { spinner } from './spinner';
 
 import {
@@ -11,7 +9,6 @@ import {
   saveToLocalStorage,
 } from './local-storage';
 
-
 // для трейлера до фільму у модалці
 import FetchApiMovies from './api';
 import { markupMovieTrailer } from './markup-trailer';
@@ -20,7 +17,6 @@ const target = document.getElementById('foo');
 const refs = {
   modalFilmBackdrop: document.querySelector('[data-modal-film]'),
   modalFilm: document.querySelector('.modal-film'),
-  div: document.querySelector('.modal-film '),
   cardFilm: document.querySelector('.cards__list'),
   cardFilmLibrary: document.querySelector('.container-library'),
 };
@@ -35,16 +31,16 @@ let currentMovie;
 
 function onOpenModalFilm(e) {
   refs.modalFilmBackdrop.classList.remove('is-hidden');
-  refs.div.classList.remove('is-hidden');
+  refs.modalFilm.classList.remove('is-hidden');
   document.body.classList.add('no-scroll');
 
   document.addEventListener('click', onCloseModalFilmByBtn);
   window.addEventListener('keydown', onCloseEscBtn);
 
   const idCard = e.target.closest('.home-card__link').id;
-  console.log(idCard);
+  // console.log(idCard);
   idMovie = Number(idCard);
-  console.log(idMovie);
+  // console.log(idMovie);
   createMovieCard(idCard);
 
   fetchMovieById(idCard).then(response => {
@@ -92,7 +88,7 @@ function closeModalFilm() {
   window.removeEventListener('keydown', onCloseEscBtn);
   document.removeEventListener('click', onCloseModalFilmByBtn);
   refs.modalFilmBackdrop.classList.add('is-hidden');
-  refs.div.classList.add('is-hidden');
+  refs.modalFilm.classList.add('is-hidden');
   document.body.classList.remove('no-scroll');
 }
 
@@ -177,7 +173,6 @@ const getModalMovieCardMarkup = ({
   genres,
 }) => {
   const genresList = genres.map(genre => genre.name).join(', ');
-
   return `
   <button
       type="button"
@@ -202,14 +197,15 @@ const getModalMovieCardMarkup = ({
   <li class="film-title__item-film"><p class="film-title__value">Popularity</p><p class="film-title__desc-film">${popularity}</p></li>
   <li class="film-title__item-film"><p class="film-title__value">Original Title</p><p class="film-title__desc-film">${original_title}</p></li>
   <li class="film-title__item-film"><p class="film-title__value">Genre</p><p class="film-title__desc-film">${genresList}</p></li>
+ 
   </ul>
   <h3 class="about-title">About ${original_title}</h3>
   <p class="text-about-movie">${overview}</p>
 
   <ul class="modal-window_list-btn">
-      <li class="modal-window_list-item-btn"><button class="modal-window__watched-btn js-add-watched" type="button" data-id=${id}>add to Watched</button></li>
-      <li class="modal-window_list-item-btn"><button class="modal-window__queued-btn js-add-queue" type="button" data-id=${id}>Add to queue</button></li>
-    </ul>
+  <li class="modal-window_list-item-btn"><button class="modal-window__watched-btn js-add-watched" type="button" data-id=${id}>add to Watched</button></li>
+  <li class="modal-window_list-item-btn"><button class="modal-window__queued-btn js-add-queue" type="button" data-id=${id}>Add to queue</button></li>
+</ul>
   </div>
 `;
 };

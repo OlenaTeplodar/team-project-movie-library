@@ -193,9 +193,9 @@ const getModalMovieCardMarkup = ({
     <h3 class="about-title">About ${original_title}</h3>
     <p class="text-about-movie">${overview}</p>
     
-    <ul>
-    <li><button class="modal-window__watched-btn" type="button" data-id=${id}>Add</button></li>
-    <li><button class="modal-window__queued-btn" type="button" data-id=${id}>Add to queue</button></li>
+    <ul class="modal-window_list-btn">
+    <li class="modal-window_list-item-btn"><button class="modal-window__watched-btn js-add-watched" type="button" data-id=${id}>add to Watched</button></li>
+    <li class="modal-window_list-item-btn"><button class="modal-window__queued-btn js-add-queue" type="button" data-id=${id}>Add to queue</button></li>
   </ul>
     </div>
   `;
