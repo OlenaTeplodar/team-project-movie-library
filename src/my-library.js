@@ -5,7 +5,7 @@ import './js/about-team-modal';
 import { Spinner } from 'spin.js';
 import { spinner } from './js/spinner';
 import { btnUp } from './js/button-up';
-import { onWatchedLibrary } from './js/watched-library';
+import { onWatchedLibrary, movieIdObj } from './js/watched-library';
 
 /// button-up
 btnUp.addEventListener();

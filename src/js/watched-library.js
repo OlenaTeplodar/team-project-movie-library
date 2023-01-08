@@ -1,28 +1,34 @@
 import axios from 'axios';
 import { WATCHED_FILM, loadFromLocalStorage } from './local-storage';
+
 const refs = {
   watchedBtn: document.querySelector('.watched-btn'),
   queueBtn: document.querySelector('.queue-btn'),
   galleryLibrary: document.querySelector('.gallery-library'),
 };
 
-refs.galleryLibrary.addEventListener('click', onWatchedLibrary);
+refs.watchedBtn.addEventListener('click', onWatchedLibrary);
 
 let movieIdObj = [];
 let movieId;
+
 export async function onWatchedLibrary() {
+  movieIdObj = [];
+  console.log('click');
   refs.watchedBtn.classList.add('btn-active');
   refs.queueBtn.classList.remove('btn-active');
-  clear();
   try {
     const moviesIdArray = loadFromLocalStorage(WATCHED_FILM);
     console.log(moviesIdArray);
+
     for (let i = 0; i < moviesIdArray.length; i++) {
       movieId = moviesIdArray[i];
-      console.log(movieId);
-      const byMovie = await fetchMovieById(movieId);
-      console.log(byMovie);
+      // console.log(movieId);
+
+      const byMovie = await fetchMovieById(moviesIdArray);
+      // console.log(byMovie);
       movieIdObj.push(byMovie);
+      console.log(movieIdObj);
     }
 
     if (!moviesIdArray || !Object.keys(moviesIdArray).length) {
@@ -44,14 +50,13 @@ export async function fetchMovieById(movieId) {
     const response = await axios.get(
       `https://api.themoviedb.org/3/movie/${movieId}?api_key=9fae0fdf266213c68361ca578a95b948&language=en-US`
     );
-    console.log(response.data);
+    // console.log(response.data);
 
     return await response.data;
   } catch (error) {
     console.log(error.message);
   }
 }
-
 export function createMarkupWhenLocalStorageEmpty() {
   return `
   <li class="container-nothing">
