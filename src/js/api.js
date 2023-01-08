@@ -19,6 +19,7 @@ export default class FetchApiMovies {
       error;
     }
   }
+
   // Реалізація для запиту фільму за ключовим словом на головній сторінці:
   async fetchSearchMovies() {
     try {
