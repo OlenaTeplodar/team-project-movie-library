@@ -1,10 +1,11 @@
 import FetchApiMovies from './api';
-
+import { spinner } from './spinner';
 import { renderMoviesCard } from './renderCards';
 import { clearMoviesContainer } from './renderCards';
-//import { pagePagination } from './pagination';
 
+const target = document.getElementById('foo');
 const fetchApiHomeContent = new FetchApiMovies();
+
 showPopularMovies();
 
 let pagination = document.querySelector('#pagination');
@@ -13,6 +14,7 @@ let notesOnePage = 10;
 
 async function showPopularMovies() {
   try {
+    spinner.spin(target);
     const data = await fetchApiHomeContent.fetchPopularMovies();
     const cards = data.results;
     let countOfItems = Math.ceil(cards.length / notesOnePage);
@@ -88,5 +90,7 @@ async function showPopularMovies() {
     }
   } catch (e) {
     console.log(e);
+  } finally {
+    spinner.stop();
   }
 }
