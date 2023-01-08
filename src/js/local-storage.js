@@ -53,23 +53,23 @@ function checkLocalStorageMovies(btn, filmId, key) {
   if (filmsArray.length > 0) {
     if (currentFilm) {
       btn.textContent = 'ADD TO WATCHED';
-      btn.classList.add('active');
-      // btn.classList.remove('no-active');
-      // btn.classList.remove('active');
+      btn.classList.add('modal-active');
+      // btn.classList.remove('no-modal-active');
+      // btn.classList.remove('modal-active');
       const a = filmsArray.filter(film => film !== filmId);
       localStorage.removeItem(key);
       localStorage.setItem(key, JSON.stringify(a));
     } else {
       btn.textContent = 'REMOVE FROM WATCHED';
       saveToLocalStorage(key, filmId);
-      btn.classList.remove('active');
-      // btn.classList.add('active');
+      btn.classList.remove('modal-active');
+      // btn.classList.add('modal-active');
     }
   } else {
     btn.textContent = 'REMOVE FROM WATCHED';
     saveToLocalStorage(key, filmId);
-    btn.classList.remove('active');
-    // btn.classList.add('active');
+    btn.classList.remove('modal-active');
+    // btn.classList.add('modal-active');
   }
 }
 

@@ -6,6 +6,13 @@ import { spinner } from './spinner';
 // для трейлера до фільму у модалці
 import FetchApiMovies from './api';
 import { markupMovieTrailer } from './markup-trailer';
+import {
+  WATCHED_FILM,
+  QUEUED_FILM,
+  loadFromLocalStorage,
+  saveToLocalStorage,
+  checkLocalStorageMovies,
+} from './local-storage';
 
 const target = document.getElementById('foo');
 
@@ -33,6 +40,10 @@ function onOpenModalFilm(e) {
 
   createMovieCard(idCard.id);
 
+  if (!refs.modalFilmBackdrop.classList.contains('is-hidden')) {
+    refs.modalFilm.addEventListener('click', onModalLibraryBtnsClick);
+  }
+
   // ------ trailer movie-------
   const boxFetchApiMovies = new FetchApiMovies();
   boxFetchApiMovies
@@ -51,6 +62,20 @@ function onOpenModalFilm(e) {
     })
     .catch(error => console.log(error));
   // ------------ end treiler movie -------------
+}
+
+function onModalLibraryBtnsClick(e) {
+  const btn = e.target;
+  const filmId = Number(e.target.dataset.id);
+
+  if (e.target.classList.contains('js-add-watched')) {
+    // checkLocalStorageWatchedMovies(btn, filmId);
+    // btn.classList.add('modal-active');
+    checkLocalStorageMovies(btn, filmId, WATCHED_FILM);
+  } else if (e.target.classList.contains('js-add-queue')) {
+    // checkLocalStorageQueueMovies(btn, filmId);
+    checkLocalStorageMovies(btn, filmId, QUEUED_FILM);
+  }
 }
 
 async function createMovieCard(id) {
@@ -148,22 +173,21 @@ const getModalMovieCardMarkup = ({
 }) => {
   const genresList = genres.map(genre => genre.name).join(', ');
 
-  // const watchedFilm = localStorage.getItem('WATCHED-FILM');
-  // const watchedFilmsArray = JSON.parse(watchedFilm) || [];
-  // const queuedFilm = localStorage.getItem('QUEUED-FILM');
-  // const queuedFilmsArray = JSON.parse(queuedFilm) || [];
+  const watchedFilmsArray = loadFromLocalStorage(WATCHED_FILM);
+  const queuedFilmsArray = loadFromLocalStorage(QUEUED_FILM);
+  const currentWatchedFilm = watchedFilmsArray.includes(id);
+  const currentQueuedFilm = queuedFilmsArray.includes(id);
 
-  // const a = String(id);
+  let textBtnWatched = 'ADD TO WATCHED';
+  let textBtnQueue = 'ADD TO QUEUE';
 
-  // const hasWatchedFilm = watchedFilmsArray.some(value => value === String(id));
-  // console.log(hasWatchedFilm);
-  // console.log(id);
+  if (currentWatchedFilm) {
+    textBtnWatched = 'REMOVE FROM WATCHED';
+  }
 
-  // console.log(watchedFilmsArray);
-
-  // const hasWatchedFilm = watchedFilmsArray.includes(id);
-  // console.log(hasWatchedFilm);
-  // console.log(id);
+  if (currentQueuedFilm) {
+    textBtnQueue = 'REMOVE FROM QUEUE';
+  }
 
   return `
     <button
@@ -193,10 +217,10 @@ const getModalMovieCardMarkup = ({
     <h3 class="about-title">About ${original_title}</h3>
     <p class="text-about-movie">${overview}</p>
     
-    <ul class="modal-window_list-btn">
-    <li class="modal-window_list-item-btn"><button class="modal-window__watched-btn js-add-watched" type="button" data-id=${id}>add to Watched</button></li>
-    <li class="modal-window_list-item-btn"><button class="modal-window__queued-btn js-add-queue" type="button" data-id=${id}>Add to queue</button></li>
-  </ul>
+     <ul class="modal-window_list-btn">
+      <li class="modal-window_list-item-btn "><button aria-label="add or remove from watched" class="modal-active modal-window__watched-btn js-add-watched" type="button" data-id=${id}>${textBtnWatched}</button></li>
+      <li class="modal-window_list-item-btn "><button aria-label="add or remove from queue" class="modal-active modal-window__queued-btn js-add-queue" type="button" data-id=${id}>${textBtnQueue}</button></li>
+    </ul>
     </div>
   `;
 };
