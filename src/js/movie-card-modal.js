@@ -205,7 +205,7 @@ const getModalMovieCardMarkup = ({
   <li class="film-title__item-film"><p class="film-title__value">Genre</p><p class="film-title__desc-film">${genresList}</p></li>
  
   </ul>
-  <h3 class="about-title">About ${original_title}</h3>
+  <h3 class="about-title">About</h3>
   <p class="text-about-movie">${overview}</p>
 
   <ul class="modal-window_list-btn">
