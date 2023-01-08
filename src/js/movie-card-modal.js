@@ -7,6 +7,7 @@ import {
   QUEUED_FILM,
   loadFromLocalStorage,
   saveToLocalStorage,
+  checkLocalStorageMovies,
 } from './local-storage';
 
 // для трейлера до фільму у модалці
@@ -26,9 +27,6 @@ refs.modalFilmBackdrop.addEventListener('click', onBackdropClick);
 
 // --------open/close-modal
 
-let idMovie;
-let currentMovie;
-
 function onOpenModalFilm(e) {
   refs.modalFilmBackdrop.classList.remove('is-hidden');
   refs.modalFilm.classList.remove('is-hidden');
@@ -38,10 +36,6 @@ function onOpenModalFilm(e) {
   window.addEventListener('keydown', onCloseEscBtn);
 
   const idCard = e.target.closest('.home-card__link').id;
-  // console.log(idCard);
-  idMovie = Number(idCard);
-  // console.log(idMovie);
-  createMovieCard(idCard);
 
   fetchMovieById(idCard).then(response => {
     refs.modalFilm.innerHTML = '';
@@ -72,15 +66,17 @@ function onOpenModalFilm(e) {
   // // ------------ end treiler movie -------------
 }
 
-function onModalLibraryBtnsClick(e, idMovie) {
-  const a = Number(e.target.dataset.id);
-  console.log(a);
+function onModalLibraryBtnsClick(e) {
+  const btn = e.target;
+  const filmId = Number(e.target.dataset.id);
+
   if (e.target.classList.contains('js-add-watched')) {
-    // checkLocalStorageWatchedMovies(e.target, currentMovie);
-    saveToLocalStorage(WATCHED_FILM, a);
+    // checkLocalStorageWatchedMovies(btn, filmId);
+    // btn.classList.add('active');
+    checkLocalStorageMovies(btn, filmId, WATCHED_FILM);
   } else if (e.target.classList.contains('js-add-queue')) {
-    // checkLocalStorageQueueMovies(e.target, currentMovie);
-    saveToLocalStorage(QUEUED_FILM, a);
+    // checkLocalStorageQueueMovies(btn, filmId);
+    checkLocalStorageMovies(btn, filmId, QUEUED_FILM);
   }
 }
 
@@ -123,8 +119,6 @@ async function fetchMovieById(idMovie) {
     const response = await axios.get(
       `https://api.themoviedb.org/3/movie/${idMovie}?api_key=9fae0fdf266213c68361ca578a95b948&language=en-US`
     );
-    // console.log(response.data);
-
     return await response.data;
   } catch (error) {
     console.log(error.message);
@@ -138,10 +132,7 @@ async function fetchMovieById(idMovie) {
 async function createMovieCard(id) {
   try {
     const response = await fetchMovieById(id);
-
-    // console.log(id);
     refs.modalFilm.innerHTML = '';
-
     render(response);
   } catch (error) {
     closeModalFilm();
@@ -157,8 +148,6 @@ function render(response) {
   return response;
 }
 
-// console.log(response);
-
 // ------Markup----
 
 const getModalMovieCardMarkup = ({
@@ -173,6 +162,23 @@ const getModalMovieCardMarkup = ({
   genres,
 }) => {
   const genresList = genres.map(genre => genre.name).join(', ');
+
+  const watchedFilmsArray = loadFromLocalStorage(WATCHED_FILM);
+  const queuedFilmsArray = loadFromLocalStorage(QUEUED_FILM);
+  const currentWatchedFilm = watchedFilmsArray.includes(id);
+  const currentQueuedFilm = queuedFilmsArray.includes(id);
+
+  let textBtnWatched = 'ADD TO WATCHED';
+  let textBtnQueue = 'ADD TO QUEUE';
+
+  if (currentWatchedFilm) {
+    textBtnWatched = 'REMOVE FROM WATCHED';
+  }
+
+  if (currentQueuedFilm) {
+    textBtnQueue = 'REMOVE FROM QUEUE';
+  }
+
   return `
   <button
       type="button"
@@ -203,9 +209,9 @@ const getModalMovieCardMarkup = ({
   <p class="text-about-movie">${overview}</p>
 
   <ul class="modal-window_list-btn">
-  <li class="modal-window_list-item-btn"><button class="modal-window__watched-btn js-add-watched" type="button" data-id=${id}>add to Watched</button></li>
-  <li class="modal-window_list-item-btn"><button class="modal-window__queued-btn js-add-queue" type="button" data-id=${id}>Add to queue</button></li>
-</ul>
+      <li class="modal-window_list-item-btn "><button aria-label="add or remove from watched" class="active modal-window__watched-btn js-add-watched" type="button" data-id=${id}>${textBtnWatched}</button></li>
+      <li class="modal-window_list-item-btn "><button aria-label="add or remove from queue" class="active modal-window__queued-btn js-add-queue" type="button" data-id=${id}>${textBtnQueue}</button></li>
+    </ul>
   </div>
 `;
 };

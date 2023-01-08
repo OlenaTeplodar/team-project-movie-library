@@ -11,15 +11,6 @@ function loadFromLocalStorage(key) {
   }
 }
 
-// function loadFromLocalStorage(key) {
-//   try {
-//     const serializedState = localStorage.getItem(key);
-//     return serializedState === null ? undefined : JSON.parse(serializedState);
-//   } catch (error) {
-//     console.error('Get state error: ', error.message);
-//   }
-// }
-
 function saveToLocalStorage(key, data) {
   try {
     const arrayFilms = loadFromLocalStorage(key);
@@ -30,13 +21,62 @@ function saveToLocalStorage(key, data) {
   }
 }
 
-// function saveToLocalStorage(key, value) {
-//   try {
-//     const serializedState = JSON.stringify(value);
-//     localStorage.setItem(key, serializedState);
-//   } catch (error) {
-//     console.error('Set state error: ', error.message);
-//   }
-// }
+// const watchedFilmsArray = loadFromLocalStorage(WATCHED_FILM);
+// const queuedFilmsArray = loadFromLocalStorage(QUEUED_FILM);
+// const currentWatchedFilm = watchedFilmsArray.includes(id);
+// const currentQueuedFilm = queuedFilmsArray.includes(id);
 
-export { WATCHED_FILM, QUEUED_FILM, loadFromLocalStorage, saveToLocalStorage };
+// function checkLocalStorageWatchedMovies(btn, filmId) {
+//   const watchedFilmsArray = loadFromLocalStorage(WATCHED_FILM);
+//   const currentWatchedFilm = watchedFilmsArray.includes(filmId);
+
+//   if (watchedFilmsArray.length > 0) {
+//     if (currentWatchedFilm) {
+//       btn.textContent = 'ADD TO WATCHED';
+//       const a = watchedFilmsArray.filter(film => film !== filmId);
+//        localStorage.removeItem(WATCHED_FILM);
+//       localStorage.setItem(WATCHED_FILM, JSON.stringify(a));
+//        } else {
+//       btn.textContent = 'REMOVE FROM WATCHED';
+//       saveToLocalStorage(WATCHED_FILM, filmId);
+//     }
+//   } else {
+//     btn.textContent = 'REMOVE FROM WATCHED';
+//     saveToLocalStorage(WATCHED_FILM, filmId);
+//   }
+//   }
+
+function checkLocalStorageMovies(btn, filmId, key) {
+  const filmsArray = loadFromLocalStorage(key);
+  const currentFilm = filmsArray.includes(filmId);
+
+  if (filmsArray.length > 0) {
+    if (currentFilm) {
+      btn.textContent = 'ADD TO WATCHED';
+      btn.classList.add('active');
+      // btn.classList.remove('no-active');
+      // btn.classList.remove('active');
+      const a = filmsArray.filter(film => film !== filmId);
+      localStorage.removeItem(key);
+      localStorage.setItem(key, JSON.stringify(a));
+    } else {
+      btn.textContent = 'REMOVE FROM WATCHED';
+      saveToLocalStorage(key, filmId);
+      btn.classList.remove('active');
+      // btn.classList.add('active');
+    }
+  } else {
+    btn.textContent = 'REMOVE FROM WATCHED';
+    saveToLocalStorage(key, filmId);
+    btn.classList.remove('active');
+    // btn.classList.add('active');
+  }
+}
+
+export {
+  WATCHED_FILM,
+  QUEUED_FILM,
+  loadFromLocalStorage,
+  saveToLocalStorage,
+  checkLocalStorageMovies,
+};
