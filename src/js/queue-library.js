@@ -19,6 +19,7 @@ let movieIdObj = [];
 let movieId;
 
 export async function onQueueLibrary() {
+  movieIdObj = [];
   console.log('click');
   refs.watchedBtn.classList.remove('btn-active');
   refs.queueBtn.classList.add('btn-active');
@@ -28,6 +29,7 @@ export async function onQueueLibrary() {
     for (let i = 0; i < moviesIdArray.length; i++) {
       movieId = moviesIdArray[i];
       const byMovie = await fetchMovieById(movieId);
+
       movieIdObj.push(byMovie);
       console.log(movieIdObj);
     }
