@@ -2,6 +2,7 @@ import FetchApiMovies from './api';
 import { clearMoviesContainer } from './renderCards';
 import { renderMoviesCard } from './renderCards';
 import { spinner } from './spinner';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 const refs = {
   cardList: document.querySelector('.gallery__list'),
@@ -21,16 +22,13 @@ function onFormSubmit(e) {
     .trim()
     .toLowerCase();
   if (fetchSearchApi.query === '') {
-    return notification();
+    Notify.info(
+      'Search result not successful. Enter the correct movie name and try again.'
+    );
+    return;
   }
   getSearchMovies();
 }
-
-function notification() {
-  refs.notification.textContent =
-    'Search result not successful. Enter the correct movie name and try again.';
-}
-
 async function getSearchMovies() {
   try {
     spinner.spin(target); //spinner
@@ -42,13 +40,15 @@ async function getSearchMovies() {
     clearMoviesContainer();
     renderMoviesCard(cards);
     if (data.total_results === 0) {
-      notification();
+      Notify.info(
+        'Search result not successful. Enter the correct movie name and try again.'
+      );
       return;
-    } else {
-      notification();
     }
   } catch (error) {
-    notification();
+    Notify.info(
+      'Search result not successful. Enter the correct movie name and try again.'
+    );
   } finally {
     //spinner
     spinner.stop();
