@@ -70,7 +70,7 @@ export function createMarkupWhenLocalStorageEmpty() {
           <a
             title="Link to main page"
             class="container-nothing__link"
-            href="https://olenateplodar.github.io/team-project-js-2/index.html"
+            href="./index.html"
             >GO TO</a
           >
           movie selection.
