@@ -1,35 +1,46 @@
-// import {
-//   createMoviesCard,
-//   createMarkupWhenLocalStorageEmpty,
-//   loadFromLocalStorage,
-//   clear,
-// } from './watched-library';
+import axios from 'axios';
+import { fetchMovieById } from './watched-library';
+import {
+  createMoviesCard,
+  createMarkupWhenLocalStorageEmpty,
+  clear,
+} from './watched-library';
+import { loadFromLocalStorage, QUEUED_FILM } from './local-storage';
 
-// const refs = {
-//   watchedBtn: document.querySelector('.watched-btn'),
-//   queueBtn: document.querySelector('.queue-btn'),
-//   galleryLibrary: document.querySelector('.container-library'),
-// };
+const refs = {
+  watchedBtn: document.querySelector('.watched-btn'),
+  queueBtn: document.querySelector('.queue-btn'),
+  galleryLibrary: document.querySelector('.gallery-library'),
+};
 
-// refs.queueBtn.addEventListener('click', onQueueLibrary);
+refs.queueBtn.addEventListener('click', onQueueLibrary);
 
-// export async function onQueueLibrary() {
-//   refs.watchedBtn.classList.remove('btn-active');
-//   refs.queueBtn.classList.add('btn-active');
-//   try {
-//     const moviesArray = await loadFromLocalStorage('QUEUED-FILM');
-//     console.log(moviesArray);
+let movieIdObj = [];
+let movieId;
 
-//     if (!moviesArray || !Object.keys(moviesArray).length) {
-//       clear();
-//       const markupNothing = createMarkupWhenLocalStorageEmpty();
-//       refs.galleryLibrary.insertAdjacentHTML('beforeend', markupNothing);
-//     } else {
-//       clear();
-//       const markup = createMoviesCard(moviesArray);
-//       refs.galleryLibrary.insertAdjacentHTML('beforeend', markup);
-//     }
-//   } catch (error) {
-//     console.log(error.message);
-//   }
-// }
+export async function onQueueLibrary() {
+  console.log('click');
+  refs.watchedBtn.classList.remove('btn-active');
+  refs.queueBtn.classList.add('btn-active');
+  clear();
+  try {
+    const moviesIdArray = loadFromLocalStorage(QUEUED_FILM);
+    for (let i = 0; i < moviesIdArray.length; i++) {
+      movieId = moviesIdArray[i];
+      const byMovie = await fetchMovieById(movieId);
+      movieIdObj.push(byMovie);
+      console.log(movieIdObj);
+    }
+    if (!moviesIdArray || !Object.keys(moviesIdArray).length) {
+      clear();
+      const markupNothing = createMarkupWhenLocalStorageEmpty();
+      refs.galleryLibrary.insertAdjacentHTML('beforeend', markupNothing);
+    } else {
+      clear();
+      const markup = createMoviesCard(movieIdObj);
+      refs.galleryLibrary.insertAdjacentHTML('beforeend', markup);
+    }
+  } catch (error) {
+    console.log(error.message);
+  }
+}

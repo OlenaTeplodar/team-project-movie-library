@@ -1,6 +1,6 @@
 import './js/watched-library';
-import './js/movie-modal-library';
 import './js/queue-library';
+import './js/movie-modal-library';
 import './js/about-team-modal';
 import { Spinner } from 'spin.js';
 import { spinner } from './js/spinner';
