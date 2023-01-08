@@ -1,6 +1,9 @@
 import axios from 'axios';
+import { Spinner } from 'spin.js';
+import { spinner } from './spinner';
 import { fetchMovieById } from './watched-library';
 import {
+  target,
   createMoviesCard,
   createMarkupWhenLocalStorageEmpty,
   clear,
@@ -25,6 +28,7 @@ export async function onQueueLibrary() {
   refs.queueBtn.classList.add('btn-active');
   clear();
   try {
+    spinner.spin(target);
     const moviesIdArray = loadFromLocalStorage(QUEUED_FILM);
     for (let i = 0; i < moviesIdArray.length; i++) {
       movieId = moviesIdArray[i];
@@ -44,5 +48,7 @@ export async function onQueueLibrary() {
     }
   } catch (error) {
     console.log(error.message);
+  } finally {
+    spinner.stop();
   }
 }

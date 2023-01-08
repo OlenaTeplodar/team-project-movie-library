@@ -1,4 +1,7 @@
 import axios from 'axios';
+import { Spinner } from 'spin.js';
+import { spinner } from './spinner';
+
 import { WATCHED_FILM, loadFromLocalStorage } from './local-storage';
 
 const refs = {
@@ -6,6 +9,8 @@ const refs = {
   queueBtn: document.querySelector('.queue-btn'),
   galleryLibrary: document.querySelector('.gallery-library'),
 };
+
+export const target = document.getElementById('foo');
 
 refs.watchedBtn.addEventListener('click', onWatchedLibrary);
 
@@ -17,20 +22,17 @@ export async function onWatchedLibrary() {
   console.log('click');
   refs.watchedBtn.classList.add('btn-active');
   refs.queueBtn.classList.remove('btn-active');
+  clear();
   try {
+    spinner.spin(target);
     const moviesIdArray = loadFromLocalStorage(WATCHED_FILM);
-    console.log(moviesIdArray);
-
     for (let i = 0; i < moviesIdArray.length; i++) {
       movieId = moviesIdArray[i];
-      // console.log(movieId);
+      const byMovie = await fetchMovieById(movieId);
 
-      const byMovie = await fetchMovieById(moviesIdArray);
-      // console.log(byMovie);
       movieIdObj.push(byMovie);
       console.log(movieIdObj);
     }
-
     if (!moviesIdArray || !Object.keys(moviesIdArray).length) {
       clear();
       const markupNothing = createMarkupWhenLocalStorageEmpty();
@@ -42,6 +44,8 @@ export async function onWatchedLibrary() {
     }
   } catch (error) {
     console.log(error.message);
+  } finally {
+    spinner.stop();
   }
 }
 
@@ -66,7 +70,7 @@ export function createMarkupWhenLocalStorageEmpty() {
           <a
             title="Link to main page"
             class="container-nothing__link"
-            href="/src/index.html"
+            href="https://olenateplodar.github.io/team-project-js-2/index.html"
             >GO TO</a
           >
           movie selection.

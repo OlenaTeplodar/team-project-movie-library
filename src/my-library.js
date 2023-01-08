@@ -6,14 +6,13 @@ import './js/switch-theme';
 import { Spinner } from 'spin.js';
 import { spinner } from './js/spinner';
 import { btnUp } from './js/button-up';
-import { onWatchedLibrary, movieIdObj } from './js/watched-library';
+import { onWatchedLibrary, target } from './js/watched-library';
 
 /// button-up
 btnUp.addEventListener();
 ////render watched gallery
 onWatchedLibrary();
 ///spinner
-const target = document.getElementById('foo');
 spinner.spin(target);
 window.addEventListener('load', function (e) {
   spinner.stop();
