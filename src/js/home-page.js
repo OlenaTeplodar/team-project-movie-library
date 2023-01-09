@@ -47,4 +47,4 @@ async function updatePagination(e) {
   spinner.stop();
 }
 
-showPopularMovies(options);
+showPopularMovies();
