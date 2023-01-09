@@ -1,0 +1,15 @@
+#pagination {
+  display: flex;
+  justify-content: center;
+}
+
+li {
+  padding-top: 8px;
+  padding-right: 4px;
+  padding-left: 4px;
+}
+
+.active {
+  background-color: #ff6b08;
+  color: #fff;
+}

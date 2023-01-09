@@ -6,13 +6,13 @@ export default class FetchApiMovies {
   constructor() {
     this.searchQuery = '';
     this.page = 1;
-    this.language = 'en-US';
   }
+
   // Реалізація для запиту на список найпопулярніших фільмів на сьогодні для створення колекції на головній сторінці:
   async fetchPopularMovies() {
     try {
       const response = await axios.get(
-        `${BASE_URL}/trending/all/day?api_key=${API_KEY}&language=${this.language}&page=${this.page}`
+        `${BASE_URL}/trending/movie/day?api_key=${API_KEY}&page=${this.page}`
       );
       return await response.data;
     } catch (error) {
@@ -82,19 +82,23 @@ export default class FetchApiMovies {
     this.page = 1;
   }
 
-  get query() {
-    return this.searchQuery;
-  }
-
-  set query(newQuery) {
-    this.searchQuery = newQuery;
-  }
-
-  get pageNum() {
-    return this.page;
-  }
-
-  set pageNum(newPage) {
+  setPage(newPage) {
     this.page = newPage;
   }
+
+  //   get query() {
+  //     return this.searchQuery;
+  //   }
+
+  //   set query(newQuery) {
+  //     this.searchQuery = newQuery;
+  //   }
+
+  //   get pageNum() {
+  //     return this.page;
+  //   }
+
+  //   set pageNum(newPage) {
+  //     this.page = newPage;
+  //   }
 }

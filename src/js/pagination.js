@@ -1,5 +1,5 @@
 // import Pagination from 'tui-pagination';
-import 'tui-pagination/dist/tui-pagination.css';
+// import 'tui-pagination/dist/tui-pagination.css';
 //import { renderMoviesCard } from './Templates/cards';
 
 /*
@@ -34,4 +34,3 @@ const options = {
 //const pagination = new Pagination(refs.pagination, options);
 
 //const container = document.getElementById('pagination');
-
