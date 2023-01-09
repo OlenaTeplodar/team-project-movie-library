@@ -15,5 +15,5 @@ import './js/switch-theme';
 import 'basiclightbox/dist/basicLightbox.min.css';
 import { onFormSubmit } from './js/search-movies';
 import { btnUp } from './js/button-up';
-
+import './js/firebase-module';
 btnUp.addEventListener();
