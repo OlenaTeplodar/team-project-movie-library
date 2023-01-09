@@ -1,9 +1,9 @@
 export const options = {
-  page: 1,
-  totalItems: 500,
+  totalItems: 0,
   itemsPerPage: 20,
   visiblePages: 5,
-  centerAlign: true,
+  page: 1,
+  centerAlign: false,
   usageStatistics: false,
   template: {
     page: '<a href="#" class="tui-page-btn">{{page}}</a>',
