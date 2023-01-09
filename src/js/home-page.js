@@ -5,7 +5,7 @@ import { renderMoviesCard } from './renderCards';
 import { clearMoviesContainer } from './renderCards';
 import { options } from './Templates/paginationSettings';
 
-const target = document.getElementById('foo');
+const target = document.querySelector('#tui-pagination-container');
 const fetchApiHomeContent = new FetchApiMovies();
 
 const refs = {
