@@ -36,23 +36,6 @@ function onOpenModalFilm(e) {
   window.addEventListener('keydown', onCloseEscBtn);
 
   const idCard = e.target.closest('.home-card__link').id;
-  // console.log(idCard);
-  // const a = refs.modalFilm.classList.contains('js-add-watched');
-  // console.log(a);
-
-  // const watchedFilmsArray = loadFromLocalStorage(WATCHED_FILM);
-  // const queuedFilmsArray = loadFromLocalStorage(QUEUED_FILM);
-  // const currentWatchedFilm = watchedFilmsArray.includes(Number(idCard));
-  // const currentQueuedFilm = queuedFilmsArray.includes(Number(idCard));
-  // console.log(currentWatchedFilm);
-  // console.log(currentQueuedFilm);
-
-  // if (currentWatchedFilm) {
-  //   console.log('film exist');
-  //   btn.classList.remove('modal-active');
-  // } else {
-  //   console.log('film dost exist');
-  // }
 
   fetchMovieById(idCard).then(response => {
     refs.modalFilm.innerHTML = '';
@@ -61,10 +44,7 @@ function onOpenModalFilm(e) {
 
   if (!refs.modalFilmBackdrop.classList.contains('is-hidden')) {
     refs.modalFilm.addEventListener('click', onModalLibraryBtnsClick);
-    // btn.classList.remove('modal-active');
   }
-
-  // console.log(e.target.dataset.id);
 
   // // ------ trailer movie-------
   const boxFetchApiMovies = new FetchApiMovies();
@@ -91,11 +71,8 @@ function onModalLibraryBtnsClick(e) {
   const filmId = Number(e.target.dataset.id);
 
   if (e.target.classList.contains('js-add-watched')) {
-    // checkLocalStorageWatchedMovies(btn, filmId);
-    // btn.classList.add('modal-active');
     checkLocalStorageMovies(btn, filmId, WATCHED_FILM);
   } else if (e.target.classList.contains('js-add-queue')) {
-    // checkLocalStorageQueueMovies(btn, filmId);
     checkLocalStorageMovies(btn, filmId, QUEUED_FILM);
   }
 }
@@ -190,13 +167,17 @@ const getModalMovieCardMarkup = ({
 
   let textBtnWatched = 'ADD TO WATCHED';
   let textBtnQueue = 'ADD TO QUEUE';
+  let modal_active_w = 'modal-active';
+  let modal_active_q = 'modal-active';
 
   if (currentWatchedFilm) {
     textBtnWatched = 'REMOVE FROM WATCHED';
+    modal_active_w = '';
   }
 
   if (currentQueuedFilm) {
     textBtnQueue = 'REMOVE FROM QUEUE';
+    modal_active_q = '';
   }
 
   return `
@@ -229,8 +210,8 @@ const getModalMovieCardMarkup = ({
   <p class="text-about-movie">${overview}</p>
 
   <ul class="modal-window_list-btn">
-      <li class="modal-window_list-item-btn "><button aria-label="add or remove from watched" class="modal-active modal-window__watched-btn js-add-watched" type="button" data-id=${id}>${textBtnWatched}</button></li>
-      <li class="modal-window_list-item-btn "><button aria-label="add or remove from queue" class="modal-active modal-window__queued-btn js-add-queue" type="button" data-id=${id}>${textBtnQueue}</button></li>
+      <li class="modal-window_list-item-btn "><button aria-label="add or remove from watched" class="${modal_active_w} modal-window__watched-btn js-add-watched" type="button" data-id=${id}>${textBtnWatched}</button></li>
+      <li class="modal-window_list-item-btn "><button aria-label="add or remove from queue" class="${modal_active_q} modal-window__queued-btn js-add-queue" type="button" data-id=${id}>${textBtnQueue}</button></li>
     </ul>
   </div>
 `;

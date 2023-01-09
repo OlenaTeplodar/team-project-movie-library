@@ -36,8 +36,6 @@ function onOpenModalFilm(e) {
   window.addEventListener('keydown', onCloseEscBtn);
 
   const idCard = e.target.closest('.home-card__link');
-  //   console.log(idCard.id);
-
   createMovieCard(idCard.id);
 
   if (!refs.modalFilmBackdrop.classList.contains('is-hidden')) {
@@ -69,11 +67,8 @@ function onModalLibraryBtnsClick(e) {
   const filmId = Number(e.target.dataset.id);
 
   if (e.target.classList.contains('js-add-watched')) {
-    // checkLocalStorageWatchedMovies(btn, filmId);
-    // btn.classList.add('modal-active');
     checkLocalStorageMovies(btn, filmId, WATCHED_FILM);
   } else if (e.target.classList.contains('js-add-queue')) {
-    // checkLocalStorageQueueMovies(btn, filmId);
     checkLocalStorageMovies(btn, filmId, QUEUED_FILM);
   }
 }
@@ -82,7 +77,6 @@ async function createMovieCard(id) {
   try {
     spinner.spin(target);
     const response = await fetchMovieById(id);
-    // console.log(response);
     refs.modalFilm.innerHTML = '';
 
     render(response);
@@ -131,8 +125,6 @@ async function fetchMovieById(idMovie) {
     const response = await axios.get(
       `https://api.themoviedb.org/3/movie/${idMovie}?api_key=9fae0fdf266213c68361ca578a95b948&language=en-US`
     );
-    // console.log(response.data);
-
     return await response.data;
   } catch (error) {
     console.log(error.message);
@@ -142,20 +134,7 @@ async function fetchMovieById(idMovie) {
 // ---Render--
 function render(response) {
   const detailsCard = getModalMovieCardMarkup(response);
-  // console.log(detailsCard);
-  //   getWatchedToLocalStr(response);
-  //   getQueuedToLocalStr(response);
-
   refs.modalFilm.insertAdjacentHTML('beforeend', detailsCard);
-
-  //   const btnWatchedFilmModalWindowEl = document.querySelector(
-  //     '.modal-window__watched-btn'
-  //   );
-  //   btnWatchedFilmModalWindowEl.addEventListener('click', onClickBtnWatchedFilm);
-  //   const btnQueuedFilmModalWindowEl = document.querySelector(
-  //     '.modal-window__queued-btn'
-  //   );
-  //   btnQueuedFilmModalWindowEl.addEventListener('click', onClickBtnQueuedFilm);
 }
 
 // ------Markup----
@@ -180,13 +159,17 @@ const getModalMovieCardMarkup = ({
 
   let textBtnWatched = 'ADD TO WATCHED';
   let textBtnQueue = 'ADD TO QUEUE';
+  let modal_active_w = 'modal-active';
+  let modal_active_q = 'modal-active';
 
   if (currentWatchedFilm) {
     textBtnWatched = 'REMOVE FROM WATCHED';
+    modal_active_w = '';
   }
 
   if (currentQueuedFilm) {
     textBtnQueue = 'REMOVE FROM QUEUE';
+    modal_active_q = '';
   }
 
   return `
@@ -218,8 +201,8 @@ const getModalMovieCardMarkup = ({
     <p class="text-about-movie">${overview}</p>
     
      <ul class="modal-window_list-btn">
-      <li class="modal-window_list-item-btn "><button aria-label="add or remove from watched" class="modal-active modal-window__watched-btn js-add-watched" type="button" data-id=${id}>${textBtnWatched}</button></li>
-      <li class="modal-window_list-item-btn "><button aria-label="add or remove from queue" class="modal-active modal-window__queued-btn js-add-queue" type="button" data-id=${id}>${textBtnQueue}</button></li>
+      <li class="modal-window_list-item-btn "><button aria-label="add or remove from watched" class="${modal_active_w} modal-window__watched-btn js-add-watched" type="button" data-id=${id}>${textBtnWatched}</button></li>
+      <li class="modal-window_list-item-btn "><button aria-label="add or remove from queue" class="${modal_active_q} modal-window__queued-btn js-add-queue" type="button" data-id=${id}>${textBtnQueue}</button></li>
     </ul>
     </div>
   `;
