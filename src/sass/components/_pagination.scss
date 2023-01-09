@@ -1,9 +1,14 @@
 #tui-pagination-container {
   padding: 40px;
   margin: 14px 0 12px;
+  margin-bottom: 60px;
   line-height: normal;
   text-align: center;
   font-size: 0;
+  @media screen and (min-width: 320px) and (max-width: 767px) {
+    padding: 0;
+    margin-bottom: 40px;
+  }
 }
 
 #tui-pagination-container .tui-page-btn {
@@ -21,6 +26,7 @@
   border: 2px solid var(--footer-background-color);
   border-width: 1px 0;
 }
+
 @media screen and (max-width: 767px) {
   #tui-pagination-container .tui-page-btn {
     height: 20px;
@@ -47,6 +53,7 @@
   color: #fff;
   background: #ff6b08;
   border-color: #ff6b08;
+  box-shadow: 0px 0px 20px var(--main-accent-color);
   cursor: default;
 }
 
