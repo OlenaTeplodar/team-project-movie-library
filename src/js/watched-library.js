@@ -4,10 +4,11 @@ import { spinner } from './spinner';
 
 import { WATCHED_FILM, loadFromLocalStorage } from './local-storage';
 
-const refs = {
+export const refs = {
   watchedBtn: document.querySelector('.watched-btn'),
   queueBtn: document.querySelector('.queue-btn'),
   galleryLibrary: document.querySelector('.gallery-library'),
+  containerNothing: document.querySelector('.container-library-nothing'),
 };
 
 export const target = document.getElementById('foo');
@@ -19,26 +20,29 @@ let movieId;
 
 export async function onWatchedLibrary() {
   movieIdObj = [];
-  console.log('click');
+  // console.log('click');
   refs.watchedBtn.classList.add('btn-active');
   refs.queueBtn.classList.remove('btn-active');
-  clear();
+
   try {
     spinner.spin(target);
+
     const moviesIdArray = loadFromLocalStorage(WATCHED_FILM);
+
     for (let i = 0; i < moviesIdArray.length; i++) {
       movieId = moviesIdArray[i];
       const byMovie = await fetchMovieById(movieId);
 
       movieIdObj.push(byMovie);
-      console.log(movieIdObj);
+      // console.log(movieIdObj);
     }
     if (!moviesIdArray || !Object.keys(moviesIdArray).length) {
-      clear();
+      refs.containerNothing.innerHTML = '';
+      clearMoviesCard();
       const markupNothing = createMarkupWhenLocalStorageEmpty();
-      refs.galleryLibrary.insertAdjacentHTML('beforeend', markupNothing);
+      refs.containerNothing.insertAdjacentHTML('beforeend', markupNothing);
     } else {
-      clear();
+      clearMoviesCard();
       const markup = createMoviesCard(movieIdObj);
       refs.galleryLibrary.insertAdjacentHTML('beforeend', markup);
     }
@@ -63,7 +67,7 @@ export async function fetchMovieById(movieId) {
 }
 export function createMarkupWhenLocalStorageEmpty() {
   return `
-  <li class="container-nothing">
+  <div class="container-nothing">
       <div class="container-nothing__content">
         <h2 class="container-nothing__title">Your library is empty!</h2>
         <p class="container-nothing__text">
@@ -76,11 +80,11 @@ export function createMarkupWhenLocalStorageEmpty() {
           movie selection.
         </p>
       </div>
-    </li>
+    </div>
     `;
 }
 
-export function clear() {
+export function clearMoviesCard() {
   refs.galleryLibrary.innerHTML = '';
 }
 
@@ -99,7 +103,8 @@ function concatGenres(arrOfGenresName) {
 export function createMoviesCard(cards = []) {
   return cards
     .map(card => {
-      const { id, title, poster_path, genres, release_date } = card;
+      const { id, title, poster_path, genres, release_date, original_name } =
+        card;
       const genresForRender = concatGenres(genres.map(genre => genre.name));
       return `<li class="home-card__link" id=${id}>
 		</div class = "home-card__thumb">
