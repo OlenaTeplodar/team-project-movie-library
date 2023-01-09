@@ -10,4 +10,3 @@ export const refs = {
   registrForm: document.querySelector('.registr-form'),
   loginForm: document.querySelector('.login-form'),
 };
-

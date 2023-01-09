@@ -12,10 +12,8 @@
 
 @media screen and (min-width: 768px) {
   .cards__list {
-    display: grid;
     max-width: 700px;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    max-width: calc(100vw - 60px);
+    grid-template-columns: repeat(2, 1fr);
     grid-gap: 32px;
   }
 }
@@ -23,8 +21,8 @@
 @media screen and (min-width: 1280px) {
   .cards__list {
     max-width: 1200px;
-    grid-row-gap: 32px;
-    grid-column-gap: 16px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 32px 16px;
   }
 }
 
@@ -90,6 +88,7 @@
 
 .card__content {
   padding-top: 10px;
+  padding-left: 10px;
 }
 
 @media screen and (min-width: 768px) {
@@ -99,10 +98,10 @@
 }
 
 .card__title {
-  font-family: 'Roboto';
+  //   font-family: 'Roboto';
   font-style: normal;
   font-weight: 500;
-  font-size: 12px;
+  //   font-size: 12px;
   line-height: 14px;
   text-transform: uppercase;
   color: var(--text-color-dark);

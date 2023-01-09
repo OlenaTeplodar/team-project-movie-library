@@ -7,7 +7,7 @@ import {
   singInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
-  } from 'firebase/auth';
+} from 'firebase/auth';
 
 import { getDatabase, ref, set, update } from 'firebase/database';
 
@@ -29,7 +29,6 @@ const firebaseConfig = {
     'https://team-project-js-2-default-rtdb.europe-west1.firebasedatabase.app/',
 };
 
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
@@ -37,11 +36,6 @@ const db = getDatabase(app);
 
 const storageWatch = JSON.parse(localStorage.getItem('watch'));
 const storageQueue = JSON.parse(localStorage.getItem('queue'));
-
-
- 
-
-
 
 refs.registrBtn.addEventListener('click', evt => {
   const emailRegistr = document.querySelector('.emailRegistr').value;
@@ -71,7 +65,6 @@ refs.registrBtn.addEventListener('click', evt => {
       );
     });
 });
-
 
 refs.loginBtn.addEventListener('click', evt => {
   const emailLogin = document.querySelector('.emailLogin').value;
@@ -133,5 +126,3 @@ refs.exitBtn.addEventListener('click', () => {
       Notiflix.Notify.failure('User is signed out!');
     });
 });
-
-
