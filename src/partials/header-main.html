@@ -1,63 +1,81 @@
 <header class="header__section">
-    <div class="header__container">
-      <div class="header__wrap">
-        <a
-          href="/src/index.html"
-          target="_self"
-          rel="noopener noreferrer"
-          title="Logo"
-        >
-          <svg class="header__navigation__svg" width="24" height="24">
-            <use href="/src/images/sprite.svg#icon-film"></use>
-          </svg>
-          <span class="header__navigation__text link">Filmoteka</span>
-        </a>
-        <nav class="header__navigation">
-          <ul class="header-list">
-            <li class="header-list__item">
-              <a
-                href="/src/index.html"
-                target="_self"
-                rel="noopener noreferrer"
-                title="Home page"
-                class="header-list__link link current"
-                >HOME</a
-              >
-            </li>
-            <li class="header-list__item">
-              <a
-                href="/src/my-library.html"
-                target="_self"
-                rel="noopener noreferrer"
-                title="My library"
-                class="header-list__link link js-library"
-                >MY LIBRARY</a
-              >
-            </li>
-          </ul>
-        </nav>
-      </div>
-      <form action="submit" class="header__form">
-        <div class="header__form-search">
-          <input
-            type="text"
-            name="searchQuery"
-            autofocus
-            autocomplete="off"
-            placeholder="Movie search"
-            class="header__form-input"
-          />
-          <button
-            type="submit"
-            aria-label="search-button"
-            class="header__search-btn"
-          >
-            <svg class="header__form-icon" width="12" height="12">
-              <use href="/src/images/icons 1.svg#icon-search"></use>
-            </svg>
-          </button>
-        </div>
-      </form>
-      <p class="header__notification"></p>
+  <div class="header__container">
+    <div class="header__wrap">
+      <a
+        href="/src/index.html"
+        target="_self"
+        rel="noopener noreferrer"
+        title="Logo"
+      >
+        <svg class="header__navigation__svg" width="24" height="24">
+          <use href="/src/images/sprite.svg#icon-film"></use>
+        </svg>
+        <span class="header__navigation__text link">Filmoteka</span>
+      </a>
+      <nav class="header__navigation">
+        <ul class="header-list">
+          <li class="header-list__item">
+            <a
+              href="/src/index.html"
+              target="_self"
+              rel="noopener noreferrer"
+              title="Home page"
+              class="header-list__link link current"
+              >HOME</a
+            >
+          </li>
+          <li class="header-list__item">
+            <a
+              href="/src/my-library.html"
+              target="_self"
+              rel="noopener noreferrer"
+              title="My library"
+              class="header-list__link link js-library"
+              >MY LIBRARY</a
+            >
+          </li>
+        </ul>
+      </nav>
     </div>
-  </header>
+    <form action="submit" class="header__form">
+      <div class="header__form-search">
+        <input
+          type="text"
+          name="searchQuery"
+          autofocus
+          autocomplete="off"
+          placeholder="Movie search"
+          class="header__form-input"
+        />
+        <button
+          type="submit"
+          aria-label="search-button"
+          class="header__search-btn"
+        >
+          <svg class="header__form-icon" width="12" height="12">
+            <use href="/src/images/icons 1.svg#icon-search"></use>
+          </svg>
+        </button>
+      </div>
+    </form>
+    <p class="header__notification"></p>
+
+    <div>
+      <label class="form-switch">
+        <svg class="theme-switch__icon" aria-label="sun" width="15" height="15">
+          <use href="./images/sprite.svg#sun-max-svgrepo-com"></use>
+        </svg>
+        <input type="checkbox" id="theme-switch-toggle" />
+        <i></i>
+        <svg
+          class="theme-switch__icon"
+          aria-label="moon"
+          width="15"
+          height="15"
+        >
+          <use href="./images/sprite.svg#moon-svgrepo-com-2"></use>
+        </svg>
+      </label>
+    </div>
+  </div>
+</header>

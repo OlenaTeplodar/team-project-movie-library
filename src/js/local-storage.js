@@ -11,15 +11,6 @@ function loadFromLocalStorage(key) {
   }
 }
 
-// function loadFromLocalStorage(key) {
-//   try {
-//     const serializedState = localStorage.getItem(key);
-//     return serializedState === null ? undefined : JSON.parse(serializedState);
-//   } catch (error) {
-//     console.error('Get state error: ', error.message);
-//   }
-// }
-
 function saveToLocalStorage(key, data) {
   try {
     const arrayFilms = loadFromLocalStorage(key);
@@ -30,13 +21,33 @@ function saveToLocalStorage(key, data) {
   }
 }
 
-// function saveToLocalStorage(key, value) {
-//   try {
-//     const serializedState = JSON.stringify(value);
-//     localStorage.setItem(key, serializedState);
-//   } catch (error) {
-//     console.error('Set state error: ', error.message);
-//   }
-// }
+function checkLocalStorageMovies(btn, filmId, key) {
+  const filmsArray = loadFromLocalStorage(key);
+  const currentFilm = filmsArray.includes(filmId);
 
-export { WATCHED_FILM, QUEUED_FILM, loadFromLocalStorage, saveToLocalStorage };
+  if (filmsArray.length > 0) {
+    if (currentFilm) {
+      btn.textContent = 'ADD TO WATCHED';
+      btn.classList.add('modal-active');
+      const newArrayFilm = filmsArray.filter(film => film !== filmId);
+      localStorage.removeItem(key);
+      localStorage.setItem(key, JSON.stringify(newArrayFilm));
+    } else {
+      btn.textContent = 'REMOVE FROM WATCHED';
+      saveToLocalStorage(key, filmId);
+      btn.classList.remove('modal-active');
+    }
+  } else {
+    btn.textContent = 'REMOVE FROM WATCHED';
+    saveToLocalStorage(key, filmId);
+    btn.classList.remove('modal-active');
+  }
+}
+
+export {
+  WATCHED_FILM,
+  QUEUED_FILM,
+  loadFromLocalStorage,
+  saveToLocalStorage,
+  checkLocalStorageMovies,
+};
