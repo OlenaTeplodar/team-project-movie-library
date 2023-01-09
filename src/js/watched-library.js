@@ -1,4 +1,4 @@
-import axios from 'axios';
+import FetchApiMovies from './api';
 import { Spinner } from 'spin.js';
 import { spinner } from './spinner';
 
@@ -12,6 +12,8 @@ export const refs = {
 };
 
 export const target = document.getElementById('foo');
+
+const fetchMovieById = new FetchApiMovies();
 
 refs.watchedBtn.addEventListener('click', onWatchedLibrary);
 
@@ -31,7 +33,7 @@ export async function onWatchedLibrary() {
 
     for (let i = 0; i < moviesIdArray.length; i++) {
       movieId = moviesIdArray[i];
-      const byMovie = await fetchMovieById(movieId);
+      const byMovie = await fetchMovieById.fetchIdMovies(movieId);
 
       movieIdObj.push(byMovie);
       // console.log(movieIdObj);
@@ -53,18 +55,18 @@ export async function onWatchedLibrary() {
   }
 }
 
-export async function fetchMovieById(movieId) {
-  try {
-    const response = await axios.get(
-      `https://api.themoviedb.org/3/movie/${movieId}?api_key=9fae0fdf266213c68361ca578a95b948&language=en-US`
-    );
-    // console.log(response.data);
+// export async function fetchMovieById(movieId) {
+//   try {
+//     const response = await axios.get(
+//       `https://api.themoviedb.org/3/movie/${movieId}?api_key=9fae0fdf266213c68361ca578a95b948&language=en-US`
+//     );
+//     // console.log(response.data);
 
-    return await response.data;
-  } catch (error) {
-    console.log(error.message);
-  }
-}
+//     return await response.data;
+//   } catch (error) {
+//     console.log(error.message);
+//   }
+// }
 export function createMarkupWhenLocalStorageEmpty() {
   return `
   <div class="container-nothing">

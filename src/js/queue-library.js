@@ -1,15 +1,23 @@
-import axios from 'axios';
+import FetchApiMovies from './api';
 import { Spinner } from 'spin.js';
 import { spinner } from './spinner';
-import { fetchMovieById } from './watched-library';
+// import { fetchMovieById } from './watched-library';
 import {
-  refs,
   target,
   createMoviesCard,
   createMarkupWhenLocalStorageEmpty,
   clearMoviesCard,
 } from './watched-library';
 import { loadFromLocalStorage, QUEUED_FILM } from './local-storage';
+
+export const refs = {
+  watchedBtn: document.querySelector('.watched-btn'),
+  queueBtn: document.querySelector('.queue-btn'),
+  galleryLibrary: document.querySelector('.gallery-library'),
+  containerNothing: document.querySelector('.container-library-nothing'),
+};
+
+const fetchMovieById = new FetchApiMovies();
 
 refs.queueBtn.addEventListener('click', onQueueLibrary);
 
@@ -29,7 +37,7 @@ export async function onQueueLibrary() {
 
     for (let i = 0; i < moviesIdArray.length; i++) {
       movieId = moviesIdArray[i];
-      const byMovie = await fetchMovieById(movieId);
+      const byMovie = await fetchMovieById.fetchIdMovies(movieId);
 
       movieIdObj.push(byMovie);
       // console.log(movieIdObj);
