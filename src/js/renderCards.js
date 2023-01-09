@@ -32,7 +32,15 @@ function createMoviesCard(cards = []) {
   saveToLocalStorage();
   return cards
     .map(card => {
-      const { id, title, poster_path, genre_ids, release_date } = card;
+      const {
+        id,
+        title,
+        original_name,
+        poster_path,
+        genre_ids,
+        release_date,
+        first_air_date,
+      } = card;
       return `<li class="home-card__link" id=${id}>
 				<div class = "home-card__thumb">
 				<picture class="home-card__poster">
@@ -42,11 +50,9 @@ function createMoviesCard(cards = []) {
 					  </picture>
 				  </div>
 				  <div class="card__content">
-				  <h2 class="card__title">${title || 'no name'}</h2>
+				  <h2 class="card__title">${title ? title : original_name}</h2>
 				  <p class="card__text">${loadGenres(genre_ids)} | ${
-        release_date
-          ? release_date.slice(0, 4)
-          : 'no infomation about release date'
+        release_date ? release_date.slice(0, 4) : first_air_date.slice(0, 4)
       }</p>
 			</div>
 				  </li>`;
