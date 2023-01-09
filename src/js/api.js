@@ -86,19 +86,19 @@ export default class FetchApiMovies {
     this.page = newPage;
   }
 
-  //   get query() {
-  //     return this.searchQuery;
-  //   }
+  get query() {
+    return this.searchQuery;
+  }
 
-  //   set query(newQuery) {
-  //     this.searchQuery = newQuery;
-  //   }
+  set query(newQuery) {
+    this.searchQuery = newQuery;
+  }
 
-  //   get pageNum() {
-  //     return this.page;
-  //   }
+  get pageNum() {
+    return this.page;
+  }
 
-  //   set pageNum(newPage) {
-  //     this.page = newPage;
-  //   }
+  set pageNum(newPage) {
+    this.page = newPage;
+  }
 }

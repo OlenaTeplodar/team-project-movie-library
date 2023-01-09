@@ -18,15 +18,13 @@ const pagination = new Pagination(refs.pagination, options);
 options.pagination = pagination;
 console.log(options);
 
-async function showPopularMovies(options) {
+async function showPopularMovies() {
   try {
     spinner.spin(target);
     const data = await fetchApiHomeContent.fetchPopularMovies();
     console.log(data);
     const cards = data.results;
     renderMoviesCard(cards);
-    // fetchApiHomeContent.setPage();
-    // fetchApiHomeContent.decrementPage();
   } catch (error) {
     console.log(error);
   }
@@ -34,20 +32,19 @@ async function showPopularMovies(options) {
   pagination.on('afterMove', updatePagination);
 }
 
-async function updatePagination() {
+async function updatePagination(e) {
   try {
     fetchApiHomeContent.setPage(e.page);
     currentPage = e.page;
     spinner.spin(target);
+    clearMoviesContainer();
     const data = await fetchApiHomeContent.fetchPopularMovies();
     const cards = data.results;
     renderMoviesCard(cards);
-    fetchApiHomeContent.decrementPage();
   } catch (error) {
     console.log(error);
   }
   spinner.stop();
-  //   clearMoviesContainer();
 }
 
 showPopularMovies(options);
