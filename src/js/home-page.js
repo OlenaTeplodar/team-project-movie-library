@@ -15,14 +15,16 @@ const refs = {
 import 'tui-pagination/dist/tui-pagination.css';
 
 const pagination = new Pagination(refs.pagination, options);
-options.pagination = pagination;
+const page = pagination.getCurrentPage();
 console.log(options);
 
-async function showPopularMovies() {
+async function showPopularMovies(page) {
   try {
     spinner.spin(target);
-    const data = await fetchApiHomeContent.fetchPopularMovies();
+    const data = await fetchApiHomeContent.fetchPopularMovies(page);
     console.log(data);
+    pagination.reset(data.total_results);
+    refs.pagination.classList.remove('pagination-is-hidden');
     const cards = data.results;
     renderMoviesCard(cards);
   } catch (error) {
@@ -38,7 +40,7 @@ async function updatePagination(e) {
     currentPage = e.page;
     spinner.spin(target);
     clearMoviesContainer();
-    const data = await fetchApiHomeContent.fetchPopularMovies();
+    const data = await fetchApiHomeContent.fetchPopularMovies(page);
     const cards = data.results;
     renderMoviesCard(cards);
   } catch (error) {
@@ -47,4 +49,4 @@ async function updatePagination(e) {
   spinner.stop();
 }
 
-showPopularMovies();
+showPopularMovies(page);
