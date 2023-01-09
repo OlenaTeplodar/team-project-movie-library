@@ -108,9 +108,10 @@ export function createMoviesCard(cards = []) {
 				  <source media="(min-width:768px)"  srcset="https://image.tmdb.org/t/p/w400${poster_path}">
 				  <img class="home-card__img" src="https://image.tmdb.org/t/p/w300${poster_path}" alt="${title}" loading="lazy">
 			  </picture>
-
-		  <h2 class='card__title'>${title}</h2>
-		  <p class='card__text' id=${id}>${
+			  </div>
+			  <div class="card__content">
+			  <h2 class="card__title">${title ? title : original_name}</h2>
+			  <p class='card__text' id=${id}>${
         genresForRender ? genresForRender : '---'
       } | ${new Date(release_date).getFullYear()} </p>
 		</div>
