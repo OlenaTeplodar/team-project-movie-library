@@ -37,7 +37,6 @@ async function showPopularMovies(page) {
 async function updatePagination(e) {
   try {
     fetchApiHomeContent.setPage(e.page);
-    currentPage = e.page;
     spinner.spin(target);
     clearMoviesContainer();
     const data = await fetchApiHomeContent.fetchPopularMovies(page);
