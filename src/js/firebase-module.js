@@ -11,6 +11,7 @@ import {
 
 import { getDatabase, ref, set, update } from 'firebase/database';
 
+
 import { refs } from './refs-firebase';
 
 //import closeModal from './'; ///   Закриття Модалки!!
@@ -29,18 +30,34 @@ const firebaseConfig = {
     'https://team-project-js-2-default-rtdb.europe-west1.firebasedatabase.app/',
 };
 
+
+
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const db = getDatabase(app);
 
-const storageWatch = JSON.parse(localStorage.getItem('watch'));
-const storageQueue = JSON.parse(localStorage.getItem('queue'));
+const storageWatch = JSON.parse(localStorage.getItem('watchedMovies'));
+const storageQueue = JSON.parse(localStorage.getItem('queueMovies'));
+
+refs.openModalBtn.addEventListener('click', (e) => {
+  refs.modal.classList.toggle('visible');
+  console.log('open modal');
+})
+
+refs.loginBtn.addEventListener('click', noShowModal);
+
+function noShowModal() {
+refs.modal.classList.toggle('visible');
+};
+  
+
 
 refs.registrBtn.addEventListener('click', evt => {
   const emailRegistr = document.querySelector('.emailRegistr').value;
   const passwordRegistr = document.querySelector('.passwordRegistr').value;
-
+ 
   createUserWithEmailAndPassword(auth, emailRegistr, passwordRegistr)
     .then(userCredential => {
       const user = userCredential.user;
@@ -108,7 +125,7 @@ onAuthStateChanged(auth, user => {
       queue: storageQueue,
     });
     refs.enterBtn.classList.add('locked');
-    refs.modalWindow.classList.remove('visible');
+    refs.modal.classList.remove('visible');
   }
 });
 
@@ -119,7 +136,7 @@ refs.exitBtn.addEventListener('click', () => {
   signOut(auth)
     .then(() => {
       refs.enterBtn.classList.remove('locked');
-      refs.modalWindow.classList.remove('active');
+      refs.modal.classList.remove('visible');
       refs.bodyAsFone.classList.remove('no-scroll');
     })
     .catch(error => {
