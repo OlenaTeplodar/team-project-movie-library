@@ -13,14 +13,8 @@ import {
 // для трейлера до фільму у модалці
 import FetchApiMovies from './api';
 import { markupMovieTrailer } from './markup-trailer';
+import { refs } from './Properties/refs';
 const target = document.getElementById('foo');
-
-const refs = {
-  modalFilmBackdrop: document.querySelector('[data-modal-film]'),
-  modalFilm: document.querySelector('.modal-film'),
-  cardFilm: document.querySelector('.cards__list'),
-  cardFilmLibrary: document.querySelector('.container-library'),
-};
 
 refs.cardFilm.addEventListener('click', onOpenModalFilm);
 refs.modalFilmBackdrop.addEventListener('click', onBackdropClick);

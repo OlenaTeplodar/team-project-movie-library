@@ -1,6 +1,7 @@
 import FetchApiMovies from './api';
 import { Spinner } from 'spin.js';
 import { spinner } from './spinner';
+import { refs } from './Properties/refs';
 // import { fetchMovieById } from './watched-library';
 import {
   target,
@@ -9,13 +10,6 @@ import {
   clearMoviesCard,
 } from './watched-library';
 import { loadFromLocalStorage, QUEUED_FILM } from './local-storage';
-
-export const refs = {
-  watchedBtn: document.querySelector('.watched-btn'),
-  queueBtn: document.querySelector('.queue-btn'),
-  galleryLibrary: document.querySelector('.gallery-library'),
-  containerNothing: document.querySelector('.container-library-nothing'),
-};
 
 const fetchMovieById = new FetchApiMovies();
 

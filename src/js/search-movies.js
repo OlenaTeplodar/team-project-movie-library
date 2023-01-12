@@ -3,12 +3,8 @@ import { clearMoviesContainer } from './renderCards';
 import { renderMoviesCard } from './renderCards';
 import { spinner } from './spinner';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import { refs } from './Properties/refs';
 
-const refs = {
-  cardList: document.querySelector('.gallery__list'),
-  formSearch: document.querySelector('.header__form'),
-  notification: document.querySelector('.header__notification'),
-};
 const target = document.getElementById('foo'); //spinner
 
 const fetchSearchApi = new FetchApiMovies();

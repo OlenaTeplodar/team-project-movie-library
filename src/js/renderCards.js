@@ -7,9 +7,7 @@ export function clearMoviesContainer() {
 }
 
 import { genres } from './Properties/genres';
-const refs = {
-  cardList: document.querySelector('.cards__list'),
-};
+import { refs } from './Properties/refs';
 
 const GENRE_KEY = 'genres';
 let genreList = genres;

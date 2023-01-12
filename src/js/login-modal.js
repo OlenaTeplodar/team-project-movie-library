@@ -5,8 +5,8 @@ refsFirebase.enterBtn.addEventListener('click', onOpenLoginModal);
 refsFirebase.modalWindow.addEventListener('click', closeEnterModal);
 
 export function onOpenLoginModal() {
-  refs.modalWindow.classList.add('visible');
-  refs.bodyAsFone.classList.add('no-scroll');
+  refsFirebase.modalWindow.classList.add('visible');
+  refsFirebase.bodyAsFone.classList.add('no-scroll');
   window.addEventListener('keydown', onEscClick);
 }
 
@@ -19,27 +19,18 @@ function onEscClick(evt) {
 
 function closeEnterModal(evt) {
   if (evt.target === refs.registrForm) {
-    refs.modalWindow.classList.remove('visible');
-    refs.registrForm.classList.remove('hidden');
-    refs.loginForm.classList.remove('visible');
+    refsFirebase.modalWindow.classList.remove('visible');
+    refsFirebase.registrForm.classList.remove('hidden');
+    refsFirebase.loginForm.classList.remove('visible');
     onBodyScroll();
   }
 
   if (evt.target === refs.loginForm) {
-    refs.loginForm.classList.remove('active');
+    refsFirebase.loginForm.classList.remove('active');
     onBodyScroll();
   }
 }
 
 function onBodyScroll() {
-  refs.bodyAsFone.classList.remove('no-scroll');
+  refsFirebase.bodyAsFone.classList.remove('no-scroll');
 }
-
-const refs = {
-  registrBtn: document.querySelector('.registr-btn'),
-  modalWindow: document.querySelector('.modal-window'),
-  exitBtn: document.querySelector('.exitBtnForm'),
-  bodyAsFone: document.querySelector('body'),
-  loginBtn: document.querySelector('.login-btn'),
-  enterBtn: document.querySelector('.enter-btn'),
-};

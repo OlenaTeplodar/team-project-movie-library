@@ -4,14 +4,10 @@ import Pagination from 'tui-pagination';
 import { renderMoviesCard } from './renderCards';
 import { clearMoviesContainer } from './renderCards';
 import { options } from './Properties/paginationSettings';
-
+import { refs } from './Properties/refs';
 const target = document.querySelector('#tui-pagination-container');
 const fetchApiHomeContent = new FetchApiMovies();
 
-const refs = {
-  pagination: document.querySelector('.tui-pagination'),
-  cardList: document.querySelector('.cards__list'),
-};
 import 'tui-pagination/dist/tui-pagination.css';
 
 const pagination = new Pagination(refs.pagination, options);

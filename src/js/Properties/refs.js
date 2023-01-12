@@ -1,5 +1,18 @@
 export const refs = {
+  body: document.querySelector('body'),
+  toggle: document.querySelector('#theme-switch-toggle'),
   openModalLink: document.querySelector('.footer__link'),
   closeModalBtn: document.querySelector('.close-modal__btn'),
   modalTeam: document.querySelector('[data-team-modal]'),
+  pagination: document.querySelector('.tui-pagination'),
+  cardList: document.querySelector('.cards__list'),
+  modalFilmBackdrop: document.querySelector('[data-modal-film]'),
+  modalFilm: document.querySelector('.modal-film'),
+  cardFilm: document.querySelector('.cards__list'),
+  cardFilmLibrary: document.querySelector('.container-library'),
+  watchedBtn: document.querySelector('.watched-btn'),
+  queueBtn: document.querySelector('.queue-btn'),
+  galleryLibrary: document.querySelector('.gallery-library'),
+  containerNothing: document.querySelector('.container-library-nothing'),
+  formSearch: document.querySelector('.header__form'),
 };
