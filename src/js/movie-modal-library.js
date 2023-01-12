@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import { genres } from './Templates/genres';
+import { genres } from './Properties/genres';
 import { Spinner } from 'spin.js';
 import { spinner } from './spinner';
 // для трейлера до фільму у модалці

@@ -3,7 +3,7 @@ import { spinner } from './spinner';
 import Pagination from 'tui-pagination';
 import { renderMoviesCard } from './renderCards';
 import { clearMoviesContainer } from './renderCards';
-import { options } from './Templates/paginationSettings';
+import { options } from './Properties/paginationSettings';
 
 const target = document.querySelector('#tui-pagination-container');
 const fetchApiHomeContent = new FetchApiMovies();

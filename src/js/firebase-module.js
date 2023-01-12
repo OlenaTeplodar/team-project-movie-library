@@ -11,7 +11,7 @@ import {
 
 import { getDatabase, ref, set, update } from 'firebase/database';
 
-import { refs } from './refs-firebase';
+import { refsFirebase } from './Properties/refs-firebase';
 
 //import closeModal from './'; ///   Закриття Модалки!!
 // TODO: Add SDKs for Firebase products that you want to use
@@ -37,7 +37,7 @@ const db = getDatabase(app);
 const storageWatch = JSON.parse(localStorage.getItem('watch'));
 const storageQueue = JSON.parse(localStorage.getItem('queue'));
 
-refs.registrBtn.addEventListener('click', evt => {
+refsFirebase.registrBtn.addEventListener('click', evt => {
   const emailRegistr = document.querySelector('.emailRegistr').value;
   const passwordRegistr = document.querySelector('.passwordRegistr').value;
 
@@ -51,22 +51,25 @@ refs.registrBtn.addEventListener('click', evt => {
       Notiflix.Notify.success('User created');
       document.querySelector('.emailRegistr').value = '';
       document.querySelector('.passwordRegistr').value = '';
-      refs.attrErrorRegistr.setAttribute('data-content-registr', 'Registered');
+      refsFirebase.attrErrorRegistr.setAttribute(
+        'data-content-registr',
+        'Registered'
+      );
     })
     .catch(function (error) {
       const errorCode = error.code;
       const errorMessage = error.message;
-      Notiflix.Notify.failure(errorMessage);
+      NotrefsFirebaseiflix.Notify.failure(errorMessage);
       document.querySelector('.emailRegistr').value = '';
       document.querySelector('.passwordRegistr').value = '';
-      refs.attrErrorRegistr.setAttribute(
+      refsFirebase.attrErrorRegistr.setAttribute(
         'data-content-registr',
         "Hi there, it's ERROR"
       );
     });
 });
 
-refs.loginBtn.addEventListener('click', evt => {
+refsFirebase.loginBtn.addEventListener('click', evt => {
   const emailLogin = document.querySelector('.emailLogin').value;
   const passwordLogin = document.querySelector('.passwordLogin').value;
 
@@ -78,7 +81,10 @@ refs.loginBtn.addEventListener('click', evt => {
         last_login: dt,
       });
       Notiflix.Notify.success('User loged in!');
-      refs.attrErrorLogin.setAttribute('data-content-login', 'User loged in!');
+      refsFirebase.attrErrorLogin.setAttribute(
+        'data-content-login',
+        'User loged in!'
+      );
     })
     .catch(error => {
       const errorCode = error.code;
@@ -86,7 +92,7 @@ refs.loginBtn.addEventListener('click', evt => {
       Notiflix.Notify.failure(errorMessage);
       document.querySelector('.emailLogin').value = '';
       document.querySelector('.passwordLogin').value = '';
-      refs.attrErrorLogin.setAttribute(
+      refsFirebase.attrErrorLogin.setAttribute(
         'data-content-login',
         "Hi there, it's ERROR"
       );
@@ -107,20 +113,20 @@ onAuthStateChanged(auth, user => {
       watch: storageWatch,
       queue: storageQueue,
     });
-    refs.enterBtn.classList.add('locked');
-    refs.modalWindow.classList.remove('visible');
+    refsFirebase.enterBtn.classList.add('locked');
+    refsFirebase.modalWindow.classList.remove('visible');
   }
 });
 
 //вихід з системи
 
-refs.exitBtn.addEventListener('click', () => {
+refsFirebase.exitBtn.addEventListener('click', () => {
   const auth = getAuth();
   signOut(auth)
     .then(() => {
-      refs.enterBtn.classList.remove('locked');
-      refs.modalWindow.classList.remove('active');
-      refs.bodyAsFone.classList.remove('no-scroll');
+      refsFirebase.enterBtn.classList.remove('locked');
+      refsFirebase.modalWindow.classList.remove('active');
+      refsFirebase.bodyAsFone.classList.remove('no-scroll');
     })
     .catch(error => {
       Notiflix.Notify.failure('User is signed out!');

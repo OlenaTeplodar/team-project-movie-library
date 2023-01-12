@@ -1,8 +1,8 @@
-import { refs } from './refs-firebase';
+import { refsFirebase } from './Properties/refs-firebase';
 
-refs.enterBtn.addEventListener('click', onOpenLoginModal);
+refsFirebase.enterBtn.addEventListener('click', onOpenLoginModal);
 
-refs.modalWindow.addEventListener('click', closeEnterModal);
+refsFirebase.modalWindow.addEventListener('click', closeEnterModal);
 
 export function onOpenLoginModal() {
   refs.modalWindow.classList.add('visible');

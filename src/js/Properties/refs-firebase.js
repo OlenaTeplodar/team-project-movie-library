@@ -1,4 +1,4 @@
-export const refs = {
+export const refsFirebase = {
   registrBtn: document.querySelector('.registr-btn'),
   modalWindow: document.querySelector('.modal-window'),
   exitBtn: document.querySelector('.exitBtnForm'),

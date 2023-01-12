@@ -6,7 +6,7 @@ export function clearMoviesContainer() {
   refs.cardList.innerHTML = '';
 }
 
-import { genres } from './Templates/genres';
+import { genres } from './Properties/genres';
 const refs = {
   cardList: document.querySelector('.cards__list'),
 };
