@@ -1,41 +1,55 @@
-import Notiflix from 'notiflix';
+// import Notiflix from 'notiflix';
 
-import { initializeApp } from 'firebase/app';
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  singInWithEmailAndPassword,
-  signOut,
-  onAuthStateChanged,
-} from 'firebase/auth';
+// import { initializeApp } from 'firebase/app';
+// // import {
+// //   getAuth,
+// //   createUserWithEmailAndPassword,
+// //   singInWithEmailAndPassword,
+// //   signOut,
+// //   onAuthStateChanged,
+// // } from 'firebase/auth';
 
-import { getDatabase, ref, set, update } from 'firebase/database';
+// import { getDatabase, ref, set, update } from 'firebase/database';
+
+
+// import { refs } from './refs-firebase';
+
+// //import closeModal from './'; ///   Закриття Модалки!!
+// // TODO: Add SDKs for Firebase products that you want to use
+// // https://firebase.google.com/docs/web/setup#available-libraries
+
+// // Your web app's Firebase configuration
+// const firebaseConfig = {
+//   apiKey: 'AIzaSyDY2DPVPIcpXqwPvgNGWDlFPf7tdgdnQBg',
+//   authDomain: 'team-project-js-2.firebaseapp.com',
+//   projectId: 'team-project-js-2',
+//   storageBucket: 'team-project-js-2.appspot.com',
+//   messagingSenderId: '85270049715',
+//   appId: '1:85270049715:web:18b08d0b0f680fb47311c6',
+//   databaseURL:
+//     'https://team-project-js-2-default-rtdb.europe-west1.firebasedatabase.app/',
+// };
+
+
+
+
+// // Initialize Firebase
+// const app = initializeApp(firebaseConfig);
+// const auth = getAuth();
+// const db = getDatabase(app);
+
+// const storageWatch = JSON.parse(localStorage.getItem('watchedMovies'));
+// const storageQueue = JSON.parse(localStorage.getItem('queueMovies'));
 
 import { refsFirebase } from './Properties/refs-firebase';
 
-//import closeModal from './'; ///   Закриття Модалки!!
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+// refs.loginBtn.addEventListener('click', noShowModal);
 
-// Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: 'AIzaSyDY2DPVPIcpXqwPvgNGWDlFPf7tdgdnQBg',
-  authDomain: 'team-project-js-2.firebaseapp.com',
-  projectId: 'team-project-js-2',
-  storageBucket: 'team-project-js-2.appspot.com',
-  messagingSenderId: '85270049715',
-  appId: '1:85270049715:web:18b08d0b0f680fb47311c6',
-  databaseURL:
-    'https://team-project-js-2-default-rtdb.europe-west1.firebasedatabase.app/',
-};
+// function noShowModal() {
+// refs.modal.classList.toggle('visible');
+// };
+  
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth();
-const db = getDatabase(app);
-
-const storageWatch = JSON.parse(localStorage.getItem('watch'));
-const storageQueue = JSON.parse(localStorage.getItem('queue'));
 
 refsFirebase.registrBtn.addEventListener('click', evt => {
   const emailRegistr = document.querySelector('.emailRegistr').value;
@@ -99,12 +113,12 @@ refsFirebase.loginBtn.addEventListener('click', evt => {
     });
 });
 
-const event = new CustomEvent('localdatachanged');
-document.dispatchEvent(event);
+// const event = new CustomEvent('localdatachanged');
+// document.dispatchEvent(event);
 
-document.addEventListener('localdatachanged', () => {
-  //handler - слідкуємо за діями залогіненого користувача
-});
+// document.addEventListener('localdatachanged', () => {
+//   //handler - слідкуємо за діями залогіненого користувача
+// });
 
 onAuthStateChanged(auth, user => {
   if (user) {

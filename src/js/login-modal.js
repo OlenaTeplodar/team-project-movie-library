@@ -10,12 +10,12 @@ export function onOpenLoginModal() {
   window.addEventListener('keydown', onEscClick);
 }
 
-function onEscClick(evt) {
-  if (evt.code === 'Escape') {
-    closeEnterModal();
-    window.removeEventListener('keydown', onEscClick);
-  }
-}
+// function onEscClick(evt) {
+//   if (evt.code === 'Escape') {
+//     closeEnterModal();
+//     window.removeEventListener('keydown', onEscClick);
+//   }
+// }
 
 function closeEnterModal(evt) {
   if (evt.target === refs.registrForm) {

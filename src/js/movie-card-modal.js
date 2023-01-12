@@ -8,6 +8,8 @@ import {
   loadFromLocalStorage,
   saveToLocalStorage,
   checkLocalStorageMovies,
+  checkWatchedLocalStorageMovies,
+  checkQueuedLocalStorageMovies,
 } from './local-storage';
 
 // для трейлера до фільму у модалці
@@ -65,9 +67,9 @@ function onModalLibraryBtnsClick(e) {
   const filmId = Number(e.target.dataset.id);
 
   if (e.target.classList.contains('js-add-watched')) {
-    checkLocalStorageMovies(btn, filmId, WATCHED_FILM);
+    checkWatchedLocalStorageMovies(btn, filmId, WATCHED_FILM);
   } else if (e.target.classList.contains('js-add-queue')) {
-    checkLocalStorageMovies(btn, filmId, QUEUED_FILM);
+    checkQueuedLocalStorageMovies(btn, filmId, QUEUED_FILM);
   }
 }
 

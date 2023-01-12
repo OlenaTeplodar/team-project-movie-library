@@ -21,7 +21,30 @@ function saveToLocalStorage(key, data) {
   }
 }
 
-function checkLocalStorageMovies(btn, filmId, key) {
+// function checkLocalStorageMovies(btn, filmId, key) {
+//   const filmsArray = loadFromLocalStorage(key);
+//   const currentFilm = filmsArray.includes(filmId);
+
+//   if (filmsArray.length > 0) {
+//     if (currentFilm) {
+//       btn.textContent = 'ADD TO WATCHED';
+//       btn.classList.add('modal-active');
+//       const newArrayFilm = filmsArray.filter(film => film !== filmId);
+//       localStorage.removeItem(key);
+//       localStorage.setItem(key, JSON.stringify(newArrayFilm));
+//     } else {
+//       btn.textContent = 'REMOVE FROM WATCHED';
+//       saveToLocalStorage(key, filmId);
+//       btn.classList.remove('modal-active');
+//     }
+//   } else {
+//     btn.textContent = 'REMOVE FROM WATCHED';
+//     saveToLocalStorage(key, filmId);
+//     btn.classList.remove('modal-active');
+//   }
+// }
+
+function checkWatchedLocalStorageMovies(btn, filmId, key) {
   const filmsArray = loadFromLocalStorage(key);
   const currentFilm = filmsArray.includes(filmId);
 
@@ -44,10 +67,35 @@ function checkLocalStorageMovies(btn, filmId, key) {
   }
 }
 
+function checkQueuedLocalStorageMovies(btn, filmId, key) {
+  const filmsArray = loadFromLocalStorage(key);
+  const currentFilm = filmsArray.includes(filmId);
+
+  if (filmsArray.length > 0) {
+    if (currentFilm) {
+      btn.textContent = 'ADD TO QUEUE';
+      btn.classList.add('modal-active');
+      const newArrayFilm = filmsArray.filter(film => film !== filmId);
+      localStorage.removeItem(key);
+      localStorage.setItem(key, JSON.stringify(newArrayFilm));
+    } else {
+      btn.textContent = 'REMOVE FROM QUEUE';
+      saveToLocalStorage(key, filmId);
+      btn.classList.remove('modal-active');
+    }
+  } else {
+    btn.textContent = 'REMOVE FROM QUEUE';
+    saveToLocalStorage(key, filmId);
+    btn.classList.remove('modal-active');
+  }
+}
+
 export {
   WATCHED_FILM,
   QUEUED_FILM,
   loadFromLocalStorage,
   saveToLocalStorage,
   checkLocalStorageMovies,
+  checkWatchedLocalStorageMovies,
+  checkQueuedLocalStorageMovies,
 };
