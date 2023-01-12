@@ -1,8 +1,9 @@
 import axios from 'axios';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import { genres } from './Templates/genres';
+import { genres } from './Properties/genres';
 import { Spinner } from 'spin.js';
 import { spinner } from './spinner';
+import { refs } from './Properties/refs';
 // для трейлера до фільму у модалці
 import FetchApiMovies from './api';
 import { markupMovieTrailer } from './markup-trailer';
@@ -17,12 +18,6 @@ import {
 } from './local-storage';
 
 const target = document.getElementById('foo');
-
-const refs = {
-  modalFilmBackdrop: document.querySelector('[data-modal-film]'),
-  modalFilm: document.querySelector('.modal-film'),
-  cardFilmLibrary: document.querySelector('.container-library'),
-};
 
 refs.cardFilmLibrary.addEventListener('click', onOpenModalFilm);
 

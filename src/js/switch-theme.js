@@ -1,7 +1,4 @@
-const refs = {
-  body: document.querySelector('body'),
-  toggle: document.querySelector('#theme-switch-toggle'),
-};
+import { refs } from './Properties/refs';
 
 checkTheme();
 

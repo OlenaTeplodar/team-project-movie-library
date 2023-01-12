@@ -10,7 +10,6 @@ import { onWatchedLibrary, target } from './js/watched-library';
 
 /// button-up
 btnUp.addEventListener();
-////render watched gallery
 onWatchedLibrary();
 ///spinner
 spinner.spin(target);
