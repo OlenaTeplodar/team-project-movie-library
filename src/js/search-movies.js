@@ -13,7 +13,6 @@ refs.formSearch.addEventListener('submit', onFormSubmit);
 function onFormSubmit(e) {
   e.preventDefault();
 
-  refs.notification.textContent = '';
   fetchSearchApi.query = e.currentTarget.elements.searchQuery.value
     .trim()
     .toLowerCase();
