@@ -33,6 +33,10 @@ function onOpenModalFilm(e) {
   window.addEventListener('keydown', onCloseEscBtn);
 
   const idCard = e.target.closest('.home-card__link');
+  if (!idCard) {
+    closeModalFilm();
+    return;
+  }
   createMovieCard(idCard.id);
 
   if (!refs.modalFilmBackdrop.classList.contains('is-hidden')) {
