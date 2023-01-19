@@ -32,6 +32,10 @@ function onOpenModalFilm(e) {
   window.addEventListener('keydown', onCloseEscBtn);
 
   const idCard = e.target.closest('.home-card__link').id;
+  if (!idCard) {
+    closeModalFilm();
+    return;
+  }
 
   fetchMovieById(idCard).then(response => {
     refs.modalFilm.innerHTML = '';
