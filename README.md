@@ -3,6 +3,8 @@
 GOIT Team Project
 
 Description
+
+
 The project is implemented in Vanilla JavaScript and working with:
 
 🛠 the Movie Database TMDB;
